@@ -8,7 +8,7 @@ namespace ItemSystem
         public static event HandleItemCollected OnItemCollected;
         public delegate void HandleItemCollected(ItemData itemData);
 
-        private ItemData _itemData;
+        [SerializeField] private ItemData _itemData;
         
         public void Collect()
         {

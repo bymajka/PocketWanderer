@@ -10,16 +10,17 @@ namespace InventorySystem
 		public InventoryItem(ItemData itemData)
 		{
 			_itemData = itemData;
+			AddToStack();
 		}
 
 		public void AddToStack()
 		{
-			throw new NotImplementedException();
+			StackSize++;
 		}
 
 		internal void RemoveFromStack()
 		{
-			throw new NotImplementedException();
+			StackSize--;
 		}
 	}
 }
