@@ -8,12 +8,12 @@ namespace ItemSystem
         public static event HandleItemCollected OnItemCollected;
         public delegate void HandleItemCollected(ItemData itemData);
 
-        public ItemData ItemData;
+        private ItemData _itemData;
         
         public void Collect()
         {
             Destroy(gameObject);
-            OnItemCollected?.Invoke(ItemData);
+            OnItemCollected?.Invoke(_itemData);
         }
     }
 }
