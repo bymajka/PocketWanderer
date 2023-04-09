@@ -6,10 +6,10 @@ namespace ItemSystem
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            ICollectible collectible = collision.GetComponent<ICollectible>();
-            if (collectible != null)
+            ICollectibleItem collectibleItemItem = collision.GetComponent<ICollectibleItem>();
+            if (collectibleItemItem != null)
             {
-                collectible.Collect();
+                collectibleItemItem.Collect();
             }
         }
     }

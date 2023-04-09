@@ -1,8 +1,9 @@
 using UnityEngine;
 
-namespace InventorySystem
+namespace ItemSystem
 {
-	public class ItemData
+	[CreateAssetMenu]
+	public class ItemData : ScriptableObject
 	{
 	}
 }

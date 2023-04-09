@@ -1,6 +1,6 @@
 ﻿namespace ItemSystem
 {
-    public interface ICollectible
+    public interface ICollectibleItem
     {
         public void Collect();
     }

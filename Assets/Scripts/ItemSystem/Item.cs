@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
-using InventorySystem;
 
 namespace ItemSystem
 {
-    public class Item : MonoBehaviour, ICollectible
+    public class Item : MonoBehaviour, ICollectibleItem
     {
         public static event HandleItemCollected OnItemCollected;
         public delegate void HandleItemCollected(ItemData itemData);
 
-        private ItemData _itemData;
+        [SerializeField] private ItemData _itemData;
         
         public void Collect()
         {
