@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using ItemSystem;
 using UnityEngine;
 
 namespace InventorySystem
@@ -7,6 +9,16 @@ namespace InventorySystem
 	{
 		public List<InventoryItem> Items { get; set; } = new();
 		private Dictionary<ItemData, InventoryItem> _inventoryItemByItemData = new();
+
+		private void OnEnable()
+		{
+			Item.OnItemCollected += Add;
+		}
+
+		private void OnDisable()
+		{
+			Item.OnItemCollected -= Add;
+		}
 
 		public void Add(ItemData itemData)
 		{
