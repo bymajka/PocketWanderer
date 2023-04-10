@@ -7,7 +7,8 @@ namespace InventorySystem
 {
 	public class Inventory : MonoBehaviour
 	{
-		public List<InventoryItem> Items { get; set; } = new();
+		public static event Action<List<InventoryItem>> OnInventoryChange;
+		public static List<InventoryItem> Items { get; set; } = new();
 		private Dictionary<ItemData, InventoryItem> _inventoryItemByItemData = new();
 
 		private void OnEnable()
@@ -25,12 +26,14 @@ namespace InventorySystem
 			if (_inventoryItemByItemData.TryGetValue(itemData, out InventoryItem inventoryItem))
 			{
 				inventoryItem.AddToStack();
+				OnInventoryChange?.Invoke(Items);
 			}
 			else
 			{
 				InventoryItem newItem = new(itemData);
 				Items.Add(newItem);
 				_inventoryItemByItemData.Add(itemData, newItem);
+				OnInventoryChange?.Invoke(Items);
 			}
 		}
 

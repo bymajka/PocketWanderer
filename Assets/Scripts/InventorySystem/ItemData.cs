@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[CreateAssetMenu]
-public class ItemData : ScriptableObject
+namespace InventorySystem
 {
-    public string DisplayName;
-    public Sprite Icon;
+    [CreateAssetMenu]
+    public class ItemData : ScriptableObject
+    {
+        [FormerlySerializedAs("DisplayName")] public string displayName;
+        [FormerlySerializedAs("Icon")] public Sprite icon;
+    }
 }

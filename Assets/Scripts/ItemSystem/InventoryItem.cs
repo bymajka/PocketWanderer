@@ -1,15 +1,15 @@
-using System;
+using InventorySystem;
 
 namespace ItemSystem
 {
 	public class InventoryItem
 	{
 		public int StackSize { get; set; }
-		private ItemData _itemData;
+		public ItemData ItemData { get; }
 
 		public InventoryItem(ItemData itemData)
 		{
-			_itemData = itemData;
+			ItemData = itemData;
 			AddToStack();
 		}
 
