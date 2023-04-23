@@ -9,21 +9,11 @@ namespace InventorySystem
 	{
 		public static event Action<List<InventoryItem>> OnInventoryChange;
 		public static List<InventoryItem> Items { get; set; } = new();
-		private Dictionary<ItemData, InventoryItem> _inventoryItemByItemData = new();
-
-		private void OnEnable()
-		{
-			Item.OnItemCollected += Add;
-		}
-
-		private void OnDisable()
-		{
-			Item.OnItemCollected -= Add;
-		}
+		private readonly Dictionary<ItemData, InventoryItem> _inventoryItemByItemData = new();
 
 		public void Add(ItemData itemData)
 		{
-			if (_inventoryItemByItemData.TryGetValue(itemData, out InventoryItem inventoryItem))
+			if (TryGetInventoryItem(itemData, out InventoryItem inventoryItem))
 			{
 				inventoryItem.AddToStack();
 				OnInventoryChange?.Invoke(Items);
@@ -39,15 +29,27 @@ namespace InventorySystem
 
 		public void Remove(ItemData itemData)
 		{
-			if (_inventoryItemByItemData.TryGetValue(itemData, out InventoryItem inventoryItem))
-			{
-				inventoryItem.RemoveFromStack();
-				if (inventoryItem.StackSize == 0)
-				{
-					Items.Remove(inventoryItem);
-					_inventoryItemByItemData.Remove(itemData);
-				}
-			}
+			if (!TryGetInventoryItem(itemData, out InventoryItem inventoryItem))
+				return;
+
+			inventoryItem.RemoveFromStack();
+			if (inventoryItem.StackSize != 0)
+				return;
+
+			Items.Remove(inventoryItem);
+			_inventoryItemByItemData.Remove(itemData);
+		}
+
+		public void TransferItem(ItemData itemToTransfer, Inventory otherInventory)
+		{
+			Remove(itemToTransfer);
+
+			otherInventory.Add(itemToTransfer);
+		}
+
+		private bool TryGetInventoryItem(ItemData itemData, out InventoryItem inventoryItem)
+		{
+			return _inventoryItemByItemData.TryGetValue(itemData, out inventoryItem);
 		}
 	}
 }
