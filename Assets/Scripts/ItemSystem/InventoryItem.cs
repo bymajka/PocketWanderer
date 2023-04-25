@@ -1,4 +1,5 @@
 using InventorySystem;
+using ItemSystem.ItemsData;
 
 namespace ItemSystem
 {
