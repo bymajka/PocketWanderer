@@ -17,6 +17,7 @@ namespace InventorySystem
             labelText.enabled = false;
             stackSizeText.enabled = false;
         }
+
         public void FillSlot(InventoryItem inventoryItem)
         {
             if (inventoryItem == null)
