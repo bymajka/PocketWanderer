@@ -11,7 +11,7 @@ namespace InventorySystem
 	{
 		public static event Action<List<InventoryItem>> OnInventoryChange;
 		public static List<InventoryItem> Items { get; set; } = new();
-
+		
 		public void Add(ItemData itemData)
 		{
 			if (TryGetItem(itemData, out InventoryItem inventoryItem))
@@ -41,10 +41,13 @@ namespace InventorySystem
 				return;
 
 			inventoryItem.RemoveFromStack();
+			OnInventoryChange?.Invoke(Items);
+			
 			if (inventoryItem.StackSize != 0)
 				return;
 
 			Items.Remove(inventoryItem);
+			OnInventoryChange?.Invoke(Items);
 			//_inventoryItemByItemData.Remove(itemData);
 		}
 

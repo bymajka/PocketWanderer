@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ItemSystem;
+using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace InventorySystem
@@ -9,6 +11,7 @@ namespace InventorySystem
         [SerializeField] private GameObject slotPrefab;
         [SerializeField] private int inventoryCapacity;
         private List<InventorySlot> _inventorySlots;
+        public static event Action<ItemData> OnRemoveItem; 
 
         public InventoryManager()
         {
@@ -46,6 +49,8 @@ namespace InventorySystem
             {
                 _inventorySlots[i].FillSlot(inventory[i]);
             }
+            
+            SignUpSlots();
         }
 
         private void CreateInventorySlot()
@@ -63,5 +68,21 @@ namespace InventorySystem
         }
 
         public void EnableDisableInventory() => gameObject.SetActive(!gameObject.activeSelf);
+
+        public static void RemoveDirectItem(InventorySlot inventorySlot)
+        {
+            if (inventorySlot.InventoryItem != null)
+            {
+                OnRemoveItem?.Invoke(inventorySlot.InventoryItem.ItemData);
+            }
+        }
+
+        public void SignUpSlots()
+        {
+            foreach (var slot in _inventorySlots)
+            {
+                slot.onClickRemove += () => RemoveDirectItem(slot);
+            }
+        }
     }
 }

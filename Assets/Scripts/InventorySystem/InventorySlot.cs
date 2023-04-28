@@ -1,3 +1,4 @@
+using System;
 using ItemSystem;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,17 @@ namespace InventorySystem
         [SerializeField] private Image image;
         [SerializeField] private TextMeshProUGUI labelText;
         [SerializeField] private TextMeshProUGUI stackSizeText;
+        [SerializeField] private Button deleteButton;
+
+        public delegate void OnClickRemove();
+
+        public OnClickRemove onClickRemove;
+        public InventoryItem InventoryItem { get; private set; }
+
+        public void OnEnable()
+        {
+            deleteButton.onClick.AddListener(() => onClickRemove?.Invoke());
+        }
 
         public void ClearSlot()
         {
@@ -25,6 +37,8 @@ namespace InventorySystem
                 ClearSlot();
                 return;
             }
+
+            InventoryItem = inventoryItem;
 
             image.enabled = true;
             labelText.enabled = true;

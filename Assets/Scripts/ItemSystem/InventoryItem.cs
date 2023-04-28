@@ -1,11 +1,9 @@
-using InventorySystem;
 using ItemSystem.ItemsData;
 
 namespace ItemSystem
 {
 	public class InventoryItem
 	{
-		
 		public int StackSize { get; set; }
 		public ItemData ItemData { get; }
 
