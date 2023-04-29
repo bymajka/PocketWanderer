@@ -15,7 +15,10 @@ namespace InventorySystem
 		
 		public void Add(ItemData itemData)
 		{
-			if (TryGetItem(itemData, out InventoryItem inventoryItem))
+			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
+				.FirstOrDefault();
+
+			if (inventoryItem != null)
 			{
 				inventoryItem.AddToStack();
 				OnInventoryChange?.Invoke();
@@ -28,18 +31,10 @@ namespace InventorySystem
 			}
 		}
 
-		private bool TryGetItem(ItemData itemData, out InventoryItem inventoryItem)
-		{
-			inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
-				.FirstOrDefault();
-
-			return inventoryItem != null;
-		}
-
 		public void Remove(ItemData itemData)
 		{
-			if (!TryGetItem(itemData, out InventoryItem inventoryItem))
-				return;
+			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize > 0)
+				.LastOrDefault();
 
 			inventoryItem.RemoveFromStack();
 			OnInventoryChange?.Invoke();
@@ -58,10 +53,5 @@ namespace InventorySystem
 
 			otherInventory.Add(itemToTransfer);
 		}
-
-		//private bool TryGetInventoryItem(ItemData itemData, out InventoryItem inventoryItem)
-		//{
-		//	return _inventoryItemByItemData.TryGetValue(itemData, out inventoryItem);
-		//}
 	}
 }

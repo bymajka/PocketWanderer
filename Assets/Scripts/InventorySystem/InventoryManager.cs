@@ -83,10 +83,10 @@ namespace InventorySystem
 
         public static void RemoveDirectItem(InventorySlot inventorySlot)
         {
-            if (inventorySlot.InventoryItem != null)
-            {
-                OnRemoveItem?.Invoke(inventorySlot.InventoryItem.ItemData);
-            }
+            if (inventorySlot.InventoryItem == null)
+                return;
+                
+            OnRemoveItem?.Invoke(inventorySlot.InventoryItem.ItemData);
         }
 
         public void SignUpSlots()
