@@ -7,13 +7,13 @@ namespace InventorySystem
 		private void OnEnable()
 		{
 			Item.OnItemCollected += Add;
-			InventoryManager.OnRemoveItem += Remove;
+			InventoryManager<PlayerInventory>.OnRemoveItem += Remove;
 		}
 
 		private void OnDisable()
 		{
 			Item.OnItemCollected -= Add;
-			InventoryManager.OnRemoveItem -= Remove;
+			InventoryManager<PlayerInventory>.OnRemoveItem -= Remove;
 		}
 	}
 }

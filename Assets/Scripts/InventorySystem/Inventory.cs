@@ -9,25 +9,26 @@ namespace InventorySystem
 {
 	public class Inventory : MonoBehaviour
 	{
-		public static event Action<List<InventoryItem>> OnInventoryChange;
-		public static List<InventoryItem> Items { get; set; } = new();
+		public static event Action OnInventoryChange;
+		public List<InventoryItem> Items { get; set; } = new();
+		[field: SerializeField] public int Capacity { get; private set; }
 		
 		public void Add(ItemData itemData)
 		{
 			if (TryGetItem(itemData, out InventoryItem inventoryItem))
 			{
 				inventoryItem.AddToStack();
-				OnInventoryChange?.Invoke(Items);
+				OnInventoryChange?.Invoke();
 			}
 			else
 			{
 				InventoryItem newItem = new(itemData);
 				Items.Add(newItem);
-				OnInventoryChange?.Invoke(Items);
+				OnInventoryChange?.Invoke();
 			}
 		}
 
-		private static bool TryGetItem(ItemData itemData, out InventoryItem inventoryItem)
+		private bool TryGetItem(ItemData itemData, out InventoryItem inventoryItem)
 		{
 			inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
 				.FirstOrDefault();
@@ -41,13 +42,13 @@ namespace InventorySystem
 				return;
 
 			inventoryItem.RemoveFromStack();
-			OnInventoryChange?.Invoke(Items);
+			OnInventoryChange?.Invoke();
 			
 			if (inventoryItem.StackSize != 0)
 				return;
 
 			Items.Remove(inventoryItem);
-			OnInventoryChange?.Invoke(Items);
+			OnInventoryChange?.Invoke();
 			//_inventoryItemByItemData.Remove(itemData);
 		}
 

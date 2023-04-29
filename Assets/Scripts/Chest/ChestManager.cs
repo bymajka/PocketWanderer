@@ -8,12 +8,11 @@ namespace Chest
     public class ChestManager : MonoBehaviour
     {
         [SerializeField] private Button chestButton;
-        private List<ChestInventory> nearestChestInventories;
+        private List<ChestInventory> nearestChestInventories = new (); 
 
         private void Awake()
         {
             chestButton.gameObject.SetActive(false);
-            nearestChestInventories = new List<ChestInventory>();
         }
 
         public void HideButton()
@@ -38,9 +37,6 @@ namespace Chest
                 nearestChestInventories.Remove(inventory);
         }
 
-        public void ShowChestInventory()
-        {
-            Debug.Log("Showing chest inventory");
-        }
+        public void ShowChestInventory() => gameObject.SetActive(!gameObject.activeSelf);
     }
 }

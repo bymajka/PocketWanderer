@@ -23,6 +23,8 @@ namespace Chest
             {
                 chestManager.HideButton();
                 chestManager.RemoveChestInventory(inventory);
+                if (chestManager.gameObject.activeSelf)
+                    chestManager.ShowChestInventory();
             }
         }
     }

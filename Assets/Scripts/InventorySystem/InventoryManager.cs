@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using ItemSystem;
 using ItemSystem.ItemsData;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    public class InventoryManager: MonoBehaviour
+    public class InventoryManager<T>: MonoBehaviour where T : Inventory
     {
         [SerializeField] private GameObject slotPrefab;
-        [SerializeField] private int inventoryCapacity;
         private List<InventorySlot> _inventorySlots;
+        [SerializeField] private T inventory;
         public static event Action<ItemData> OnRemoveItem; 
 
-        public InventoryManager()
+        public InventoryManager(T inventory)
         {
-            _inventorySlots = new List<InventorySlot>(inventoryCapacity);
+            this.inventory = inventory;
+            _inventorySlots = new List<InventorySlot>(inventory.Capacity);
         }
 
         private void Awake()
         {
-            DrawInventory(Inventory.Items);
+            DrawInventory();
             Inventory.OnInventoryChange += DrawInventory;
         }
 
@@ -36,18 +38,18 @@ namespace InventorySystem
                 Destroy(childTransform.gameObject);
             }
 
-            _inventorySlots = new List<InventorySlot>(inventoryCapacity);
+            _inventorySlots = new List<InventorySlot>(inventory.Capacity);
         }
 
-        private void DrawInventory(List<InventoryItem> inventory)
+        private void DrawInventory()
         {
             ResetInventory();
 
             CreateEmptyInventory(_inventorySlots.Capacity);
 
-            for (int i = 0; i < inventory.Count; i++)
+            for (int i = 0; i < inventory.Items.Count; i++)
             {
-                _inventorySlots[i].FillSlot(inventory[i]);
+                _inventorySlots[i].FillSlot(inventory.Items[i]);
             }
             
             SignUpSlots();
@@ -67,7 +69,17 @@ namespace InventorySystem
                 CreateInventorySlot();
         }
 
-        public void EnableDisableInventory() => gameObject.SetActive(!gameObject.activeSelf);
+        public void EnableDisableInventory()
+        {
+            GameObject parent;
+            GameObject children = gameObject;
+            do
+            {
+                parent = children.transform.parent.gameObject;
+                children = parent;
+            } while (children.transform.parent != null && !children.GetComponent<ScrollRect>());
+            parent.gameObject.SetActive(!parent.activeSelf);
+        }
 
         public static void RemoveDirectItem(InventorySlot inventorySlot)
         {
