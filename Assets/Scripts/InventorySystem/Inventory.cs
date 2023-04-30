@@ -9,7 +9,7 @@ namespace InventorySystem
 {
 	public class Inventory : MonoBehaviour
 	{
-		public static event Action OnInventoryChange;
+		public static event Action<InventoryItem> OnInventoryChange;
 		public List<InventoryItem> Items { get; set; } = new();
 		[field: SerializeField] public int Capacity { get; private set; }
 		
@@ -21,13 +21,13 @@ namespace InventorySystem
 			if (inventoryItem != null)
 			{
 				inventoryItem.AddToStack();
-				OnInventoryChange?.Invoke();
+				OnInventoryChange?.Invoke(inventoryItem);
 			}
 			else
 			{
 				InventoryItem newItem = new(itemData);
 				Items.Add(newItem);
-				OnInventoryChange?.Invoke();
+				OnInventoryChange?.Invoke(newItem);
 			}
 		}
 
@@ -37,13 +37,13 @@ namespace InventorySystem
 				.LastOrDefault();
 
 			inventoryItem.RemoveFromStack();
-			OnInventoryChange?.Invoke();
+			OnInventoryChange?.Invoke(inventoryItem);
 			
 			if (inventoryItem.StackSize != 0)
 				return;
 
 			Items.Remove(inventoryItem);
-			OnInventoryChange?.Invoke();
+			//OnInventoryChange?.Invoke(inventoryItem);
 			//_inventoryItemByItemData.Remove(itemData);
 		}
 

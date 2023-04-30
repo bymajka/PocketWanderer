@@ -25,6 +25,7 @@ namespace InventorySystem
 
         public void ClearSlot()
         {
+            InventoryItem = null;
             image.enabled = false;
             labelText.enabled = false;
             stackSizeText.enabled = false;
@@ -32,11 +33,11 @@ namespace InventorySystem
 
         public void FillSlot(InventoryItem inventoryItem)
         {
-            if (inventoryItem == null)
+            /*if (inventoryItem == null)
             {
                 ClearSlot();
                 return;
-            }
+            }*/
 
             InventoryItem = inventoryItem;
 

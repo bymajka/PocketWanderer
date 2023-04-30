@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ItemSystem;
 using ItemSystem.ItemsData;
 using UnityEngine;
@@ -17,42 +18,18 @@ namespace InventorySystem
         public InventoryManager(T inventory)
         {
             this.inventory = inventory;
-            _inventorySlots = new List<InventorySlot>(inventory.Capacity);
         }
 
         private void Awake()
         {
-            DrawInventory();
-            Inventory.OnInventoryChange += DrawInventory;
+            _inventorySlots = new List<InventorySlot>(inventory.Capacity);
+            Inventory.OnInventoryChange += UpdateSlot;
+            CreateEmptyInventory();
         }
 
         private void OnDestroy()
         {
-            Inventory.OnInventoryChange -= DrawInventory;
-        }
-
-        private void ResetInventory()
-        {
-            foreach (Transform childTransform in transform)
-            {
-                Destroy(childTransform.gameObject);
-            }
-
-            _inventorySlots = new List<InventorySlot>(inventory.Capacity);
-        }
-
-        private void DrawInventory()
-        {
-            ResetInventory();
-
-            CreateEmptyInventory(_inventorySlots.Capacity);
-
-            for (int i = 0; i < inventory.Items.Count; i++)
-            {
-                _inventorySlots[i].FillSlot(inventory.Items[i]);
-            }
-            
-            SignUpSlots();
+            Inventory.OnInventoryChange -= UpdateSlot;
         }
 
         private void CreateInventorySlot()
@@ -63,10 +40,13 @@ namespace InventorySystem
             _inventorySlots.Add(newSlotComponent);
         }
 
-        private void CreateEmptyInventory(int capacity)
+        private void CreateEmptyInventory()
         {
-            for (int i = 0; i < capacity; i++)
+            for (int i = 0; i < _inventorySlots.Capacity; i++)
                 CreateInventorySlot();
+            for (int i = 0; i < inventory.Items.Count; i++)
+                _inventorySlots[i].FillSlot(inventory.Items[i]);
+            SignUpSlots();
         }
 
         public void EnableDisableInventory()
@@ -95,6 +75,22 @@ namespace InventorySystem
             {
                 slot.onClickRemove += () => RemoveDirectItem(slot);
             }
+        }
+
+        public void UpdateSlot(InventoryItem item)
+        {
+            var occupiedSlot = _inventorySlots.Find(i => i.InventoryItem == item);
+            if (occupiedSlot != null)
+            {
+                if (occupiedSlot.InventoryItem.StackSize <= 0)
+                {
+                    occupiedSlot.ClearSlot();
+                    return;
+                }
+                occupiedSlot.FillSlot(item);
+            }
+            else 
+                _inventorySlots.FirstOrDefault(i => i.InventoryItem == null)!.FillSlot(item);
         }
     }
 }
