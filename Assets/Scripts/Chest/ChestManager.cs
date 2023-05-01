@@ -1,44 +1,43 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using InventorySystem;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace Chest
 {
     public class ChestManager : MonoBehaviour
     {
-        [SerializeField] private Button chestButton;
-        private List<ChestInventory> nearestChestInventories;
+        [SerializeField] private PlayerInput playerInput;
+        private List<Chest> nearestChests = new List<Chest>();
 
         private void Awake()
         {
-            chestButton.gameObject.SetActive(false);
-            nearestChestInventories = new List<ChestInventory>();
+            playerInput.actions["Interaction"].performed += OnInteraction;
         }
 
-        public void HideButton()
+        public void AddChest(Chest chest)
         {
-            chestButton.gameObject.SetActive(false);
-        }
-
-        public void ShowButton()
-        {
-            chestButton.gameObject.SetActive(true);
-        }
-
-        public void AddChestInventory(ChestInventory inventory)
-        {
-            if (inventory != null)
-                nearestChestInventories.Add(inventory);
+            if (chest != null)
+                nearestChests.Add(chest);
         }
         
-        public void RemoveChestInventory(ChestInventory inventory)
+        public void RemoveChest(Chest chest)
         {
-            if (inventory != null)
-                nearestChestInventories.Remove(inventory);
+            if (chest != null)
+                nearestChests.Remove(chest);
         }
 
-        public void ShowChestInventory()
+        public void OnInteraction(InputAction.CallbackContext callbackContext)
+        {
+            var chestToOpen = nearestChests.FirstOrDefault();
+            if (chestToOpen != null)
+            {
+                chestToOpen.OpenChest();
+            }
+        }
+
+        public void ShowChestInventory(ChestInventory chestInventory)
         {
             Debug.Log("Showing chest inventory");
         }
