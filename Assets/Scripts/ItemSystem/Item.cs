@@ -1,4 +1,4 @@
-﻿using InventorySystem;
+﻿using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace ItemSystem

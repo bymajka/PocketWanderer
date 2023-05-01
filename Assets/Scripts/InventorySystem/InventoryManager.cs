@@ -14,24 +14,18 @@ namespace InventorySystem
         {
             _inventorySlots = new List<InventorySlot>(inventoryCapacity);
         }
+
         private void Awake()
         {
             DrawInventory(Inventory.Items);
             Inventory.OnInventoryChange += DrawInventory;
         }
 
-        /*private void OnEnable()
-        {
-            Inventory.OnInventoryChange += DrawInventory;
-        }
-        private void OnDisable()
-        {
-            Inventory.OnInventoryChange -= DrawInventory;
-        }*/
         private void OnDestroy()
         {
             Inventory.OnInventoryChange -= DrawInventory;
         }
+
         private void ResetInventory()
         {
             foreach (Transform childTransform in transform)
@@ -41,6 +35,7 @@ namespace InventorySystem
 
             _inventorySlots = new List<InventorySlot>(inventoryCapacity);
         }
+
         private void DrawInventory(List<InventoryItem> inventory)
         {
             ResetInventory();
@@ -52,6 +47,7 @@ namespace InventorySystem
                 _inventorySlots[i].FillSlot(inventory[i]);
             }
         }
+
         private void CreateInventorySlot()
         {
             GameObject newSlot = Instantiate(slotPrefab, transform, false);
@@ -59,11 +55,13 @@ namespace InventorySystem
             newSlotComponent.ClearSlot();
             _inventorySlots.Add(newSlotComponent);
         }
+
         private void CreateEmptyInventory(int capacity)
         {
             for (int i = 0; i < capacity; i++)
                 CreateInventorySlot();
         }
+
         public void EnableDisableInventory() => gameObject.SetActive(!gameObject.activeSelf);
     }
 }

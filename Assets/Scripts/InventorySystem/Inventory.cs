@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ItemSystem;
+using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace InventorySystem
@@ -9,11 +11,10 @@ namespace InventorySystem
 	{
 		public static event Action<List<InventoryItem>> OnInventoryChange;
 		public static List<InventoryItem> Items { get; set; } = new();
-		private readonly Dictionary<ItemData, InventoryItem> _inventoryItemByItemData = new();
 
 		public void Add(ItemData itemData)
 		{
-			if (TryGetInventoryItem(itemData, out InventoryItem inventoryItem))
+			if (TryGetItem(itemData, out InventoryItem inventoryItem))
 			{
 				inventoryItem.AddToStack();
 				OnInventoryChange?.Invoke(Items);
@@ -22,14 +23,21 @@ namespace InventorySystem
 			{
 				InventoryItem newItem = new(itemData);
 				Items.Add(newItem);
-				_inventoryItemByItemData.Add(itemData, newItem);
 				OnInventoryChange?.Invoke(Items);
 			}
 		}
 
+		private static bool TryGetItem(ItemData itemData, out InventoryItem inventoryItem)
+		{
+			inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
+				.FirstOrDefault();
+
+			return inventoryItem != null;
+		}
+
 		public void Remove(ItemData itemData)
 		{
-			if (!TryGetInventoryItem(itemData, out InventoryItem inventoryItem))
+			if (!TryGetItem(itemData, out InventoryItem inventoryItem))
 				return;
 
 			inventoryItem.RemoveFromStack();
@@ -37,7 +45,7 @@ namespace InventorySystem
 				return;
 
 			Items.Remove(inventoryItem);
-			_inventoryItemByItemData.Remove(itemData);
+			//_inventoryItemByItemData.Remove(itemData);
 		}
 
 		public void TransferItem(ItemData itemToTransfer, Inventory otherInventory)
@@ -47,9 +55,9 @@ namespace InventorySystem
 			otherInventory.Add(itemToTransfer);
 		}
 
-		private bool TryGetInventoryItem(ItemData itemData, out InventoryItem inventoryItem)
-		{
-			return _inventoryItemByItemData.TryGetValue(itemData, out inventoryItem);
-		}
+		//private bool TryGetInventoryItem(ItemData itemData, out InventoryItem inventoryItem)
+		//{
+		//	return _inventoryItemByItemData.TryGetValue(itemData, out inventoryItem);
+		//}
 	}
 }
