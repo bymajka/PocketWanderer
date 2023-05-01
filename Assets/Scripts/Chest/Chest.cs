@@ -23,7 +23,7 @@ namespace Chest
             if (other.CompareTag("Player"))
             {
                 ShowButton();
-                chestManager.AddChestInventory(inventory);
+                chestManager.AddChest(this);
             }
         }
 
@@ -33,13 +33,14 @@ namespace Chest
             {
                 HideButton();
                 CloseChest();
-                chestManager.RemoveChestInventory(inventory);
+                chestManager.RemoveChest(this);
             }
         }
 
         public void OpenChest()
         {
             spriteRenderer.sprite = chestOpenedSprite;
+            chestManager.ShowChestInventory(inventory);
         }
 
         private void CloseChest()

@@ -3291,6 +3291,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f75fdc7c-d8f2-4e27-b4ea-9bf2e122c360
     m_ActionName: Player/Maining[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: efd35c45-e9d2-412a-9d9a-4e60b8f3b921
+    m_ActionName: Player/Interaction[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -4330,6 +4334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b778d55748a4fe29209d72d65445fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 488093612}
 --- !u!1 &1389107663
 GameObject:
   m_ObjectHideFlags: 0
@@ -43678,64 +43683,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonWest
---- !u!1001 &481827070339407400
+--- !u!1001 &5200976588641849023
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 481827069481184258, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
-      propertyPath: m_Name
-      value: Chest
-      objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184260, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
-      propertyPath: chestManager
-      value: 
-      objectReference: {fileID: 1309967958}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7558
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.213
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 481827069481184263, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200976588022643859, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: chestManager
+      value: 
+      objectReference: {fileID: 1309967958}
+    - target: {fileID: 5200976588022643861, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: m_Name
+      value: Chest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
