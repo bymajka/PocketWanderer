@@ -1,93 +1,60 @@
-﻿using System;
-using System.Collections;
-using Pathfinding;
+﻿using EnemySystem.StateMachine;
 using UnityEngine;
-using EnemySystem.StateMachine;
 
 namespace EnemySystem
 {
     public class EnemyMover
     {
-        public Transform Target
-        {
-            get => _target;
-            set
-            {
-                if (value == null) throw new ArgumentNullException(nameof(value));
-                ResetMovement();
-                _target = value;
-                _coroutine = _context.RunCoroutine(SearchPathCoroutine());
-            }
-        }
+        private static readonly int LastHorizontal = Animator.StringToHash("LastHorizontal");
+        private static readonly int LastVertical = Animator.StringToHash("LastVertical");
+        private static readonly int Horizontal = Animator.StringToHash("Horizontal");
+        private static readonly int Vertical = Animator.StringToHash("Vertical");
 
-        private readonly EnemyStateMachine _context;
-        private readonly Seeker _seeker;
-        private readonly Transform _enemyTransform;
-        private readonly Rigidbody2D _enemyRigidbody;
-        private Coroutine _coroutine;
+        public Vector2 LastMoveDirection { get; private set; }
 
-        private Vector3 _previousTargetPosition;
-        private Vector3 _destination;
-        private Path _currentPath;
-        private int _currentWayPoint;
-        private float _stoppingDistance;
+        private EnemyStateMachine _context;
+        private Rigidbody2D _rigidbody;
+        private PathfindingAgent _pathfindingAgent;
+        private Vector2 _direction;
+        private Vector2 _nextPosition;
+        private float _speed;
 
-        private Transform _target;
-
-        public EnemyMover(EnemyStateMachine context)
+        public void Initialize(EnemyStateMachine context)
         {
             _context = context;
-            _seeker = context.Seeker;
-            _enemyRigidbody = _context.EnemyRigidbody;
-            _enemyTransform = _context.EnemyTransform;
+            _rigidbody = context.EnemyRigidbody;
+            _pathfindingAgent = context.PathfindingAgent;
+            _speed = context.MovementSpeed;
         }
 
         public void Move()
         {
-            if (_currentPath == null || _currentWayPoint >= _currentPath.vectorPath.Count) return;
+            _nextPosition = _pathfindingAgent.GetNextPosition();
+            var currentPosition = _rigidbody.position;
+            _direction = (_nextPosition - currentPosition).normalized;
 
-            var currentPosition = (Vector3)_enemyRigidbody.position;
-            var waypointPosition = _currentPath.vectorPath[_currentWayPoint];
-            //var waypointDirection = waypointPosition - currentPosition;
-            
-            if (Vector2.Distance(waypointPosition, currentPosition) < 0.05f)
-            {
-                _currentWayPoint++;
-                return;
-            }
-            
-            _enemyTransform.position = Vector2.MoveTowards(currentPosition, waypointPosition,
-                _context.MovementSpeed * Time.deltaTime);
+            currentPosition += _direction * (_speed * Time.deltaTime);
+            _rigidbody.position = currentPosition;
+        }
+
+        public void Stop()
+        {
+            _pathfindingAgent.Reset();
         }
         
-        public void ResetMovement()
+        public void CheckDirection()
         {
-            if (_coroutine != null) _context.KillCoroutine(_coroutine);
-
-            _target = null;
-            _currentPath = null;
-        }
-
-        private IEnumerator SearchPathCoroutine()
-        {
-            while (_target != null)
+            if (_direction is { x: 0f, y: 0f })
             {
-                if (_target.position != _previousTargetPosition)
-                {
-                    _destination = _target.position;
-                    _previousTargetPosition = _destination;
-                    _seeker.StartPath(_enemyRigidbody.position, _destination, OnPathCompleted);
-                }
-                yield return new WaitForSeconds(_context.PathUpdateTime);
+                _context.Animator.SetFloat(LastHorizontal, LastMoveDirection.x);
+                _context.Animator.SetFloat(LastVertical, LastMoveDirection.y);
             }
-            ResetMovement();
-        }
-
-        private void OnPathCompleted(Path path)
-        {
-            if (path.error) return;
-            _currentPath = path;
-            _currentWayPoint = 0;
+            else
+            {
+                LastMoveDirection = _direction;
+            }
+            _context.Animator.SetFloat(Horizontal, _direction.x);
+            _context.Animator.SetFloat(Vertical, _direction.y);
         }
     }
 }

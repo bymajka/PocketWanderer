@@ -1,14 +1,10 @@
-﻿using Pathfinding;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EnemySystem.StateMachine
 {
     public class EnemyChaseState : EnemyBaseState
     {
-        private Path _path;
-        private int _currentWayPoint;
-        private float _distanceToTarget;
-
+        private static readonly int Moving = Animator.StringToHash("Moving");
         public EnemyChaseState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
         {
         }
@@ -16,30 +12,31 @@ namespace EnemySystem.StateMachine
         public override void OnEnterState()
         {
             Debug.Log("Enemy entered in CHASE state.");
-            Context.EnemyMover.Target = Context.Target;
+            Context.Animator.SetBool(Moving, true);
+            Context.PathfindingAgent.Target = Context.Target;
         }
 
         public override void OnUpdateState()
         {
-            _distanceToTarget = Vector2.Distance(Context.EnemyTransform.position, Context.Target.position);
-            CheckSwitchStates();
             Chase();
+            CheckSwitchStates();
         }
 
         public override void OnExitState()
         {
             Debug.Log("Enemy exited from CHASE state.");
-            Context.EnemyMover.ResetMovement();
+            Context.EnemyMover.Stop();
+            Context.Animator.SetBool(Moving, false);
         }
 
         public override void CheckSwitchStates()
         {
-            if (_distanceToTarget <= Context.MinChaseDistance)
+            if (Context.EnemyStateController.CheckTargetAttackAbility())
             {
                 SwitchState(Factory.Attack());
             }
             
-            if (_distanceToTarget >= Context.MaxChaseDistance)
+            if (!Context.EnemyStateController.CheckChasePossibility())
             {
                 SwitchState(Factory.Idle());
             }
@@ -47,6 +44,7 @@ namespace EnemySystem.StateMachine
 
         private void Chase()
         {
+            Context.EnemyMover.CheckDirection();
             Context.EnemyMover.Move();
         }
     }

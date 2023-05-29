@@ -7,7 +7,6 @@ namespace EnemySystem.StateMachine
     {
         private Coroutine _coroutine;
         private bool _isDelayOver;
-        private float _distanceToTarget;
 
         public EnemyIdleState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
         {
@@ -21,7 +20,6 @@ namespace EnemySystem.StateMachine
 
         public override void OnUpdateState()
         {
-            _distanceToTarget = Vector2.Distance(Context.EnemyTransform.position, Context.Target.position);
             CheckSwitchStates();
         }
 
@@ -33,7 +31,7 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
-            if (_distanceToTarget < Context.TriggeredDistance)
+            if (Context.EnemyStateController.CheckTargetVisibility(Context.EnemyMover.LastMoveDirection))
             {
                 SwitchState(Factory.Chaise());
             }

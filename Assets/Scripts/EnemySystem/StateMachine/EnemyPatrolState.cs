@@ -4,9 +4,9 @@ namespace EnemySystem.StateMachine
 {
     public class EnemyPatrolState : EnemyBaseState
     {
+        private static readonly int Moving = Animator.StringToHash("Moving");
         private int _currentPatrolPointIndex;
         private bool _hasReachedPatrolPoint;
-        private float _distanceToTarget;
 
         public EnemyPatrolState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
         {
@@ -16,26 +16,28 @@ namespace EnemySystem.StateMachine
         {
             Debug.Log("Enemy entered in PATROL state.");
             _currentPatrolPointIndex = Context.LastPatronPointIndex;
-            Context.EnemyMover.Target = Context.PatrolPoints[_currentPatrolPointIndex];
+            Context.PathfindingAgent.Target = Context.PatrolPoints[_currentPatrolPointIndex];
+            Context.Animator.SetBool(Moving, true);
         }
 
         public override void OnUpdateState()
         {
-            _distanceToTarget = Vector2.Distance(Context.EnemyTransform.position, Context.Target.position);
-            CheckSwitchStates();
+            Context.EnemyMover.CheckDirection();
             Patrol();
+            CheckSwitchStates();
         }
 
         public override void OnExitState()
         {
             Debug.Log("Enemy exited from PATROL state.");
             Context.LastPatronPointIndex = _currentPatrolPointIndex;
-            Context.EnemyMover.ResetMovement();
+            Context.Animator.SetBool(Moving, false);
+            Context.EnemyMover.Stop();
         }
 
         public override void CheckSwitchStates()
         {
-            if (_distanceToTarget < Context.TriggeredDistance)
+            if (Context.EnemyStateController.CheckTargetVisibility(Context.EnemyMover.LastMoveDirection))
             {
                 SwitchState(Factory.Chaise());
             }
@@ -49,14 +51,12 @@ namespace EnemySystem.StateMachine
             {
                 _currentPatrolPointIndex = 0;
             }
-
             SwitchState(Factory.Idle());
         }
 
         private void Patrol()
         {
-            if (Vector2.Distance(Context.EnemyTransform.position,
-                    Context.PatrolPoints[_currentPatrolPointIndex].position) > 0.05f)
+            if (Vector2.Distance(Context.EnemyTransform.position, Context.PatrolPoints[_currentPatrolPointIndex].position) > 0.05f)
             {
                 Context.EnemyMover.Move();
             }
