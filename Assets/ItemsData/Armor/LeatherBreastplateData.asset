@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6096135595944dcbc2123ae7d302ee7, type: 3}
+  m_Name: LeatherBreastplateData
+  m_EditorClassIdentifier: 
+  displayName: Leather Breastplate
+  icon: {fileID: 1903158177, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  stackCapacity: 1
+  rarity: 1
+  amount: 1
+  price: 10
+  armorRating: 15
