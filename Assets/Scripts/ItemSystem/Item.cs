@@ -1,4 +1,5 @@
-﻿using ItemSystem.ItemsData;
+﻿using System;
+using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace ItemSystem
@@ -8,7 +9,7 @@ namespace ItemSystem
         public static event HandleItemCollected OnItemCollected;
         public delegate void HandleItemCollected(ItemData itemData);
 
-        [SerializeField] private ItemData _itemData;
+        [SerializeField] protected ItemData _itemData;
         
         public void Collect()
         {

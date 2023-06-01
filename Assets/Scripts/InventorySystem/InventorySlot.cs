@@ -1,6 +1,6 @@
-using System;
 using ItemSystem;
 using TMPro;
+using UI.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +29,7 @@ namespace InventorySystem
             image.enabled = false;
             labelText.enabled = false;
             stackSizeText.enabled = false;
+            GetComponentInChildren<ItemActionPanel>().RemoveOldButtons();
         }
 
         public void FillSlot(InventoryItem inventoryItem)

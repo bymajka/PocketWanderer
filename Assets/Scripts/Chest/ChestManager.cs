@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using InventorySystem;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,8 @@ namespace Chest
     public class ChestManager : MonoBehaviour
     {
         [SerializeField] private Button chestButton;
-        private List<ChestInventory> nearestChestInventories = new (); 
+        public static event Action<Inventory> SubscribeOnItemActions;
+        private List<ChestInventory> nearestChestInventories = new ();
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace Chest
         {
             if (inventory != null)
                 nearestChestInventories.Add(inventory);
+            SubscribeOnItemActions?.Invoke(inventory);
         }
         
         public void RemoveChestInventory(ChestInventory inventory)

@@ -8,11 +8,11 @@ using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    public class InventoryManager<T>: MonoBehaviour where T : Inventory
+    public abstract class InventoryManager<T>: MonoBehaviour where T : Inventory
     {
         [SerializeField] private GameObject slotPrefab;
-        private List<InventorySlot> _inventorySlots;
-        [SerializeField] private T inventory;
+        public List<InventorySlot> InventorySlots { get; protected set; }
+        [SerializeField] protected T inventory;
         public static event Action<ItemData> OnRemoveItem; 
 
         public InventoryManager(T inventory)
@@ -22,14 +22,14 @@ namespace InventorySystem
 
         private void Awake()
         {
-            _inventorySlots = new List<InventorySlot>(inventory.Capacity);
-            Inventory.OnInventoryChange += UpdateSlot;
+            InventorySlots = new List<InventorySlot>(inventory.Capacity);
             CreateEmptyInventory();
         }
 
         private void OnDestroy()
         {
-            Inventory.OnInventoryChange -= UpdateSlot;
+            //PlayerInventory.OnInventoryChangedPlayer -= UpdateSlot;
+            //ChestInventory.OnInventoryChangedChest -= UpdateSlot;
         }
 
         private void CreateInventorySlot()
@@ -37,15 +37,15 @@ namespace InventorySystem
             GameObject newSlot = Instantiate(slotPrefab, transform, false);
             InventorySlot newSlotComponent = newSlot.GetComponent<InventorySlot>();
             newSlotComponent.ClearSlot();
-            _inventorySlots.Add(newSlotComponent);
+            InventorySlots.Add(newSlotComponent);
         }
 
-        private void CreateEmptyInventory()
+        protected void CreateEmptyInventory()
         {
-            for (int i = 0; i < _inventorySlots.Capacity; i++)
+            for (int i = 0; i < InventorySlots.Capacity; i++)
                 CreateInventorySlot();
             for (int i = 0; i < inventory.Items.Count; i++)
-                _inventorySlots[i].FillSlot(inventory.Items[i]);
+                InventorySlots[i].FillSlot(inventory.Items[i]);
             SignUpSlots();
         }
 
@@ -71,7 +71,7 @@ namespace InventorySystem
 
         public void SignUpSlots()
         {
-            foreach (var slot in _inventorySlots)
+            foreach (var slot in InventorySlots)
             {
                 slot.onClickRemove += () => RemoveDirectItem(slot);
             }
@@ -79,7 +79,7 @@ namespace InventorySystem
 
         public void UpdateSlot(InventoryItem item)
         {
-            var occupiedSlot = _inventorySlots.Find(i => i.InventoryItem == item);
+            var occupiedSlot = InventorySlots.Find(i => i.InventoryItem == item);
             if (occupiedSlot != null)
             {
                 if (occupiedSlot.InventoryItem.StackSize <= 0)
@@ -90,7 +90,7 @@ namespace InventorySystem
                 occupiedSlot.FillSlot(item);
             }
             else 
-                _inventorySlots.FirstOrDefault(i => i.InventoryItem == null)!.FillSlot(item);
+                InventorySlots.FirstOrDefault(i => i.InventoryItem == null)!.FillSlot(item);
         }
     }
 }

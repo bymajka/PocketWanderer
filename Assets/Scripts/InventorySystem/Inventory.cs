@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace InventorySystem
 {
-	public class Inventory : MonoBehaviour
+	public abstract class Inventory : MonoBehaviour
 	{
 		public static event Action<InventoryItem> OnInventoryChange;
 		public List<InventoryItem> Items { get; set; } = new();
 		[field: SerializeField] public int Capacity { get; private set; }
 		
-		public void Add(ItemData itemData)
+		protected virtual void Add(ItemData itemData)
 		{
 			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
 				.FirstOrDefault();
@@ -31,7 +31,7 @@ namespace InventorySystem
 			}
 		}
 
-		public void Remove(ItemData itemData)
+		protected virtual void Remove(ItemData itemData)
 		{
 			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize > 0)
 				.LastOrDefault();
@@ -43,14 +43,11 @@ namespace InventorySystem
 				return;
 
 			Items.Remove(inventoryItem);
-			//OnInventoryChange?.Invoke(inventoryItem);
-			//_inventoryItemByItemData.Remove(itemData);
 		}
 
 		public void TransferItem(ItemData itemToTransfer, Inventory otherInventory)
 		{
 			Remove(itemToTransfer);
-
 			otherInventory.Add(itemToTransfer);
 		}
 	}
