@@ -44204,6 +44204,8 @@ GameObject:
   - component: {fileID: 1478996659}
   - component: {fileID: 1478996663}
   - component: {fileID: 1478996664}
+  - component: {fileID: 1478996666}
+  - component: {fileID: 1478996665}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Player
@@ -44360,14 +44362,48 @@ MonoBehaviour:
   <FOV>k__BackingField: 90
   <VisionDistance>k__BackingField: 5
   <TriggeredDistance>k__BackingField: 1.5
-  <PathUpdateTime>k__BackingField: 0.5
+  <VisibleLayers>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 384
   <PatrolPoints>k__BackingField:
   - {fileID: 469480932}
   - {fileID: 1667637748}
   - {fileID: 50193731}
   <WaitTimeOnPatrolPoint>k__BackingField: 3
-  <MaxChaseDistance>k__BackingField: 5
   <AttackDistance>k__BackingField: 0.7
+--- !u!114 &1478996665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478996657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2424b1ee5a46618135d0d345dd80f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pathUpdateTime: 0.5
+--- !u!95 &1478996666
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478996657}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af1125977df96394b8c68b9789dae1f6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1482337976
 GameObject:
   m_ObjectHideFlags: 0
