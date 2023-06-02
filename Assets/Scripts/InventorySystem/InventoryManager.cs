@@ -1,51 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ItemSystem;
+using ItemSystem.ItemsData;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    public class InventoryManager: MonoBehaviour
+    public abstract class InventoryManager<T>: MonoBehaviour where T : Inventory
     {
         [SerializeField] private GameObject slotPrefab;
-        [SerializeField] private int inventoryCapacity;
-        private List<InventorySlot> _inventorySlots;
+        public List<InventorySlot> InventorySlots { get; protected set; }
+        [SerializeField] protected T inventory;
+        public static event Action<ItemData> OnRemoveItem; 
 
-        public InventoryManager()
+        public InventoryManager(T inventory)
         {
-            _inventorySlots = new List<InventorySlot>(inventoryCapacity);
+            this.inventory = inventory;
         }
 
         private void Awake()
         {
-            DrawInventory(Inventory.Items);
-            Inventory.OnInventoryChange += DrawInventory;
+            InventorySlots = new List<InventorySlot>(inventory.Capacity);
+            CreateEmptyInventory();
         }
 
         private void OnDestroy()
         {
-            Inventory.OnInventoryChange -= DrawInventory;
-        }
-
-        private void ResetInventory()
-        {
-            foreach (Transform childTransform in transform)
-            {
-                Destroy(childTransform.gameObject);
-            }
-
-            _inventorySlots = new List<InventorySlot>(inventoryCapacity);
-        }
-
-        private void DrawInventory(List<InventoryItem> inventory)
-        {
-            ResetInventory();
-
-            CreateEmptyInventory(_inventorySlots.Capacity);
-
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                _inventorySlots[i].FillSlot(inventory[i]);
-            }
+            //PlayerInventory.OnInventoryChangedPlayer -= UpdateSlot;
+            //ChestInventory.OnInventoryChangedChest -= UpdateSlot;
         }
 
         private void CreateInventorySlot()
@@ -53,15 +37,60 @@ namespace InventorySystem
             GameObject newSlot = Instantiate(slotPrefab, transform, false);
             InventorySlot newSlotComponent = newSlot.GetComponent<InventorySlot>();
             newSlotComponent.ClearSlot();
-            _inventorySlots.Add(newSlotComponent);
+            InventorySlots.Add(newSlotComponent);
         }
 
-        private void CreateEmptyInventory(int capacity)
+        protected void CreateEmptyInventory()
         {
-            for (int i = 0; i < capacity; i++)
+            for (int i = 0; i < InventorySlots.Capacity; i++)
                 CreateInventorySlot();
+            for (int i = 0; i < inventory.Items.Count; i++)
+                InventorySlots[i].FillSlot(inventory.Items[i]);
+            SignUpSlots();
         }
 
-        public void EnableDisableInventory() => gameObject.SetActive(!gameObject.activeSelf);
+        public void EnableDisableInventory()
+        {
+            GameObject parent;
+            GameObject children = gameObject;
+            do
+            {
+                parent = children.transform.parent.gameObject;
+                children = parent;
+            } while (children.transform.parent != null && !children.GetComponent<ScrollRect>());
+            parent.gameObject.SetActive(!parent.activeSelf);
+        }
+
+        public static void RemoveDirectItem(InventorySlot inventorySlot)
+        {
+            if (inventorySlot.InventoryItem == null)
+                return;
+                
+            OnRemoveItem?.Invoke(inventorySlot.InventoryItem.ItemData);
+        }
+
+        public void SignUpSlots()
+        {
+            foreach (var slot in InventorySlots)
+            {
+                slot.onClickRemove += () => RemoveDirectItem(slot);
+            }
+        }
+
+        public void UpdateSlot(InventoryItem item)
+        {
+            var occupiedSlot = InventorySlots.Find(i => i.InventoryItem == item);
+            if (occupiedSlot != null)
+            {
+                if (occupiedSlot.InventoryItem.StackSize <= 0)
+                {
+                    occupiedSlot.ClearSlot();
+                    return;
+                }
+                occupiedSlot.FillSlot(item);
+            }
+            else 
+                InventorySlots.FirstOrDefault(i => i.InventoryItem == null)!.FillSlot(item);
+        }
     }
 }

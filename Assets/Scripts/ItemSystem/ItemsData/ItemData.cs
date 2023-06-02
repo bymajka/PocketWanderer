@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -40,5 +42,11 @@ namespace ItemSystem.ItemsData
         /// </summary>
         [FormerlySerializedAs("Price")]
         public float price;
+
+        /// <summary>
+        /// Actions that has item.
+        /// </summary>
+        [FormerlySerializedAs("Actions")] 
+        public Dictionary<string, Action> ItemActions;
     }
 }
