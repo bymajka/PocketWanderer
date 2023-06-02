@@ -8,7 +8,7 @@ namespace InventorySystem
 	public class ChestInventory : Inventory
 	{
 		public static event Action<InventoryItem> OnInventoryChangedChest;
-		protected override void Add(ItemData itemData)
+		public override void Add(ItemData itemData)
 		{
 			var inventoryItem = Items
 				.FirstOrDefault(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity);

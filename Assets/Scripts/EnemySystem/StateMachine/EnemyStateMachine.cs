@@ -49,7 +49,7 @@ namespace EnemySystem.StateMachine
             EnemyStateController.Initialize(this);
             EnemyMover.Initialize(this);
             
-            CurrentState = _states.Patrol();
+            CurrentState = _states.Idle();
             CurrentState.OnEnterState();
         }
 

@@ -9,12 +9,12 @@ namespace ItemSystem
         public static event HandleItemCollected OnItemCollected;
         public delegate void HandleItemCollected(ItemData itemData);
 
-        [SerializeField] protected ItemData _itemData;
-        
+        [field: SerializeField] public ItemData ItemData { get; set; }
+
         public void Collect()
         {
             Destroy(gameObject);
-            OnItemCollected?.Invoke(_itemData);
+            OnItemCollected?.Invoke(ItemData);
         }
     }
 }

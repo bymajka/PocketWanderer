@@ -161,6 +161,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3312021498026533777, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
+      propertyPath: <ItemData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 12de48330f1443f41acac7d49b01b6c7, type: 2}
     - target: {fileID: 3560285481198796982, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
       propertyPath: m_Name
       value: HelthBoostPotion (2)
@@ -222,6 +226,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3312021498026533777, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
+      propertyPath: <ItemData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 12de48330f1443f41acac7d49b01b6c7, type: 2}
     - target: {fileID: 3560285481198796982, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
       propertyPath: m_Name
       value: HelthBoostPotion (3)
@@ -283,6 +291,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3312021498026533777, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
+      propertyPath: <ItemData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 12de48330f1443f41acac7d49b01b6c7, type: 2}
     - target: {fileID: 3560285481198796982, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
       propertyPath: m_Name
       value: HelthBoostPotion (5)
@@ -2692,6 +2704,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3312021498026533777, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
+      propertyPath: <ItemData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 12de48330f1443f41acac7d49b01b6c7, type: 2}
     - target: {fileID: 3560285481198796982, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
       propertyPath: m_Name
       value: HelthBoostPotion (1)
@@ -3628,6 +3644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ddd31e1960d98419a6095d4eb23016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Capacity>k__BackingField: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,6 +4133,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3312021498026533777, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
+      propertyPath: <ItemData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 12de48330f1443f41acac7d49b01b6c7, type: 2}
     - target: {fileID: 3560285481198796982, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
       propertyPath: m_Name
       value: HelthBoostPotion (4)
@@ -4177,6 +4198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3312021498026533777, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
+      propertyPath: <ItemData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 12de48330f1443f41acac7d49b01b6c7, type: 2}
     - target: {fileID: 3560285481198796982, guid: 8a3a270fee5bce043859216aee1c5a7a, type: 3}
       propertyPath: m_Name
       value: HelthBoostPotion
@@ -4388,7 +4413,7 @@ GameObject:
   - component: {fileID: 1176252964}
   - component: {fileID: 1176252963}
   - component: {fileID: 1176252962}
-  - component: {fileID: 1176252961}
+  - component: {fileID: 1176252965}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -4416,20 +4441,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1176252961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176252959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23d66156b1e34a4d9f305cda89261d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 5293788575940011114, guid: b3ebe8c4dae7cfb42b61d78b13ae8c5f, type: 3}
-  inventoryCapacity: 16
 --- !u!114 &1176252962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4492,6 +4503,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176252959}
   m_CullTransparentMesh: 1
+--- !u!114 &1176252965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176252959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a39719c2e1458c94caf67fe74fa0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotPrefab: {fileID: 5293788575940011114, guid: b3ebe8c4dae7cfb42b61d78b13ae8c5f, type: 3}
+  inventory: {fileID: 488093620}
 --- !u!1 &1199403225
 GameObject:
   m_ObjectHideFlags: 0
@@ -44563,8 +44588,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1176252961}
-        m_TargetAssemblyTypeName: InventorySystem.InventoryManager, Assembly-CSharp
+      - m_Target: {fileID: 1176252965}
+        m_TargetAssemblyTypeName: InventorySystem.InventoryManager`1[[InventorySystem.PlayerInventory,
+          Assembly-CSharp
         m_MethodName: EnableDisableInventory
         m_Mode: 1
         m_Arguments:
@@ -45318,10 +45344,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200976588022643856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200976588022643859, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: prefabItem1
+      value: 
+      objectReference: {fileID: 11400000, guid: c24c3cecb78ec4845ad003f847e6a33f, type: 2}
+    - target: {fileID: 5200976588022643859, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: prefabItem2
+      value: 
+      objectReference: {fileID: 11400000, guid: 12de48330f1443f41acac7d49b01b6c7, type: 2}
+    - target: {fileID: 5200976588022643859, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: prefabItem3
+      value: 
+      objectReference: {fileID: 11400000, guid: fdfc5aec25d2f70489c943d60a0ad045, type: 2}
     - target: {fileID: 5200976588022643859, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: chestManager
       value: 
       objectReference: {fileID: 1309967958}
+    - target: {fileID: 5200976588022643859, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
+      propertyPath: dropItemsRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6206309357292341856, guid: 16acbb6a71641cf4187c091d9261d12f, type: 3}
       propertyPath: chestManager
       value: 

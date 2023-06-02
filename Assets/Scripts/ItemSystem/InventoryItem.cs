@@ -15,7 +15,6 @@ namespace ItemSystem
 		{
 			ItemData = itemData;
 			itemData.ItemActions = new Dictionary<string, Action>();
-			InventoryTransfer.SubscribeInventoryTransfering += AddAction(nameof(Transfer), );
 			AddAction(nameof(Use), Use);
 			AddToStack();
 		}

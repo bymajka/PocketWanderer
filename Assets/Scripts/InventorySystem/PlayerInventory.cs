@@ -8,7 +8,7 @@ namespace InventorySystem
 	public class PlayerInventory : Inventory
 	{
 		public static event Action<InventoryItem> OnInventoryChangedPlayer;
-		protected override void Add(ItemData itemData)
+		public override void Add(ItemData itemData)
 		{
 			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
 				.FirstOrDefault();

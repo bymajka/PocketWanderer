@@ -13,7 +13,7 @@ namespace InventorySystem
 		public List<InventoryItem> Items { get; set; } = new();
 		[field: SerializeField] public int Capacity { get; private set; }
 		
-		protected virtual void Add(ItemData itemData)
+		public virtual void Add(ItemData itemData)
 		{
 			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
 				.FirstOrDefault();
