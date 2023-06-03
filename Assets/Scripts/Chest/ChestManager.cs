@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using InventorySystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,11 +34,6 @@ namespace Chest
             {
                 chestToOpen.OpenChest();
             }
-        }
-
-        public void ShowChestInventory(ChestInventory chestInventory)
-        {
-            Debug.Log("Showing chest inventory");
         }
     }
 }

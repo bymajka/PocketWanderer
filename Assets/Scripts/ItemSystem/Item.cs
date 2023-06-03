@@ -1,4 +1,5 @@
-﻿using ItemSystem.ItemsData;
+﻿using System;
+using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace ItemSystem
@@ -8,12 +9,12 @@ namespace ItemSystem
         public static event HandleItemCollected OnItemCollected;
         public delegate void HandleItemCollected(ItemData itemData);
 
-        [SerializeField] private ItemData _itemData;
-        
+        [field: SerializeField] public ItemData ItemData { get; set; }
+
         public void Collect()
         {
             Destroy(gameObject);
-            OnItemCollected?.Invoke(_itemData);
+            OnItemCollected?.Invoke(ItemData);
         }
     }
 }
