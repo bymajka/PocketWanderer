@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &8612313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8612314}
+  m_Layer: 8
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8612314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8612313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 488093609}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &50193730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,7 +3475,8 @@ Transform:
   m_LocalPosition: {x: -2.865, y: 2.111, z: 0}
   m_LocalScale: {x: 4.3941, y: 4.3941, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8612314}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3613,6 +3645,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Direction>k__BackingField: {x: 0, y: 0}
   <Speed>k__BackingField: 3
+  <AttackPoint>k__BackingField: {fileID: 8612314}
+  <AttackPointOffset>k__BackingField: 0.1
+  <AttackDamage>k__BackingField: 20
+  <AttackRange>k__BackingField: 0.1
+  <EnemyLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 512
   <PlayerRb>k__BackingField: {fileID: 488093615}
   <Animator>k__BackingField: {fileID: 488093607}
   isAttacking: 0
@@ -3764,6 +3803,37 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &519720972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519720973}
+  m_Layer: 8
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519720973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519720972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1478996662}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &539468687
 GameObject:
   m_ObjectHideFlags: 0
@@ -44338,7 +44408,8 @@ Transform:
   m_LocalPosition: {x: 6.62, y: 0.5, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 519720973}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44396,6 +44467,13 @@ MonoBehaviour:
   - {fileID: 50193731}
   <WaitTimeOnPatrolPoint>k__BackingField: 3
   <AttackDistance>k__BackingField: 0.7
+  <AttackPoint>k__BackingField: {fileID: 519720973}
+  <AttackPointOffset>k__BackingField: 0.1
+  <AttackDamage>k__BackingField: 10
+  <AttackRange>k__BackingField: 0.1
+  <PlayerLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1478996665
 MonoBehaviour:
   m_ObjectHideFlags: 0

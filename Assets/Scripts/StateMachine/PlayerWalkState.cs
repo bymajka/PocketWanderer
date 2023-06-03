@@ -61,6 +61,7 @@ namespace StateMachine
             else
             {
                 _ctx.LastMoveDirection = _ctx.Direction;
+                _ctx.AttackPoint.localPosition = new Vector2(_ctx.LastMoveDirection.x * _ctx.AttackPointOffset, _ctx.LastMoveDirection.y * _ctx.AttackPointOffset);
             }
             _ctx.Animator.SetFloat(Horizontal, _ctx.Direction.x);
             _ctx.Animator.SetFloat(Vertical, _ctx.Direction.y);

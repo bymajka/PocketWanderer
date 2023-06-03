@@ -1,3 +1,4 @@
+using Assets.Scripts.StatsSystem;
 using UnityEngine;
 
 namespace StateMachine
@@ -12,6 +13,14 @@ namespace StateMachine
         public override void EnterState()
         {
             _ctx.Animator.SetBool(Attack, true);
+            
+            var hitEnemies = Physics2D.OverlapCircleAll(_ctx.AttackPoint.position, _ctx.AttackRange, _ctx.EnemyLayer);
+
+            foreach (var enemy in hitEnemies)
+            {
+                // TODO: remake to do damage
+                Debug.Log($"Enemy took damage of {_ctx.AttackDamage}");
+            }
         }
 
         public override void UpdateState()

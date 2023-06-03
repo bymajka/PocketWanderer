@@ -22,6 +22,11 @@ namespace EnemySystem.StateMachine
 
         [field: Header("Attack")]
         [field: SerializeField] public float AttackDistance { get; set; }
+        [field: SerializeField] public Transform AttackPoint { get; set; }
+        [field: SerializeField] public float AttackPointOffset { get; set; }
+        [field: SerializeField] public int AttackDamage { get; set; }
+        [field: SerializeField] public float AttackRange { get; set; }
+        [field: SerializeField] public LayerMask PlayerLayer { get; set; }
 
         public EnemyBaseState CurrentState { get; set; }
         public Transform EnemyTransform { get; private set; }

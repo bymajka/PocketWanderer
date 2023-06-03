@@ -52,6 +52,7 @@ namespace EnemySystem
             else
             {
                 LastMoveDirection = _direction;
+                _context.AttackPoint.localPosition = new Vector2(LastMoveDirection.x * _context.AttackPointOffset, LastMoveDirection.y * _context.AttackPointOffset);
             }
             _context.Animator.SetFloat(Horizontal, _direction.x);
             _context.Animator.SetFloat(Vertical, _direction.y);

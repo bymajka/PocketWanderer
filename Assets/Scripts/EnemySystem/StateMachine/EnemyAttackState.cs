@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.StatsSystem;
+using UnityEngine;
 
 namespace EnemySystem.StateMachine
 {
@@ -11,6 +12,14 @@ namespace EnemySystem.StateMachine
         public override void OnEnterState()
         {
             Debug.Log("Enemy entered in ATTACK state.");
+            
+            var hitEnemies = Physics2D.OverlapCircleAll(Context.AttackPoint.position, Context.AttackRange, Context.PlayerLayer);
+
+            foreach (var enemy in hitEnemies)
+            {
+                // TODO: remake to do damage
+                Debug.Log($"Enemy took damage of {Context.AttackDamage}");
+            }
         }
 
         public override void OnUpdateState()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,13 @@ namespace StateMachine
 
         [field: SerializeField] public float Speed { get; set; }
         public Vector2 LastMoveDirection { get; set; }
+        
+        [field: Header("Attack")] 
+        [field: SerializeField] public Transform AttackPoint { get; set; }
+        [field: SerializeField] public float AttackPointOffset { get; set; }
+        [field: SerializeField] public int AttackDamage { get; set; }
+        [field: SerializeField] public float AttackRange { get; set; }
+        [field: SerializeField] public LayerMask EnemyLayer { get; set; }
 
         [field: Header("Physics")] 
         [field: SerializeField] public Rigidbody2D PlayerRb { get; set; }
@@ -39,7 +47,15 @@ namespace StateMachine
         {
             PlayerCurrentState.UpdateState();
         }
-    
+
+        private void OnDrawGizmosSelected()
+        {
+            if (AttackPoint == null)
+                return;
+            
+            Gizmos.DrawWireSphere(AttackPoint.position, AttackRange);
+        }
+
         public void OnMove(InputAction.CallbackContext context)
         {
             isMoving = true;
