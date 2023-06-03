@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EnemySystem
 {
-    public class EnemyBehaviour : BaseEntityBehaviour, IPathFindingListener
+    public class EnemyBehaviour : BaseEntityBehaviour
     {
         [SerializeField] public EnemyStats Stats;
         
@@ -15,6 +15,30 @@ namespace EnemySystem
 
         private Path _currentPath;
         private int _currentWayPoint;
+
+        public Path CurrentPath
+        {
+            get
+            {
+                return _currentPath;
+            }
+            set
+            {
+                _currentPath = value;
+            }
+        }
+
+        public int CurrentWayPoint
+        {
+            get
+            {
+                return _currentWayPoint;
+            }
+            set
+            {
+                _currentWayPoint = value;
+            }
+        }
 
         public override void Initialize()
         {
@@ -59,12 +83,6 @@ namespace EnemySystem
             {
                 _currentWayPoint++;
             }
-        }
-
-        public void OnPathCompleted(Path path)
-        {
-            _currentPath = path;
-            _currentWayPoint = 0;
         }
     }
 }

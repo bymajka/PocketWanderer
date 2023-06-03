@@ -10,20 +10,9 @@ namespace EnemySystem
     [RequireComponent(typeof(SimpleSmoothModifier))]
     public class PathfindingAgent : MonoBehaviour
     {
-        public Transform Target
-        {
-            set
-            {
-                if (value == null) throw new ArgumentNullException(nameof(value));
-                Reset();
-                _target = value;
-                _coroutine = StartCoroutine(SearchPathCoroutine());
-            }
-        }
-        
         [SerializeField] private float _pathUpdateTime;
         
-        private IPathFindingListener _listener;
+        private EnemyBehaviour _enemyBehaviour;
         private Seeker _seeker;
         private SimpleSmoothModifier _simpleSmoothModifier;
         private Rigidbody2D _enemyRigidbody;
@@ -33,12 +22,24 @@ namespace EnemySystem
         private Vector2 _previousPosition;
         private Vector3 _previousTargetPosition;
         private Vector3 _destination;
+        
+        public Transform Target
+        {
+            set
+            {
+                if (value == null) 
+                    throw new ArgumentNullException(nameof(value));
+                Reset();
+                _target = value;
+                _coroutine = StartCoroutine(SearchPathCoroutine());
+            }
+        }
 
         private void Awake()
         {
             _seeker = GetComponent<Seeker>();
             _enemyRigidbody = GetComponent<Rigidbody2D>();
-            _listener = GetComponent<EnemyBehaviour>();
+            _enemyBehaviour = GetComponent<EnemyBehaviour>();
             _simpleSmoothModifier = GetComponent<SimpleSmoothModifier>();
         }
 
@@ -64,10 +65,14 @@ namespace EnemySystem
 
         private void OnPathCompleted(Path path)
         {
-            if (path.error) return;
-            var smoothPath = path;
-            smoothPath.vectorPath = _simpleSmoothModifier.SmoothSimple(smoothPath.vectorPath);
-            _listener.OnPathCompleted(smoothPath);
+            if (path.error) 
+                return;
+
+            path.vectorPath = _simpleSmoothModifier.SmoothSimple(path.vectorPath);
+
+            _enemyBehaviour.CurrentPath = path;
+            Debug.Log("Point count: " + path.vectorPath.Count);
+            _enemyBehaviour.CurrentWayPoint = 0;
         }
     }
 }
