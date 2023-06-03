@@ -1,18 +1,14 @@
-using Assets.Scripts.StatsSystem;
-using UnityEngine;
-
-namespace StateMachine
+namespace PlayerSystem.StateMachine
 {
     public class PlayerAttackState : PlayerBaseState
     {
-        private static readonly int Attack = Animator.StringToHash("Attack");
-
-        public PlayerAttackState(PlayerStateMachine context, 
-            PlayerStateFactory playerStateFactory) : base(context, playerStateFactory){}
+        public PlayerAttackState(PlayerStateMachine context, PlayerStateFactory playerStateFactory) : base(context, playerStateFactory)
+        {
+        }
 
         public override void EnterState()
         {
-            _ctx.Animator.SetBool(Attack, true);
+            _ctx.Player.PlayAttackAnimation();
             
             var hitEnemies = Physics2D.OverlapCircleAll(_ctx.AttackPoint.position, _ctx.AttackRange, _ctx.EnemyLayer);
 
@@ -30,7 +26,7 @@ namespace StateMachine
 
         public override void ExitState()
         {
-            _ctx.Animator.SetBool(Attack, false);
+            _ctx.Player.StopAttackAnimation();
         }
 
         public override void CheckSwitchStates()
@@ -39,10 +35,12 @@ namespace StateMachine
             {
                 SwitchState(_factory.Walk());
             }
-            else if(!_ctx.isAttacking)
+            else if (!_ctx.isAttacking)
                 SwitchState(_factory.Idle());
         }
 
-        public override void InitializeSubState() {}
+        public override void InitializeSubState()
+        {
+        }
     }
 }

@@ -46,8 +46,8 @@ namespace InventorySystem
             labelText.enabled = true;
             stackSizeText.enabled = true;
         
-            image.sprite = inventoryItem.ItemData.icon;
-            labelText.text = inventoryItem.ItemData.displayName;
+            image.sprite = inventoryItem.ItemData.Icon;
+            labelText.text = inventoryItem.ItemData.DisplayName;
             stackSizeText.text = inventoryItem.StackSize.ToString();
         }
     }

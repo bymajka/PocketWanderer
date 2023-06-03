@@ -31,7 +31,7 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
-            if (Context.EnemyStateController.CheckTargetVisibility(Context.EnemyMover.LastMoveDirection))
+            if (Context.EnemyStateController.CheckIfFindTarget(Context.Enemy.Direction))
             {
                 SwitchState(Factory.Chaise());
             }

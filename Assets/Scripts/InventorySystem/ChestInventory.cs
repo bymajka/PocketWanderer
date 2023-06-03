@@ -11,7 +11,7 @@ namespace InventorySystem
 		public override void Add(ItemData itemData)
 		{
 			var inventoryItem = Items
-				.FirstOrDefault(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity);
+				.FirstOrDefault(i => i.ItemData == itemData && i.StackSize < itemData.StackCapacity);
 
 			if (inventoryItem != null)
 			{

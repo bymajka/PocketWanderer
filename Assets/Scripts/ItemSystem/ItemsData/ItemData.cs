@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ItemSystem.ItemsData
 {
@@ -10,43 +9,36 @@ namespace ItemSystem.ItemsData
         /// <summary>
         /// The name that is displayed to the player in the game interface.
         /// </summary>
-        [FormerlySerializedAs("DisplayName")]
-        public string displayName;
+        public string DisplayName;
 
         /// <summary>
         /// The image used to represent this item in the game interface.
         /// </summary>
-        [FormerlySerializedAs("Icon")]
-        public Sprite icon;
+        public Sprite Icon;
 
         /// <summary>
         /// The maximum number of identical items that can be held in a single inventory slot.
         /// </summary>
-        [FormerlySerializedAs("StackCapacity")]
-        public int stackCapacity;
+        public int StackCapacity;
 
         /// <summary>
         /// The rarity of the item, which affects its value and properties.
         /// </summary>
-        [FormerlySerializedAs("Rarity")]
-        public ItemRarity rarity;
+        public ItemRarity Rarity;
 
         /// <summary>
         /// The quantity of this item, typically used to determine the amount a player will receive when collecting the item.
         /// </summary>
-        [FormerlySerializedAs("Amount")]
-        public float amount;
+        public float Amount;
 
         /// <summary>
         /// The price of the item in monetary equivalent.
         /// </summary>
-        [FormerlySerializedAs("Price")]
-        public float price;
+        public float Price;
 
         /// <summary>
         /// Actions that has item.
         /// </summary>
-        [FormerlySerializedAs("Actions")] 
         public Dictionary<string, Action> ItemActions;
     }
 }

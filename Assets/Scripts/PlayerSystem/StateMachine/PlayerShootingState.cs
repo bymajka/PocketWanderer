@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-namespace StateMachine
+namespace PlayerSystem.StateMachine
 {
-    public class PlayerMiningState : PlayerBaseState
+    public class PlayerShootingState : PlayerBaseState
     {
-        private static readonly int Mine = Animator.StringToHash("Mine");
+        private static readonly int Shoot = Animator.StringToHash("Shoot");
 
-        public PlayerMiningState(PlayerStateMachine ctx, 
-            PlayerStateFactory factory) : base(ctx, factory){}
+        public PlayerShootingState(PlayerStateMachine ctx, 
+            PlayerStateFactory factory) : base(ctx, factory) {}
 
         public override void EnterState()
         {
-            _ctx.Animator.SetBool(Mine, true);
+            _ctx.Animator.SetBool(Shoot, true);
         }
 
         public override void UpdateState()
@@ -21,7 +21,7 @@ namespace StateMachine
 
         public override void ExitState()
         {
-            _ctx.Animator.SetBool(Mine, false);
+            _ctx.Animator.SetBool(Shoot, false);
         }
 
         public override void CheckSwitchStates()
@@ -30,7 +30,7 @@ namespace StateMachine
             {
                 SwitchState(_factory.Walk());
             }
-            else if(!_ctx.isMining)
+            else if(!_ctx.isShooting)
                 SwitchState(_factory.Idle());
         }
 
