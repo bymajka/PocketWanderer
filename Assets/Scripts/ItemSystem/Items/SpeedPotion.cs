@@ -11,7 +11,7 @@ namespace ItemSystem.Items
 
         protected override void Use()
         {
-            Debug.Log("+" + PotionData.effectValue + "MS");
+            Debug.Log("+" + PotionData.EffectValue + "MS");
         }
     }
 }

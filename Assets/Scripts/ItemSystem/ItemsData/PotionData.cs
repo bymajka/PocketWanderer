@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ItemSystem.ItemsData
 {
     [CreateAssetMenu]
     public class PotionData : ItemData
     {
-        // The effect of potion, like speed boost or etc.
-        [FormerlySerializedAs("PotionEffect")]
-        public PotionEffect potionEffect;
+        /// <summary>
+        /// The effect of potion, like speed boost or etc.
+        /// </summary>
+        public PotionEffect PotionEffect;
         
-        // A value indicating how strong the effect is.
-        [FormerlySerializedAs("EffectValue")]
-        public float effectValue;
+        /// <summary>
+        /// A value indicating how strong the effect is.
+        /// </summary>
+        public float EffectValue;
     }
 }

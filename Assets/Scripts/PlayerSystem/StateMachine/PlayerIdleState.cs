@@ -1,4 +1,4 @@
-namespace StateMachine
+namespace PlayerSystem.StateMachine
 {
     public class PlayerIdleState : PlayerBaseState
     {

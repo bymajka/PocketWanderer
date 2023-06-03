@@ -1,40 +1,35 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace StateMachine
+namespace PlayerSystem.StateMachine
 {
+    [RequireComponent(typeof(PlayerBehaviour))]
     public class PlayerStateMachine : MonoBehaviour
     {
-        [field: Header("Movement")]
-        [field: SerializeField] public Vector2 Direction { get; set; }
-
-        [field: SerializeField] public float Speed { get; set; }
-        public Vector2 LastMoveDirection { get; set; }
-
-        [field: Header("Physics")] 
-        [field: SerializeField] public Rigidbody2D PlayerRb { get; set; }
-
-        [field: SerializeField] public Animator Animator { get; set; }
-
+        public PlayerBehaviour Player { get; private set; }
         public PlayerBaseState PlayerCurrentState { get; set; }
-    
-        private PlayerStateFactory _states;
+        public Vector2 Direction { get; private set; }
+        
+        public Animator Animator { get; private set; }
 
         public bool isAttacking;
         public bool isMoving;
         public bool isSpellCasting;
         public bool isShooting;
         public bool isMining;
-    
+
+        private PlayerStateFactory _states;
+
         private void Awake()
         {
             _states = new PlayerStateFactory(this);
+            Player = GetComponent<PlayerBehaviour>();
+            Player.Initialize();
+            Animator = GetComponent<Animator>();
             PlayerCurrentState = _states.Idle();
             PlayerCurrentState.EnterState();
-            PlayerRb = GetComponent<Rigidbody2D>();
-            Animator = GetComponent<Animator>();
         }
-    
+
         void Update()
         {
             PlayerCurrentState.UpdateState();

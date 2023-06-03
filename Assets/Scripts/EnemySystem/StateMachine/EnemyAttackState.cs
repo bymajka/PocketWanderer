@@ -25,7 +25,7 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
-            if (!Context.EnemyStateController.CheckTargetAttackAbility())
+            if (!Context.EnemyStateController.CheckIfCanAttack())
             {
                 SwitchState(Factory.Chaise());
             }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StateMachine
+namespace PlayerSystem.StateMachine
 {
     public class PlayerSpellCastState : PlayerBaseState
     {

@@ -15,7 +15,7 @@ namespace InventorySystem
 		
 		public virtual void Add(ItemData itemData)
 		{
-			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.stackCapacity)
+			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.StackCapacity)
 				.FirstOrDefault();
 
 			if (inventoryItem != null)

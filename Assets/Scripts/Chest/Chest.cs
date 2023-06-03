@@ -60,7 +60,7 @@ namespace Chest
             {
                 GameObject newItem = new GameObject();
                 newItem.AddComponent<Item>().ItemData = item.ItemData;
-                newItem.AddComponent<SpriteRenderer>().sprite = item.ItemData.icon;
+                newItem.AddComponent<SpriteRenderer>().sprite = item.ItemData.Icon;
                 newItem.GetComponent<SpriteRenderer>().sortingOrder = 1;
                 newItem.AddComponent<CircleCollider2D>().isTrigger = true;
                 newItem.transform.localScale *= 1.5f;
