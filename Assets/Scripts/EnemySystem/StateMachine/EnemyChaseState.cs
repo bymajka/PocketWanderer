@@ -32,6 +32,11 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
+            if (Context.EnemyStateController.CheckIfGotDamage(out var damage))
+            {
+                SwitchState(Factory.GetDamage(damage));
+            }
+            
             if (Context.EnemyStateController.CheckIfCanAttack())
             {
                 SwitchState(Factory.Attack());

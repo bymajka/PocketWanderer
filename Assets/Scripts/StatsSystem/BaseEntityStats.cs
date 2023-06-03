@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StatsSystem
 {
@@ -8,5 +9,8 @@ namespace StatsSystem
 		public float Armor;
 		public float Damage;
 		public float MovementSpeed;
+		public float TakenDamage;
+		public float AttackPointOffset;
+		public float AttackPointRadius;
 	}
 }

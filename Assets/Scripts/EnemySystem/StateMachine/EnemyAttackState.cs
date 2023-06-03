@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.StatsSystem;
+﻿using PlayerSystem.StateMachine;
 using UnityEngine;
 
 namespace EnemySystem.StateMachine
@@ -12,19 +12,18 @@ namespace EnemySystem.StateMachine
         public override void OnEnterState()
         {
             Debug.Log("Enemy entered in ATTACK state.");
-            
-            var hitEnemies = Physics2D.OverlapCircleAll(Context.AttackPoint.position, Context.AttackRange, Context.PlayerLayer);
-
-            foreach (var enemy in hitEnemies)
-            {
-                // TODO: remake to do damage
-                Debug.Log($"Enemy took damage of {Context.AttackDamage}");
-            }
         }
 
         public override void OnUpdateState()
         {
             CheckSwitchStates();
+            
+            var hitPlayers = Physics2D.OverlapCircleAll(Context.AttackPoint.position, Context.Enemy.Stats.AttackPointRadius, Context.PlayerLayer);
+
+            foreach (var enemy in hitPlayers)
+            {
+                enemy.GetComponent<PlayerStateMachine>().Player.Stats.TakenDamage = Context.Enemy.Stats.Damage;
+            }
         }
 
         public override void OnExitState()
@@ -34,6 +33,11 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
+            if (Context.EnemyStateController.CheckIfGotDamage(out var damage))
+            {
+                SwitchState(Factory.GetDamage(damage));
+            }
+            
             if (!Context.EnemyStateController.CheckIfCanAttack())
             {
                 SwitchState(Factory.Chaise());

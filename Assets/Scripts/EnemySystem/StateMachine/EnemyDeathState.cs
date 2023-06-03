@@ -11,11 +11,11 @@ namespace EnemySystem.StateMachine
         public override void OnEnterState()
         {
             Debug.Log("Enemy entered in DEATH state.");
+            Context.Enemy.PlayDeathAnimation();
         }
 
         public override void OnUpdateState()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnExitState()
@@ -25,7 +25,6 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +6,9 @@ namespace PlayerSystem.StateMachine
     [RequireComponent(typeof(PlayerBehaviour))]
     public class PlayerStateMachine : MonoBehaviour
     {
+        [field: Header("Attack")]
+        [field: SerializeField] public Transform AttackPoint { get; set; }
+        [field: SerializeField] public LayerMask EnemyLayer { get; set; }
         public PlayerBehaviour Player { get; private set; }
         public PlayerBaseState PlayerCurrentState { get; set; }
         public Vector2 Direction { get; private set; }
@@ -36,12 +38,17 @@ namespace PlayerSystem.StateMachine
             PlayerCurrentState.UpdateState();
         }
 
-        private void OnDrawGizmosSelected()
+        public bool CheckIfDamageTaken(out float damage)
         {
-            if (AttackPoint == null)
-                return;
-            
-            Gizmos.DrawWireSphere(AttackPoint.position, AttackRange);
+            if (Player.Stats.TakenDamage == 0)
+            {
+                damage = 0;
+                return false;
+            }
+
+            damage = Player.Stats.TakenDamage;
+            Player.Stats.TakenDamage = 0;
+            return true;
         }
 
         public void OnMove(InputAction.CallbackContext context)

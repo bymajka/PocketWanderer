@@ -25,6 +25,10 @@ namespace PlayerSystem.StateMachine
 
         public override void CheckSwitchStates()
         {
+            if (_ctx.CheckIfDamageTaken(out var damage))
+            {
+                SwitchState(_factory.GetDamage(damage));
+            }
             if (_ctx.isAttacking)
             {
                 SwitchState(_factory.Attack());

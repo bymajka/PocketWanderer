@@ -16,6 +16,10 @@ namespace EnemySystem.StateMachine
         [field: Header("Patrol")]
         [field: SerializeField] public Transform[] PatrolPoints { get; set; }
         [field: SerializeField] public float WaitTimeOnPatrolPoint { get; set; }
+        
+        [field: Header("Attack")]
+        [field: SerializeField] public Transform AttackPoint { get; set; }
+        [field: SerializeField] public LayerMask PlayerLayer { get; set; }
 
         public EnemyBehaviour Enemy { get; private set; }
         public EnemyBaseState CurrentState { get; set; }

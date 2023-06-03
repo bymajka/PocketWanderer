@@ -4,13 +4,18 @@ namespace EnemySystem.StateMachine
 {
     public class EnemyGetDamageState : EnemyBaseState
     {
-        public EnemyGetDamageState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
+        private float _takenDamage;
+        
+        public EnemyGetDamageState(EnemyStateMachine context, EnemyStateFactory factory, float takenDamage)
+            : base(context, factory)
         {
+            _takenDamage = takenDamage;
         }
 
         public override void OnEnterState()
         {
-            Debug.Log("Enemy entered in Damage state.");
+            Debug.Log($"Enemy entered in Damage state. Damage: {_takenDamage}");
+            Context.Enemy.Stats.HitPoints -= _takenDamage;
         }
 
         public override void OnUpdateState()
@@ -25,6 +30,12 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
+            if (Context.Enemy.Stats.HitPoints < 0)
+            {
+                SwitchState(Factory.Death());
+                return;
+            }
+
             SwitchState(Context.EnemyStateController.CheckIfCanAttack() ? Factory.Attack() : Factory.Chaise());
         }
     }

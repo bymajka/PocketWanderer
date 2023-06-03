@@ -16,3 +16,6 @@ MonoBehaviour:
   Armor: 100
   Damage: 10
   MovementSpeed: 3
+  TakenDamage: 0
+  AttackPointOffset: 0.1
+  AttackPointRadius: 0.1

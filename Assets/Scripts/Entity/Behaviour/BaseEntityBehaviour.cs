@@ -22,6 +22,7 @@ namespace Entity.Behaviour
 
         public void PlayMovingAnimation() => Animator.PlayMovingAnimation();
         public void PlayAttackAnimation() => Animator.PlayAttackAnimation();
+        public void PlayDeathAnimation() => Animator.PlayDeathAnimation();
         public void StopMovingAnimation() => Animator.StopMovingAnimation();
         public void StopAttackAnimation() => Animator.StopAttackAnimation();
     }

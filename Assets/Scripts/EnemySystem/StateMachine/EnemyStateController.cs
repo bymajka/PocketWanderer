@@ -12,6 +12,7 @@ namespace EnemySystem.StateMachine
         private float _triggeredDistance;
         private float _fov;
         private float _attackDistance;
+        private float _takenDamage;
 
         public void Initialize(EnemyStateMachine context)
         {
@@ -22,6 +23,8 @@ namespace EnemySystem.StateMachine
             _triggeredDistance = context.Enemy.Stats.TriggeredDistance;
             _fov = context.Enemy.Stats.FOV;
             _attackDistance = context.Enemy.Stats.AttackDistance;
+            _takenDamage = context.Enemy.Stats.TakenDamage;
+            context.Enemy.Stats.TakenDamage = 0;
         }
 
         public bool CheckIfFindTarget(Vector2 enemyDirection)
@@ -44,6 +47,18 @@ namespace EnemySystem.StateMachine
         public bool CheckIfCanAttack()
         {
             return Vector2.Distance(_enemy.position, _target.position) <= _attackDistance;
+        }
+
+        public bool CheckIfGotDamage(out float damage)
+        {
+            if (_takenDamage == 0)
+            {
+                damage = _takenDamage;
+                return false;
+            }
+
+            damage = _takenDamage;
+            return true;
         }
     }
 }

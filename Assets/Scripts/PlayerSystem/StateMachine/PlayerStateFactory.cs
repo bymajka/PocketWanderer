@@ -15,5 +15,7 @@ namespace PlayerSystem.StateMachine
         public PlayerBaseState SpellCast() => new PlayerSpellCastState(_context, this);
         public PlayerBaseState ShootingState() => new PlayerShootingState(_context, this);
         public PlayerBaseState MiningState() => new PlayerMiningState(_context, this);
+        public PlayerBaseState Death() => new PlayerDeathState(_context, this);
+        public PlayerBaseState GetDamage(float damage) => new PlayerGetDamageState(_context, this, damage);
     }
 }

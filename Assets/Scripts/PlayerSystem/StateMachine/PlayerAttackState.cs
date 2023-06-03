@@ -1,3 +1,6 @@
+using EnemySystem.StateMachine;
+using UnityEngine;
+
 namespace PlayerSystem.StateMachine
 {
     public class PlayerAttackState : PlayerBaseState
@@ -10,12 +13,11 @@ namespace PlayerSystem.StateMachine
         {
             _ctx.Player.PlayAttackAnimation();
             
-            var hitEnemies = Physics2D.OverlapCircleAll(_ctx.AttackPoint.position, _ctx.AttackRange, _ctx.EnemyLayer);
+            var hitEnemies = Physics2D.OverlapCircleAll(_ctx.AttackPoint.position, _ctx.Player.Stats.AttackPointRadius, _ctx.EnemyLayer);
 
             foreach (var enemy in hitEnemies)
             {
-                // TODO: remake to do damage
-                Debug.Log($"Enemy took damage of {_ctx.AttackDamage}");
+                enemy.GetComponent<EnemyStateMachine>().Enemy.Stats.TakenDamage = _ctx.Player.Stats.Damage;
             }
         }
 
@@ -31,6 +33,10 @@ namespace PlayerSystem.StateMachine
 
         public override void CheckSwitchStates()
         {
+            if (_ctx.CheckIfDamageTaken(out var damage))
+            {
+                SwitchState(_factory.GetDamage(damage));
+            }
             if (_ctx.isMoving)
             {
                 SwitchState(_factory.Walk());
