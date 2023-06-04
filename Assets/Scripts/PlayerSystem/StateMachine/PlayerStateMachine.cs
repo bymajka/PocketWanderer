@@ -37,17 +37,32 @@ namespace PlayerSystem.StateMachine
         {
             PlayerCurrentState.UpdateState();
         }
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (AttackPoint == null)
+                return;
+
+            Gizmos.DrawWireSphere(AttackPoint.position, 0.3f);
+        }
+
+        private float _takenDamage;
+        
+        public void TakeDamage(float damage)
+        {
+           _takenDamage += damage;
+        }
 
         public bool CheckIfDamageTaken(out float damage)
         {
-            if (Player.Stats.TakenDamage == 0)
+            if (_takenDamage == 0)
             {
                 damage = 0;
                 return false;
             }
 
-            damage = Player.Stats.TakenDamage;
-            Player.Stats.TakenDamage = 0;
+            damage = _takenDamage;
+            _takenDamage = 0;
             return true;
         }
 

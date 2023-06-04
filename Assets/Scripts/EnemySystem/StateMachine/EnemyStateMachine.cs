@@ -44,6 +44,14 @@ namespace EnemySystem.StateMachine
             CurrentState = _states.Idle();
             CurrentState.OnEnterState();
         }
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (AttackPoint == null)
+                return;
+
+            Gizmos.DrawWireSphere(AttackPoint.position, 0.3f);
+        }
 
         private void FixedUpdate()
         {

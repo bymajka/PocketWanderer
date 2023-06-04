@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee99a24166f2442db531b6662cef7dc3, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  HitPoints: 100
-  Armor: 100
+  HitPoints: 5200
+  Armor: 0
   Damage: 10
   MovementSpeed: 3
-  TakenDamage: 0
-  AttackPointOffset: 0.1
-  AttackPointRadius: 0.1
+  AttackPointRadius: 0.3

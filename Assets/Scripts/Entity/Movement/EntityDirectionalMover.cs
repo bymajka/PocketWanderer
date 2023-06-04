@@ -9,13 +9,18 @@ namespace Entity.Movement
         private readonly Rigidbody2D _rigidbody;
         private readonly EntityAnimationController _animator;
         private readonly float _movementSpeed;
+        private readonly Transform _attackPoint;
+        private readonly float _attackPointOffset;
         public Vector2 LastMovementDirection;
 
-        public EntityDirectionalMover(Rigidbody2D rigidbody, EntityAnimationController animator, float movementSpeed)
+        public EntityDirectionalMover(Rigidbody2D rigidbody, EntityAnimationController animator, float movementSpeed,
+            Transform attackPoint, float attackPointOffset)
         {
             _rigidbody = rigidbody;
             _animator = animator;
             _movementSpeed = movementSpeed;
+            _attackPoint = attackPoint;
+            _attackPointOffset = attackPointOffset;
             InitializeDirection();
         }
 
@@ -34,6 +39,7 @@ namespace Entity.Movement
             else
             {
                 LastMovementDirection = direction;
+                _attackPoint.localPosition = new Vector2(direction.x * _attackPointOffset, direction.y * _attackPointOffset);
             }
 
             _animator.SetDirection(direction);

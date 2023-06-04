@@ -17,7 +17,7 @@ namespace PlayerSystem.StateMachine
 
             foreach (var enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyStateMachine>().Enemy.Stats.TakenDamage = _ctx.Player.Stats.Damage;
+                enemy.GetComponent<EnemyStateMachine>().EnemyStateController.TakeDamage(_ctx.Player.Stats.Damage);
             }
         }
 

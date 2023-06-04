@@ -15,7 +15,14 @@ namespace EnemySystem.StateMachine
         public override void OnEnterState()
         {
             Debug.Log($"Enemy entered in Damage state. Damage: {_takenDamage}");
-            Context.Enemy.Stats.HitPoints -= _takenDamage;
+            if (Context.Enemy.Stats.Armor > 0)
+            {
+                Context.Enemy.Stats.Armor -= _takenDamage;
+            }
+            else
+            {
+                Context.Enemy.Stats.HitPoints -= _takenDamage;
+            }
         }
 
         public override void OnUpdateState()

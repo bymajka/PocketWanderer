@@ -1,4 +1,5 @@
-﻿using PlayerSystem;
+﻿using System;
+using PlayerSystem;
 using UnityEngine;
 
 namespace EnemySystem.StateMachine
@@ -13,6 +14,8 @@ namespace EnemySystem.StateMachine
         private float _fov;
         private float _attackDistance;
         private float _takenDamage;
+        private float _attackCooldown;
+        private DateTime _lastAttackTime;
 
         public void Initialize(EnemyStateMachine context)
         {
@@ -23,8 +26,8 @@ namespace EnemySystem.StateMachine
             _triggeredDistance = context.Enemy.Stats.TriggeredDistance;
             _fov = context.Enemy.Stats.FOV;
             _attackDistance = context.Enemy.Stats.AttackDistance;
-            _takenDamage = context.Enemy.Stats.TakenDamage;
-            context.Enemy.Stats.TakenDamage = 0;
+            _attackCooldown = context.Enemy.Stats.AttackCooldown;
+            _lastAttackTime = DateTime.MinValue;
         }
 
         public bool CheckIfFindTarget(Vector2 enemyDirection)
@@ -46,18 +49,34 @@ namespace EnemySystem.StateMachine
 
         public bool CheckIfCanAttack()
         {
+            if ((DateTime.Now - _lastAttackTime).TotalSeconds < _attackCooldown)
+            {
+                return false;
+            }
+            
             return Vector2.Distance(_enemy.position, _target.position) <= _attackDistance;
         }
 
-        public bool CheckIfGotDamage(out float damage)
+        public void ResetLastAttackTime()
+        {
+            _lastAttackTime = DateTime.Now;
+        }
+        
+        public void TakeDamage(float statsDamage)
+        {
+            _takenDamage += statsDamage;
+        }
+
+        public bool CheckIfTookDamage(out float damage)
         {
             if (_takenDamage == 0)
             {
-                damage = _takenDamage;
+                damage = 0;
                 return false;
             }
 
             damage = _takenDamage;
+            _takenDamage = 0;
             return true;
         }
     }

@@ -9,11 +9,13 @@ namespace PlayerSystem
     public class PlayerBehaviour : BaseEntityBehaviour
     {
         [SerializeField] public PlayerStats Stats;
+        [SerializeField] public Transform AttackPoint;
+        [SerializeField] public float AttackPointOffset;
 
         public override void Initialize()
         {
             base.Initialize();
-            DirectionalMover = new EntityDirectionalMover(Rigidbody, Animator, Stats.MovementSpeed);
+            DirectionalMover = new EntityDirectionalMover(Rigidbody, Animator, Stats.MovementSpeed, AttackPoint, AttackPointOffset);
         }
     }
 }

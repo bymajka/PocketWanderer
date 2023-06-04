@@ -15,7 +15,15 @@ namespace PlayerSystem.StateMachine
         public override void EnterState()
         {
             Debug.Log($"Player entered in Damage state. Damage: {_takenDamage}");
-            _ctx.Player.Stats.HitPoints -= _takenDamage;
+
+            if (_ctx.Player.Stats.Armor > 0)
+            {
+                _ctx.Player.Stats.Armor -= _takenDamage;
+            }
+            else
+            {
+                _ctx.Player.Stats.HitPoints -= _takenDamage;
+            }
         }
 
         public override void UpdateState()

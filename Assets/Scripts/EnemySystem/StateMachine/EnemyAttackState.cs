@@ -22,8 +22,10 @@ namespace EnemySystem.StateMachine
 
             foreach (var enemy in hitPlayers)
             {
-                enemy.GetComponent<PlayerStateMachine>().Player.Stats.TakenDamage = Context.Enemy.Stats.Damage;
+                enemy.GetComponent<PlayerStateMachine>().TakeDamage(Context.Enemy.Stats.Damage);
             }
+            
+            Context.EnemyStateController.ResetLastAttackTime();
         }
 
         public override void OnExitState()
@@ -33,11 +35,10 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
-            if (Context.EnemyStateController.CheckIfGotDamage(out var damage))
+            if (Context.EnemyStateController.CheckIfTookDamage(out var damage))
             {
                 SwitchState(Factory.GetDamage(damage));
             }
-            
             if (!Context.EnemyStateController.CheckIfCanAttack())
             {
                 SwitchState(Factory.Chaise());

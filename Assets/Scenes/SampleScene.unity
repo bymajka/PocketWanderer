@@ -3660,6 +3660,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats: {fileID: 11400000, guid: 4899f55fd5fcf9d42b393efab285445b, type: 2}
+  AttackPoint: {fileID: 1023314093}
+  AttackPointOffset: 0.2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -44279,7 +44281,7 @@ GameObject:
   - component: {fileID: 1478996664}
   - component: {fileID: 1478996668}
   - component: {fileID: 1478996667}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44490,6 +44492,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stats: {fileID: 11400000, guid: 67aeacab1386dd94b92e6f66b82bf349, type: 2}
+  AttackPoint: {fileID: 1839252248}
+  AttackPointOffset: 0.1
 --- !u!114 &1478996668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44974,7 +44978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1839252248}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

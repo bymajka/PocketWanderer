@@ -1,4 +1,5 @@
-﻿using Entity.Behaviour;
+﻿using System;
+using Entity.Behaviour;
 using Entity.Movement;
 using Pathfinding;
 using StatsSystem;
@@ -9,6 +10,8 @@ namespace EnemySystem
     public class EnemyBehaviour : BaseEntityBehaviour
     {
         [SerializeField] public EnemyStats Stats;
+        [SerializeField] public Transform AttackPoint;
+        [SerializeField] public float AttackPointOffset;
         
         public Vector2 Direction { get; private set; }
         public Vector2 LastDirection { get; private set; }
@@ -43,7 +46,7 @@ namespace EnemySystem
         public override void Initialize()
         {
             base.Initialize();
-            DirectionalMover = new EntityDirectionalMover(Rigidbody, Animator, Stats.MovementSpeed);
+            DirectionalMover = new EntityDirectionalMover(Rigidbody, Animator, Stats.MovementSpeed, AttackPoint, AttackPointOffset);
         }
 
         public void Move()
