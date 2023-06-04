@@ -22,6 +22,7 @@ namespace PlayerSystem.StateMachine
         public bool isMining;
 
         private PlayerStateFactory _states;
+        private float _takenDamage;
 
         private void Awake()
         {
@@ -46,8 +47,6 @@ namespace PlayerSystem.StateMachine
             Gizmos.DrawWireSphere(AttackPoint.position, 0.3f);
         }
 
-        private float _takenDamage;
-        
         public void TakeDamage(float damage)
         {
            _takenDamage += damage;

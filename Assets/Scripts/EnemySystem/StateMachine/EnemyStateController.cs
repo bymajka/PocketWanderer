@@ -33,12 +33,17 @@ namespace EnemySystem.StateMachine
         public bool CheckIfFindTarget(Vector2 enemyDirection)
         {
             float distanceToTarget = Vector2.Distance(_enemy.position, _target.position);
-            if (distanceToTarget > _visionDistance) return false;
+            if (distanceToTarget > _visionDistance)
+                return false;
+            
             Vector2 directionToTarget = (_target.position - _enemy.position).normalized;
-            if (Vector2.Angle(enemyDirection, directionToTarget) > _fov / 2f &&
-                distanceToTarget > _triggeredDistance) return false;
+            if (Vector2.Angle(enemyDirection, directionToTarget) > _fov / 2f && distanceToTarget > _triggeredDistance)
+                return false;
+            
             var raycastHit2D = Physics2D.Raycast(_enemy.position, directionToTarget, _visionDistance, _layerMask);
-            if (raycastHit2D.collider == null) return false;
+            if (raycastHit2D.collider == null)
+                return false;
+            
             return raycastHit2D.collider.gameObject.GetComponent<PlayerBehaviour>() != null;
         }
 
