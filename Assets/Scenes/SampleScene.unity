@@ -3351,6 +3351,7 @@ GameObject:
   - component: {fileID: 488093612}
   - component: {fileID: 488093615}
   - component: {fileID: 488093616}
+  - component: {fileID: 488093623}
   - component: {fileID: 488093622}
   - component: {fileID: 488093617}
   - component: {fileID: 488093619}
@@ -3654,7 +3655,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf17ffb085245039140d6e2d833a266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stats: {fileID: 11400000, guid: 4899f55fd5fcf9d42b393efab285445b, type: 2}
+  <Stats>k__BackingField: {fileID: 11400000, guid: 4899f55fd5fcf9d42b393efab285445b, type: 2}
+--- !u!114 &488093623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488093606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15bd2a7e21b40bd91cba3a1b11085a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4698,7 +4711,39 @@ MonoBehaviour:
     _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
     _AreaColors:
     - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
@@ -44238,10 +44283,11 @@ GameObject:
   - component: {fileID: 1478996660}
   - component: {fileID: 1478996659}
   - component: {fileID: 1478996666}
+  - component: {fileID: 1478996669}
+  - component: {fileID: 1478996667}
   - component: {fileID: 1478996663}
-  - component: {fileID: 1478996665}
   - component: {fileID: 1478996664}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44393,32 +44439,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Target>k__BackingField: {fileID: 488093609}
-  <MovementSpeed>k__BackingField: 2
-  <FOV>k__BackingField: 90
-  <VisionDistance>k__BackingField: 5
-  <TriggeredDistance>k__BackingField: 1.5
   <VisibleLayers>k__BackingField:
     serializedVersion: 2
     m_Bits: 384
+  <PathUpdateTime>k__BackingField: 0.5
   <PatrolPoints>k__BackingField:
   - {fileID: 469480932}
   - {fileID: 1667637748}
   - {fileID: 50193731}
   <WaitTimeOnPatrolPoint>k__BackingField: 3
-  <AttackDistance>k__BackingField: 0.7
---- !u!114 &1478996665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478996657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b2424b1ee5a46618135d0d345dd80f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pathUpdateTime: 0.5
 --- !u!95 &1478996666
 Animator:
   serializedVersion: 5
@@ -44439,6 +44468,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1478996667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478996657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be66c98089ae479d896a400442a458b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Stats>k__BackingField: {fileID: 11400000, guid: 67aeacab1386dd94b92e6f66b82bf349, type: 2}
+--- !u!114 &1478996669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478996657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15bd2a7e21b40bd91cba3a1b11085a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1482337976
 GameObject:
   m_ObjectHideFlags: 0

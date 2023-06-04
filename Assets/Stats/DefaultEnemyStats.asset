@@ -16,7 +16,7 @@ MonoBehaviour:
   Armor: 20
   Damage: 10
   MovementSpeed: 2
-  AttackDistance: 0.7
+  AttackDistance: 0.5
   AttackCooldown: 1
   VisionDistance: 5
   TriggeredDistance: 1.5
