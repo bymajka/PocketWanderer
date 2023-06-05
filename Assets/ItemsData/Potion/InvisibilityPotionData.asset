@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b39e1699894eaabb1b422a56bc32e9, type: 3}
   m_Name: InvisibilityPotionData
   m_EditorClassIdentifier: 
-  displayName: Speed Boost Potion
-  icon: {fileID: 980771272, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 5
-  rarity: 3
-  amount: 1
-  price: 50
-  potionEffect: 3
-  effectValue: 5
+  DisplayName: Invisibility Potion
+  Icon: {fileID: 980771272, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 5
+  Rarity: 3
+  Amount: 1
+  Price: 50
+  PotionEffect: 3
+  EffectValue: 100

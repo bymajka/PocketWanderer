@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: WoodenSword
   m_EditorClassIdentifier: 
-  displayName: Wooden Sword
-  icon: {fileID: -135579316, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 0
-  amount: 1
-  price: 1
-  weaponType: 3
-  damage: 5
+  DisplayName: Wooden Sword
+  Icon: {fileID: -135579316, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 0
+  Amount: 1
+  Price: 1
+  WeaponType: 3
+  Damage: 5

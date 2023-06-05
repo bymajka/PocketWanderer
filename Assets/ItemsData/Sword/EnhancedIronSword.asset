@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: EnhancedIronSword
   m_EditorClassIdentifier: 
-  displayName: Enhanced Iron Sword
-  icon: {fileID: 1931535498, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 2
-  amount: 1
-  price: 30
-  weaponType: 3
-  damage: 20
+  DisplayName: Enhanced Iron Sword
+  Icon: {fileID: 1931535498, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 2
+  Amount: 1
+  Price: 30
+  WeaponType: 3
+  Damage: 20

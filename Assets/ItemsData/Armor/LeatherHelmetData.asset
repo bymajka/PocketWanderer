@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6096135595944dcbc2123ae7d302ee7, type: 3}
   m_Name: LeatherHelmetData
   m_EditorClassIdentifier: 
-  displayName: Leather Helmet
-  icon: {fileID: -459463766, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 1
-  amount: 1
-  price: 8
-  armorRating: 11
+  DisplayName: Leather Helmet
+  Icon: {fileID: -459463766, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 1
+  Amount: 1
+  Price: 8
+  ArmorRating: 11

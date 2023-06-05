@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: BladeOfSolarRadiance
   m_EditorClassIdentifier: 
-  displayName: Blade of Solar Radiance
-  icon: {fileID: -1922175376, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 3
-  amount: 1
-  price: 200
-  weaponType: 3
-  damage: 40
+  DisplayName: Blade of Solar Radiance
+  Icon: {fileID: -1922175376, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 3
+  Amount: 1
+  Price: 200
+  WeaponType: 3
+  Damage: 40

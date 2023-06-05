@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6096135595944dcbc2123ae7d302ee7, type: 3}
   m_Name: SentinelBreastplateData
   m_EditorClassIdentifier: 
-  displayName: Sentinel's Breastplate
-  icon: {fileID: 1750772010, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 3
-  amount: 1
-  price: 16
-  armorRating: 25
+  DisplayName: Sentinel's Breastplate
+  Icon: {fileID: 1750772010, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 3
+  Amount: 1
+  Price: 16
+  ArmorRating: 25

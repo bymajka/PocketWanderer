@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: ThunderstrikeTrident
   m_EditorClassIdentifier: 
-  displayName: Thunderstrike Trident
-  icon: {fileID: 474270128, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 3
-  amount: 1
-  price: 250
-  weaponType: 3
-  damage: 43
+  DisplayName: Thunderstrike Trident
+  Icon: {fileID: 474270128, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 3
+  Amount: 1
+  Price: 250
+  WeaponType: 3
+  Damage: 43

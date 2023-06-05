@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6096135595944dcbc2123ae7d302ee7, type: 3}
   m_Name: IronBreastplateData
   m_EditorClassIdentifier: 
-  displayName: Iron Breastplate
-  icon: {fileID: -371077312, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 2
-  amount: 1
-  price: 13
-  armorRating: 20
+  DisplayName: Iron Breastplate
+  Icon: {fileID: -371077312, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 2
+  Amount: 1
+  Price: 13
+  ArmorRating: 20

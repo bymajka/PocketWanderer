@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b39e1699894eaabb1b422a56bc32e9, type: 3}
   m_Name: HealthBoostPotionData
   m_EditorClassIdentifier: 
-  displayName: Health Boost Potion
-  icon: {fileID: -1429212929, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 5
-  rarity: 2
-  amount: 1
-  price: 30
-  potionEffect: 0
-  effectValue: 50
+  DisplayName: Health Boost Potion
+  Icon: {fileID: -1429212929, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 5
+  Rarity: 2
+  Amount: 1
+  Price: 30
+  PotionEffect: 0
+  EffectValue: 50

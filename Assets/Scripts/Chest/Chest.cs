@@ -1,6 +1,5 @@
 using InventorySystem;
 using ItemSystem;
-using ItemSystem.ItemsData;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,18 +14,11 @@ namespace Chest
         [SerializeField] private Sprite chestClosedSprite;
         [SerializeField] private Button chestButton;
         [SerializeField] private float dropItemsRange;
-        
-        [SerializeField] private ItemData prefabItem1;
-        [SerializeField] private ItemData prefabItem2;
-        [SerializeField] private ItemData prefabItem3;
 
         private void Awake()
         {
             chestButton.gameObject.SetActive(false);
             inventory = gameObject.AddComponent<ChestInventory>();
-            inventory.Add(prefabItem1);
-            inventory.Add(prefabItem2);
-            inventory.Add(prefabItem3);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

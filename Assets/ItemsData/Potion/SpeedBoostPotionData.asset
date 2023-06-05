@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b39e1699894eaabb1b422a56bc32e9, type: 3}
   m_Name: SpeedBoostPotionData
   m_EditorClassIdentifier: 
-  displayName: Speed Boost Potion
-  icon: {fileID: 1487198590, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 5
-  rarity: 2
-  amount: 1
-  price: 25
-  potionEffect: 1
-  effectValue: 5
+  DisplayName: Speed Boost Potion
+  Icon: {fileID: 1487198590, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 5
+  Rarity: 3
+  Amount: 0
+  Price: 50
+  PotionEffect: 1
+  EffectValue: 2

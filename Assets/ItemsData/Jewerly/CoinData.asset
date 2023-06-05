@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4953df4c9a14eeab595e99859c3682e, type: 3}
   m_Name: CoinData
   m_EditorClassIdentifier: 
-  displayName: Coin
-  icon: {fileID: 2007360556, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 100000
-  rarity: 0
-  amount: 1
-  price: 1
+  DisplayName: Coin
+  Icon: {fileID: 2007360556, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 100000
+  Rarity: 0
+  Amount: 1
+  Price: 1

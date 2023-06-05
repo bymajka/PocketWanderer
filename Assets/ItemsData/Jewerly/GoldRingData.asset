@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4953df4c9a14eeab595e99859c3682e, type: 3}
   m_Name: GoldRingData
   m_EditorClassIdentifier: 
-  displayName: Gold Ring
-  icon: {fileID: -2040189667, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 10
-  rarity: 3
-  amount: 1
-  price: 70
+  DisplayName: Gold Ring
+  Icon: {fileID: -2040189667, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 10
+  Rarity: 2
+  Amount: 1
+  Price: 70

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: MysticGrimoireData
   m_EditorClassIdentifier: 
-  displayName: Mystic Grimoire
-  icon: {fileID: -487859028, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 4
-  amount: 1
-  price: 400
-  weaponType: 2
-  damage: 65
+  DisplayName: Mystic Grimoire
+  Icon: {fileID: -487859028, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 4
+  Amount: 1
+  Price: 400
+  WeaponType: 2
+  Damage: 65

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6096135595944dcbc2123ae7d302ee7, type: 3}
   m_Name: DragonBreastplateData
   m_EditorClassIdentifier: 
-  displayName: Dragon Breastplate
-  icon: {fileID: -1891617257, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 4
-  amount: 1
-  price: 35
-  armorRating: 50
+  DisplayName: Dragon Breastplate
+  Icon: {fileID: -1891617257, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 4
+  Amount: 1
+  Price: 35
+  ArmorRating: 50

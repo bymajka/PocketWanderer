@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: IronAxeData
   m_EditorClassIdentifier: 
-  displayName: Iron Axe
-  icon: {fileID: -435932418, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 2
-  amount: 1
-  price: 7
-  weaponType: 0
-  damage: 15
+  DisplayName: Iron Axe
+  Icon: {fileID: -435932418, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 2
+  Amount: 1
+  Price: 7
+  WeaponType: 0
+  Damage: 15

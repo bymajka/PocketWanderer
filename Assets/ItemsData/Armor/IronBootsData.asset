@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6096135595944dcbc2123ae7d302ee7, type: 3}
   m_Name: IronBootsData
   m_EditorClassIdentifier: 
-  displayName: Iron Boots
-  icon: {fileID: 1931015729, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 2
-  amount: 1
-  price: 6
-  armorRating: 8
+  DisplayName: Iron Boots
+  Icon: {fileID: 1931015729, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 2
+  Amount: 1
+  Price: 6
+  ArmorRating: 8

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: SwiftIronSword
   m_EditorClassIdentifier: 
-  displayName: Swift Iron Sword
-  icon: {fileID: 2137185366, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 2
-  rarity: 2
-  amount: 1
-  price: 35
-  weaponType: 3
-  damage: 23
+  DisplayName: Swift Iron Sword
+  Icon: {fileID: 2137185366, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 2
+  Amount: 1
+  Price: 35
+  WeaponType: 3
+  Damage: 23

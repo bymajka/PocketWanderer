@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22350ea3aee04b5b9f91ed41d97162d6, type: 3}
   m_Name: ArcaneTomeData
   m_EditorClassIdentifier: 
-  displayName: Arcane Tome
-  icon: {fileID: 1686237620, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
-  stackCapacity: 1
-  rarity: 3
-  amount: 1
-  price: 240
-  weaponType: 2
-  damage: 35
+  DisplayName: Arcane Tome
+  Icon: {fileID: 1686237620, guid: 7eec746f5538873428622741b5d6ad8e, type: 3}
+  StackCapacity: 1
+  Rarity: 0
+  Amount: 1
+  Price: 240
+  WeaponType: 2
+  Damage: 35
