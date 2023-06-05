@@ -1,4 +1,5 @@
 ﻿using ItemSystem.ItemsData;
+using PlayerSystem;
 using UnityEngine;
 
 namespace ItemSystem.Items
@@ -11,7 +12,7 @@ namespace ItemSystem.Items
 
         protected override void Use()
         {
-            Debug.Log("+" + PotionData.EffectValue + "HP");
-        }
-    }
+			ModifyPlayerStats("HealthPotion");
+		}
+	}
 }
