@@ -52,14 +52,14 @@ namespace EnemySystem.StateMachine
             return Vector2.Distance(_enemy.position, _target.position) <= _visionDistance;
         }
 
+        public bool CheckIfPlayerInAttackRange()
+        {
+            return Vector2.Distance(_enemy.position, _target.position) <= _attackDistance;
+        }
+
         public bool CheckIfCanAttack()
         {
-            if ((DateTime.Now - _lastAttackTime).TotalSeconds < _attackCooldown)
-            {
-                return false;
-            }
-            
-            return Vector2.Distance(_enemy.position, _target.position) <= _attackDistance;
+            return (DateTime.Now - _lastAttackTime).TotalSeconds > _attackCooldown;
         }
 
         public void ResetLastAttackTime()

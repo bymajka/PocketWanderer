@@ -38,7 +38,7 @@ namespace PlayerSystem.StateMachine
 
         public override void CheckSwitchStates()
         {
-            SwitchState(_ctx.Player.Stats.HitPoints < 0 ? _factory.Death() : _factory.Idle());
+            SwitchState(_ctx.Player.Stats.HitPoints <= 0 ? _factory.Death() : _factory.Idle());
         }
 
         public override void InitializeSubState()

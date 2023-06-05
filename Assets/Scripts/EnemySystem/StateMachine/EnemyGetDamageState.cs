@@ -37,13 +37,13 @@ namespace EnemySystem.StateMachine
 
         public override void CheckSwitchStates()
         {
-            if (Context.Enemy.Stats.HitPoints < 0)
+            if (Context.Enemy.Stats.HitPoints <= 0)
             {
                 SwitchState(Factory.Death());
                 return;
             }
 
-            SwitchState(Context.EnemyStateController.CheckIfCanAttack() ? Factory.Attack() : Factory.Chaise());
+            SwitchState(Context.EnemyStateController.CheckIfPlayerInAttackRange() ? Factory.Attack() : Factory.Chaise());
         }
     }
 }
