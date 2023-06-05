@@ -39,7 +39,7 @@ namespace Entity.Movement
             else
             {
                 LastMovementDirection = direction;
-                _attackPoint.localPosition = new Vector2(direction.x * _attackPointOffset, direction.y * _attackPointOffset);
+                _attackPoint.localPosition = new Vector2(direction.x * _attackPointOffset, direction.y * _attackPointOffset + 0.06F);
             }
 
             _animator.SetDirection(direction);

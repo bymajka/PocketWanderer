@@ -50,7 +50,7 @@ namespace EnemySystem.StateMachine
             if (AttackPoint == null)
                 return;
 
-            Gizmos.DrawWireSphere(AttackPoint.position, 0.3f);
+            Gizmos.DrawWireSphere(AttackPoint.position, 0.5f);
         }
 
         private void FixedUpdate()
