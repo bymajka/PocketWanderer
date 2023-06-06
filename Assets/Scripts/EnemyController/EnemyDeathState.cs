@@ -1,4 +1,5 @@
-﻿using Core.Animation;
+﻿using System.Collections;
+using Core.Animation;
 using ItemSystem;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace EnemyController
             Context.EnemyEntity.Animator.SetAnimationType(AnimationType.Dead);
             Context.EnemyEntity.Animator.PlayAnimation();
             DropItems();
+            Context.RunCoroutine(DeathRoutine());
         }
 
         public override void OnUpdateState()
@@ -34,7 +36,6 @@ namespace EnemyController
         public override void CheckSwitchStates()
         {
         }
-
         public void DropItems()
         {
             foreach (var item in Context.Inventory.Items)
@@ -49,6 +50,11 @@ namespace EnemyController
                 newItem.transform.position = new Vector3(position.x + Random.Range(-Context.DropItemsRange, Context.DropItemsRange), 
                     position.y + Random.Range(-Context.DropItemsRange, Context.DropItemsRange), position.z);
             }
+        }
+        IEnumerator DeathRoutine()
+        {
+            yield return new WaitForSecondsRealtime(3f);
+            Object.Destroy(Context.gameObject);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace EnemyController
     public class EnemyAttackState : EnemyBaseState
     {
         private Vector2 _directionToTarget;
+
         public EnemyAttackState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
         {
         }
@@ -22,6 +23,7 @@ namespace EnemyController
         public override void OnUpdateState()
         {
             _directionToTarget = (Context.Target.position - Context.transform.position).normalized;
+            Context.PositionMover.LastMovementDirection = _directionToTarget;
             Context.EnemyEntity.Animator.SetLastDirection(_directionToTarget);
             CheckSwitchStates();
             Attack();
@@ -43,26 +45,32 @@ namespace EnemyController
             {
                 SwitchState(Factory.GetDamage(damage));
             }
+
             if (!Context.EnemyStateController.CheckIfPlayerInAttackRange())
             {
                 SwitchState(Factory.Chaise());
             }
         }
-        
-        private void Attack()
+
+        public void Attack()
         {
             if (!Context.EnemyStateController.CheckIfCanAttack())
                 return;
-            
-            var hitPlayers = Physics2D.OverlapCircleAll(Context.AttackPoint.position, Context.EnemyEntity.Stats.AttackPointRadius,
-                Context.PlayerLayer);
-
-            foreach (var player in hitPlayers)
+            Debug.DrawLine(Context.transform.position,
+                Context.EnemyEntity.Stats.AttackPointDistance * Context.PositionMover.LastMovementDirection +
+                (Vector2) Context.transform.position, Color.magenta, 3f);
+            var hitEnemies = Physics2D.RaycastAll(Context.transform.position,
+                Context.PositionMover.LastMovementDirection,
+                Context.EnemyEntity.Stats.AttackPointDistance, Context.PlayerLayer);
+            Debug.Log(hitEnemies.Length);
+            foreach (var player in hitEnemies)
             {
-                player.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage);
+                player.transform.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage);
             }
 
             Context.EnemyStateController.ResetLastAttackTime();
         }
+
+        public override void InvokeAnimationEvent() => Attack();
     }
 }

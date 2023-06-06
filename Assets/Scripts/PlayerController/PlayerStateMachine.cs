@@ -9,7 +9,6 @@ namespace PlayerController
     public class PlayerStateMachine : MonoBehaviour
     {
         [field: Header("Attack")]
-        [field: SerializeField] public Transform AttackPoint { get; set; }
         [field: SerializeField] public LayerMask EnemyLayer { get; set; }
         
         public PlayerEntityBehaviour PlayerEntity { get; private set; }
@@ -42,14 +41,6 @@ namespace PlayerController
         void Update()
         {
             PlayerCurrentState.UpdateState();
-        }
-        
-        private void OnDrawGizmosSelected()
-        {
-            if (AttackPoint == null)
-                return;
-
-            Gizmos.DrawWireSphere(AttackPoint.position, 0.3f);
         }
 
         public void TakeDamage(float damage)
@@ -94,6 +85,12 @@ namespace PlayerController
         public void OnMining(InputAction.CallbackContext context)
         {
             isMining = true;
+        }
+
+        public void ActivateAnimationEvent()
+        {
+            if(PlayerCurrentState is PlayerAttackState)
+                PlayerCurrentState.ActivateAnimationEvent();
         }
     }
 }

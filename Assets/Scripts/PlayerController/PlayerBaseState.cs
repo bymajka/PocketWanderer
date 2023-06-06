@@ -29,5 +29,7 @@ namespace PlayerController
         protected void SetSuperState() {}
     
         protected void SetSubState(){}
+        
+        public virtual void ActivateAnimationEvent(){}
     }
 }

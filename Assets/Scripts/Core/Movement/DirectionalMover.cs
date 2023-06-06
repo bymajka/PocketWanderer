@@ -8,7 +8,7 @@ namespace Core.Movement
         
         private Vector2 _direction;
         
-        public Vector2 LastMovementDirection { get; private set; }
+        public Vector2 LastMovementDirection { get; set; }
 
         public DirectionalMover(Rigidbody2D rigidbody)
         {

@@ -28,7 +28,6 @@ namespace EnemyController
         [field: SerializeField] public float WaitTimeOnPatrolPoint { get; set; }
 
         [field: Header("Attack")]
-        [field: SerializeField] public Transform AttackPoint { get; set; }
         [field: SerializeField] public LayerMask PlayerLayer { get; set; }
         
         [field: Header("Drop items")]
@@ -63,15 +62,7 @@ namespace EnemyController
             CurrentState = _states.Idle();
             CurrentState.OnEnterState();
         }
-
-        private void OnDrawGizmosSelected()
-        {
-            if (AttackPoint == null)
-                return;
-
-            Gizmos.DrawWireSphere(AttackPoint.position, 0.5f);
-        }
-
+        
         private void Update()
         {
             Debug.DrawLine(EnemyEntity.Rigidbody.position,
@@ -93,6 +84,12 @@ namespace EnemyController
         public void KillCoroutine(Coroutine coroutine)
         {
             if (coroutine != null) StopCoroutine(coroutine);
+        }
+
+        public void InvokeAnimationEvent()
+        {
+            if(CurrentState is EnemyAttackState)
+                CurrentState.InvokeAnimationEvent();
         }
     }
 }

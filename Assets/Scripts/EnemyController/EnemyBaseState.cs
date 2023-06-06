@@ -24,5 +24,7 @@
             newState.OnEnterState();
             Context.CurrentState = newState;
         }
+        
+        public virtual void InvokeAnimationEvent(){}
     }
 }
