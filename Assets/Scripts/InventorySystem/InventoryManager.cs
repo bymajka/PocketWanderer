@@ -26,12 +26,6 @@ namespace InventorySystem
             CreateEmptyInventory();
         }
 
-        private void OnDestroy()
-        {
-            //PlayerInventory.OnInventoryChangedPlayer -= UpdateSlot;
-            //ChestInventory.OnInventoryChangedChest -= UpdateSlot;
-        }
-
         private void CreateInventorySlot()
         {
             GameObject newSlot = Instantiate(slotPrefab, transform, false);

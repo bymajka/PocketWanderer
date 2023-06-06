@@ -32,7 +32,7 @@ namespace EnemyController
 
         public bool CheckIfFindTarget(Vector2 enemyDirection)
         {
-            float distanceToTarget = Vector2.Distance(_enemy.position, _target.position);
+            var distanceToTarget = Vector2.Distance(_enemy.position, _target.position);
             if (distanceToTarget > _visionDistance)
                 return false;
             

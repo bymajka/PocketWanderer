@@ -12,8 +12,6 @@ namespace EnemyController
     [RequireComponent(typeof(Seeker))]
     public class EnemyStateMachine : MonoBehaviour
     {
-        private EnemyStateFactory _states;
-
         [field: Header("General")]
         [field: SerializeField] public Transform Target { get; set; }
         [field: SerializeField] public LayerMask VisibleLayers { get; set; }
@@ -34,6 +32,7 @@ namespace EnemyController
         public EnemyStateController EnemyStateController { get; private set; }
         public int LastPatronPointIndex { get; set; }
 
+        private EnemyStateFactory _states;
 
         private void Awake()
         {
