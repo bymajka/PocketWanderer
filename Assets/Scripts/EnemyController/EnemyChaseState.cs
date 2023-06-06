@@ -52,7 +52,7 @@ namespace EnemyController
                 SwitchState(Factory.GetDamage(damage));
             }
             
-            if (Context.EnemyStateController.CheckIfCanAttack())
+            if (Context.EnemyStateController.CheckIfPlayerInAttackRange())
             {
                 SwitchState(Factory.Attack());
             }

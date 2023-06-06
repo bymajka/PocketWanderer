@@ -6,6 +6,7 @@ namespace EnemyController
 {
     public class EnemyAttackState : EnemyBaseState
     {
+        private Vector2 _directionToTarget;
         public EnemyAttackState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
         {
         }
@@ -20,24 +21,10 @@ namespace EnemyController
 
         public override void OnUpdateState()
         {
+            _directionToTarget = (Context.Target.position - Context.transform.position).normalized;
+            Context.EnemyEntity.Animator.SetLastDirection(_directionToTarget);
             CheckSwitchStates();
             Attack();
-        }
-
-        private void Attack()
-        {
-            if (!Context.EnemyStateController.CheckIfCanAttack())
-                return;
-            
-            var hitPlayers = Physics2D.OverlapCircleAll(Context.AttackPoint.position, Context.EnemyEntity.Stats.AttackPointRadius,
-                Context.PlayerLayer);
-
-            foreach (var enemy in hitPlayers)
-            {
-                enemy.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage);
-            }
-
-            Context.EnemyStateController.ResetLastAttackTime();
         }
 
         public override void OnFixedUpdateState()
@@ -60,6 +47,22 @@ namespace EnemyController
             {
                 SwitchState(Factory.Chaise());
             }
+        }
+        
+        private void Attack()
+        {
+            if (!Context.EnemyStateController.CheckIfCanAttack())
+                return;
+            
+            var hitPlayers = Physics2D.OverlapCircleAll(Context.AttackPoint.position, Context.EnemyEntity.Stats.AttackPointRadius,
+                Context.PlayerLayer);
+
+            foreach (var enemy in hitPlayers)
+            {
+                enemy.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage);
+            }
+
+            Context.EnemyStateController.ResetLastAttackTime();
         }
     }
 }

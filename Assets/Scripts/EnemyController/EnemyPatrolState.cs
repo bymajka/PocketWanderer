@@ -29,6 +29,13 @@ namespace EnemyController
         public override void OnUpdateState()
         {
             Context.EnemyEntity.Animator.SetDirection(Context.PositionMover.LastMovementDirection);
+            
+            if (Vector2.Distance(Context.EnemyEntity.transform.position,
+                    Context.PatrolPoints[_currentPatrolPointIndex].position) < 0.05f)
+            {
+                _hasReachedPatrolPoint = true;
+            }
+            
             CheckSwitchStates();
         }
 
@@ -62,12 +69,6 @@ namespace EnemyController
                 SwitchState(Factory.Chaise());
             }
 
-            if (Vector2.Distance(Context.EnemyEntity.transform.position,
-                    Context.PatrolPoints[_currentPatrolPointIndex].position) < 0.05f)
-            {
-                _hasReachedPatrolPoint = true;
-            }
-            
             if (!_hasReachedPatrolPoint) return;
             if (_currentPatrolPointIndex + 1 < Context.PatrolPoints.Length)
             {

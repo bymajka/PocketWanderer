@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Chest
 {
-    public class Chest : MonoBehaviour
+    public class Chest : MonoBehaviour, IDroppable
     {
         [SerializeField] private ChestManager chestManager;
         [SerializeField] private ChestInventory inventory;
@@ -46,7 +46,7 @@ namespace Chest
             GetComponent<Collider2D>().enabled = false;
         }
 
-        private void DropItems()
+        public void DropItems()
         {
             foreach (var item in inventory.Items)
             {
