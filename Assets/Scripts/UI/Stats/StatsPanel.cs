@@ -1,18 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Globalization;
+using Entity.Behaviour;
+using StatsSystem;
+using TMPro;
 using UnityEngine;
 
-public class StatsPanel : MonoBehaviour
+namespace UI.Stats
 {
-    // Start is called before the first frame update
-    void Start()
+    public class StatsPanel : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private UnityEngine.UI.Slider healthPoolSlider;
+        [SerializeField] private UnityEngine.UI.Slider manaPoolSlider;
+        [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+        private void Start()
+        {
+            PlayerStats.OnHealthPointsChanged += HandleHealthPointsChanged;
+            PlayerStats.OnManaPointsChanged += HandleManaPointsChanged;
+            PlayerStats.OnGoldAmountChanged += HandleGoldAmountChanged;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void OnDestroy()
+        {
+            PlayerStats.OnHealthPointsChanged -= HandleHealthPointsChanged;
+            PlayerStats.OnManaPointsChanged -= HandleManaPointsChanged;
+            PlayerStats.OnGoldAmountChanged -= HandleGoldAmountChanged;
+        }
+
+        /*private void HandleGoldAmountChanged(int goldValue)
+        {
+            textMeshProUGUI.text = goldValue.ToString(CultureInfo.CurrentCulture);
+        }
+
+        private void HandleManaPointsChanged(float mana)
+        {
+            float normalizedMana = mana / PlayerManager.Instance.PlayerObject.
+                GetComponent<PlayerEntityBehaviour>().Stats.MaxManaPool;
+            manaPoolSlider.value = normalizedMana;
+        }
+        private void HandleHealthPointsChanged(float health)
+        {
+            float normalizedHealth = health / PlayerManager.Instance.PlayerObject.
+                GetComponent<PlayerEntityBehaviour>().Stats.MaxHitPoints;
+            healthPoolSlider.value = normalizedHealth;
+        }*/
+        private void HandleGoldAmountChanged(int goldValue) => UpdateText(goldValue.ToString(CultureInfo.CurrentCulture));
+        private void HandleManaPointsChanged(float mana)
+        {
+            float normalizedMana = CalculateNormalizedValue(mana, 
+                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.MaxManaPool);
+            manaPoolSlider.value = normalizedMana;
+        }
+        private void HandleHealthPointsChanged(float health)
+        {
+            float normalizedHealth = CalculateNormalizedValue(health,
+                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.MaxHitPoints);
+            healthPoolSlider.value = normalizedHealth;
+        }
+        private void UpdateText(string value) => textMeshProUGUI.text = value;
+        private float CalculateNormalizedValue(float value, float maxValue) => value / maxValue;
+
     }
 }

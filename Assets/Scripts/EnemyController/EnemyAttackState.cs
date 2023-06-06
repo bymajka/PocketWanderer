@@ -57,9 +57,9 @@ namespace EnemyController
             var hitPlayers = Physics2D.OverlapCircleAll(Context.AttackPoint.position, Context.EnemyEntity.Stats.AttackPointRadius,
                 Context.PlayerLayer);
 
-            foreach (var enemy in hitPlayers)
+            foreach (var player in hitPlayers)
             {
-                enemy.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage);
+                player.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage);
             }
 
             Context.EnemyStateController.ResetLastAttackTime();
