@@ -2,27 +2,24 @@
 using Core.Animation;
 using UnityEngine;
 
-namespace EnemyStateMachine
+namespace EnemyController
 {
-    public class EnemyPatrolState : EnemyBaseState
+    public class EnemyChaseState : EnemyBaseState
     {
         private Coroutine _coroutine;
+        private Transform _target;
         private Vector2 _previousTargetPosition;
-        private int _currentPatrolPointIndex;
-        private bool _hasReachedPatrolPoint;
 
-        public EnemyPatrolState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
+        public EnemyChaseState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
         {
         }
 
         public override void OnEnterState()
         {
-            Debug.Log("Enemy entered in PATROL state.");
+            Debug.Log("Enemy entered in CHASE state.");
             Context.EnemyEntity.Animator.SetAnimationType(AnimationType.Move);
             Context.EnemyEntity.Animator.PlayAnimation();
-
-            _currentPatrolPointIndex = Context.LastPatronPointIndex;
-            
+            _target = Context.Target;
             _coroutine = Context.StartCoroutine(SearchPathCoroutine());
         }
 
@@ -41,47 +38,36 @@ namespace EnemyStateMachine
 
         public override void OnExitState()
         {
-            Debug.Log("Enemy exited from PATROL state.");
+            Debug.Log("Enemy exited from CHASE state.");
             Context.EnemyEntity.Animator.SetLastDirection(Context.PositionMover.LastMovementDirection);
             Context.EnemyEntity.Animator.StopAnimation();
-
-            Context.LastPatronPointIndex = _currentPatrolPointIndex;
 
             Context.KillCoroutine(_coroutine);
         }
 
         public override void CheckSwitchStates()
         {
-            if (Context.EnemyStateController.CheckIfFindTarget(Context.PositionMover.LastMovementDirection))
+            if (Context.EnemyStateController.CheckIfTookDamage(out var damage))
             {
-                SwitchState(Factory.Chaise());
-            }
-
-            if (Vector2.Distance(Context.EnemyEntity.transform.position,
-                    Context.PatrolPoints[_currentPatrolPointIndex].position) < 0.05f)
-            {
-                _hasReachedPatrolPoint = true;
+                SwitchState(Factory.GetDamage(damage));
             }
             
-            if (!_hasReachedPatrolPoint) return;
-            if (_currentPatrolPointIndex + 1 < Context.PatrolPoints.Length)
+            if (Context.EnemyStateController.CheckIfCanAttack())
             {
-                _currentPatrolPointIndex++;
-            }
-            else
-            {
-                _currentPatrolPointIndex = 0;
+                SwitchState(Factory.Attack());
             }
 
-            SwitchState(Factory.Idle());
+            if (!Context.EnemyStateController.CheckIfCanChase())
+            {
+                SwitchState(Factory.Idle());
+            }
         }
 
         private IEnumerator SearchPathCoroutine()
         {
-            var target = Context.PatrolPoints[_currentPatrolPointIndex];
-            while (!_hasReachedPatrolPoint)
+            while (_target != null)
             {
-                Vector2 destination = target.transform.position;
+                Vector2 destination = _target.transform.position;
                 if (destination != _previousTargetPosition)
                 {
                     _previousTargetPosition = destination;

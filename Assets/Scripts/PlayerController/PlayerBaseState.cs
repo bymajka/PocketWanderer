@@ -1,4 +1,4 @@
-namespace PlayerStateMachine
+namespace PlayerController
 {
     public abstract class PlayerBaseState
     {

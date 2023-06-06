@@ -1,4 +1,4 @@
-﻿namespace EnemyStateMachine
+﻿namespace EnemyController
 {
     public abstract class EnemyBaseState
     {

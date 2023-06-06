@@ -3,11 +3,15 @@ using Entity.Behaviour;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PlayerStateMachine
+namespace PlayerController
 {
     [RequireComponent(typeof(PlayerEntityBehaviour))]
     public class PlayerStateMachine : MonoBehaviour
     {
+        [field: Header("Attack")]
+        [field: SerializeField] public Transform AttackPoint { get; set; }
+        [field: SerializeField] public LayerMask EnemyLayer { get; set; }
+        
         public PlayerEntityBehaviour PlayerEntity { get; private set; }
         public DirectionalMover DirectionalMover { get; private set; }
         public PlayerBaseState PlayerCurrentState { get; set; }
@@ -22,6 +26,7 @@ namespace PlayerStateMachine
         public bool isMining;
 
         private PlayerStateFactory _states;
+        private float _takenDamage;
 
         private void Awake()
         {
@@ -38,7 +43,33 @@ namespace PlayerStateMachine
         {
             PlayerCurrentState.UpdateState();
         }
-    
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (AttackPoint == null)
+                return;
+
+            Gizmos.DrawWireSphere(AttackPoint.position, 0.3f);
+        }
+
+        public void TakeDamage(float damage)
+        {
+           _takenDamage += damage;
+        }
+
+        public bool CheckIfDamageTaken(out float damage)
+        {
+            if (_takenDamage == 0)
+            {
+                damage = 0;
+                return false;
+            }
+
+            damage = _takenDamage;
+            _takenDamage = 0;
+            return true;
+        }
+
         public void OnMove(InputAction.CallbackContext context)
         {
             isMoving = true;

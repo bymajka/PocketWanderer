@@ -1,4 +1,4 @@
-namespace PlayerStateMachine
+namespace PlayerController
 {
     public class PlayerIdleState : PlayerBaseState
     {
@@ -17,6 +17,10 @@ namespace PlayerStateMachine
 
         public override void CheckSwitchStates()
         {
+            if (_ctx.CheckIfDamageTaken(out var damage))
+            {
+                SwitchState(_factory.GetDamage(damage));
+            }
             if (_ctx.isAttacking)
             {
                 SwitchState(_factory.Attack());
@@ -37,6 +41,7 @@ namespace PlayerStateMachine
             {
                 SwitchState(_factory.Walk());
             }
+            
         }
 
         public override void InitializeSubState() {}

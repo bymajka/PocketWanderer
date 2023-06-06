@@ -4,7 +4,7 @@ using Entity.Behaviour;
 using Pathfinding;
 using UnityEngine;
 
-namespace EnemyStateMachine
+namespace EnemyController
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(EnemyEntityBehaviour))]
@@ -22,6 +22,10 @@ namespace EnemyStateMachine
         [field: Header("Patrol")]
         [field: SerializeField] public Transform[] PatrolPoints { get; set; }
         [field: SerializeField] public float WaitTimeOnPatrolPoint { get; set; }
+        
+        [field: Header("Attack")]
+        [field: SerializeField] public Transform AttackPoint { get; set; }
+        [field: SerializeField] public LayerMask PlayerLayer { get; set; }
 
         public EnemyEntityBehaviour EnemyEntity { get; private set; }
         public PositionMover PositionMover { get; private set; }
@@ -36,7 +40,8 @@ namespace EnemyStateMachine
             EnemyEntity = GetComponent<EnemyEntityBehaviour>();
             EnemyEntity.Initialize();
 
-            EnemyStateController = new EnemyStateController(this);
+            EnemyStateController = new EnemyStateController();
+            EnemyStateController.Initialize(this);
 
             PositionMover = new PositionMover(EnemyEntity.Rigidbody);
             
@@ -46,6 +51,14 @@ namespace EnemyStateMachine
             
             CurrentState = _states.Idle();
             CurrentState.OnEnterState();
+        }
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (AttackPoint == null)
+                return;
+
+            Gizmos.DrawWireSphere(AttackPoint.position, 0.5f);
         }
 
         private void Update()

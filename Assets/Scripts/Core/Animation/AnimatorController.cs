@@ -7,6 +7,7 @@ namespace Core.Animation
     {
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int Moving = Animator.StringToHash("Moving");
+        private static readonly int Dead = Animator.StringToHash("Dead");
         private static readonly int LastHorizontal = Animator.StringToHash("LastHorizontal");
         private static readonly int LastVertical = Animator.StringToHash("LastVertical");
         private static readonly int Horizontal = Animator.StringToHash("Horizontal");
@@ -23,6 +24,9 @@ namespace Core.Animation
             {
                 case AnimationType.Attack:
                     _currentAnimationType = Attack;
+                    break;
+                case AnimationType.Dead:
+                    _currentAnimationType = Dead;
                     break;
                 default:
                     _currentAnimationType = Moving;

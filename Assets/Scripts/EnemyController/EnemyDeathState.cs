@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Core.Animation;
+using UnityEngine;
 
-namespace EnemyStateMachine
+namespace EnemyController
 {
     public class EnemyDeathState : EnemyBaseState
     {
@@ -11,11 +12,12 @@ namespace EnemyStateMachine
         public override void OnEnterState()
         {
             Debug.Log("Enemy entered in DEATH state.");
+            Context.EnemyEntity.Animator.SetAnimationType(AnimationType.Dead);
+            Context.EnemyEntity.Animator.PlayAnimation();
         }
 
         public override void OnUpdateState()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnFixedUpdateState()
@@ -29,7 +31,6 @@ namespace EnemyStateMachine
 
         public override void CheckSwitchStates()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

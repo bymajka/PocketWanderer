@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace EnemyStateMachine
+namespace EnemyController
 {
     public class EnemyIdleState : EnemyBaseState
     {
@@ -35,6 +35,11 @@ namespace EnemyStateMachine
 
         public override void CheckSwitchStates()
         {
+            if (Context.EnemyStateController.CheckIfTookDamage(out var damage))
+            {
+                SwitchState(Factory.GetDamage(damage));
+            }
+            
             if (Context.EnemyStateController.CheckIfFindTarget(Context.PositionMover.LastMovementDirection))
             {
                 SwitchState(Factory.Chaise());

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: DefaultEnemyStats
   m_EditorClassIdentifier: 
   HitPoints: 100
-  Armor: 20
+  Armor: 10
   Damage: 10
   MovementSpeed: 2
-  AttackDistance: 0.5
-  AttackCooldown: 1
+  AttackPointRadius: 0.5
+  AttackDistance: 0.7
+  AttackCooldown: 2
   VisionDistance: 5
   TriggeredDistance: 1.5
   FOV: 90

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PlayerStateMachine
+namespace PlayerController
 {
     public class PlayerSpellCastState : PlayerBaseState
     {
@@ -26,6 +26,10 @@ namespace PlayerStateMachine
 
         public override void CheckSwitchStates()
         {
+            if (_ctx.CheckIfDamageTaken(out var damage))
+            {
+                SwitchState(_factory.GetDamage(damage));
+            }
             if (_ctx.isMoving)
             {
                 SwitchState(_factory.Walk());

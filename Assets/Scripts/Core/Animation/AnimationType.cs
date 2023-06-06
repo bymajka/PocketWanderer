@@ -4,5 +4,6 @@
     {
         Attack,
         Move,
+        Dead
     }
 }

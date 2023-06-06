@@ -1,6 +1,8 @@
 using Core.Animation;
+using EnemyController;
+using UnityEngine;
 
-namespace PlayerStateMachine
+namespace PlayerController
 {
     public class PlayerAttackState : PlayerBaseState
     {
@@ -12,6 +14,13 @@ namespace PlayerStateMachine
         {
             _ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Attack);
             _ctx.PlayerEntity.Animator.PlayAnimation();
+
+            var hitEnemies = Physics2D.OverlapCircleAll(_ctx.AttackPoint.position, _ctx.PlayerEntity.Stats.AttackPointRadius, _ctx.EnemyLayer);
+
+            foreach (var enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyStateMachine>().EnemyStateController.TakeDamage(_ctx.PlayerEntity.Stats.Damage);
+            }
         }
 
         public override void UpdateState()
@@ -26,6 +35,10 @@ namespace PlayerStateMachine
 
         public override void CheckSwitchStates()
         {
+            if (_ctx.CheckIfDamageTaken(out var damage))
+            {
+                SwitchState(_factory.GetDamage(damage));
+            }
             if (_ctx.isMoving)
             {
                 SwitchState(_factory.Walk());
