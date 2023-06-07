@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Entity.Behaviour;
 using ItemSystem;
 using ItemSystem.Items;
 using ItemSystem.ItemsData;
+using Unity.VisualScripting;
 
 namespace InventorySystem
 {
@@ -54,6 +56,12 @@ namespace InventorySystem
 				{
 					WeaponData weaponData = (WeaponData) itemData;
 					newItem = new WeaponItem(weaponData);
+				}
+				else if (itemData.GetType() == typeof(JewelryData))
+				{
+					var player = PlayerManager.Instance.GameObject()
+						.GetComponent<PlayerEntityBehaviour>();
+					player.Stats.gold += (int)itemData.Price;
 				}
 				Items.Add(newItem);
 				OnInventoryChangedPlayer?.Invoke(newItem);
