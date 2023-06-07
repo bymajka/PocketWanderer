@@ -29,14 +29,6 @@ namespace PlayerController
             {
                 SwitchState(_factory.SpellCast());
             }
-            else if (_ctx.isShooting)
-            {
-                SwitchState(_factory.ShootingState());
-            }
-            else if (_ctx.isMining)
-            {
-                SwitchState(_factory.MiningState());
-            }
             if (_ctx.isMoving)
             {
                 SwitchState(_factory.Walk());

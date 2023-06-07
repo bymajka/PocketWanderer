@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StatsSystem
 {
@@ -35,8 +36,11 @@ namespace StatsSystem
                 OnHealthPointsChanged?.Invoke(HitPoints);
             }
         }
-        public float MaxHitPoints;
-        public float MaxManaPool;
+
+        [FormerlySerializedAs("MaxHitPoints")] public float maxHitPoints;
+        [FormerlySerializedAs("MaxManaPool")] public float maxManaPool;
+        public float spellCastCost;
+        public float spellDamage;
 
         /*public static event HealthPointsChangedDelegate OnHealthPointsChanged;
         public delegate void HealthPointsChangedDelegate(float health);

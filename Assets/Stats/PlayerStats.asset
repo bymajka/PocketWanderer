@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee99a24166f2442db531b6662cef7dc3, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  HitPoints: 815
+  HitPoints: 785
   Armor: 0
   Damage: 10
   MovementSpeed: 3
   AttackPointDistance: 0.6
   gold: 0
-  manaPoints: 100
-  MaxHitPoints: 1000
-  MaxManaPool: 100
+  manaPoints: 25
+  maxHitPoints: 1000
+  maxManaPool: 100
+  spellCastCost: 25
+  spellDamage: 25

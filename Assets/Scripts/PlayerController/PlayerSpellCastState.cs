@@ -1,17 +1,20 @@
-using UnityEngine;
+using Core.Animation;
+using EnemyController;
 
 namespace PlayerController
 {
     public class PlayerSpellCastState : PlayerBaseState
     {
-        private static readonly int SpellCast = Animator.StringToHash("SpellCast");
-
-        public PlayerSpellCastState(PlayerStateMachine context, 
-            PlayerStateFactory playerStateFactory) : base(context, playerStateFactory){}
+        public PlayerSpellCastState(PlayerStateMachine context,
+            PlayerStateFactory playerStateFactory) : base(context, playerStateFactory)
+        {
+        }
 
         public override void EnterState()
         {
-            _ctx.Animator.SetBool(SpellCast, true);
+            _ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.SpellCast);
+            _ctx.PlayerEntity.Animator.PlayAnimation();
+            DealSpellCastDamage();
         }
 
         public override void UpdateState()
@@ -21,7 +24,7 @@ namespace PlayerController
 
         public override void ExitState()
         {
-            _ctx.Animator.SetBool(SpellCast, false);
+            _ctx.PlayerEntity.Animator.StopAnimation();
         }
 
         public override void CheckSwitchStates()
@@ -30,14 +33,28 @@ namespace PlayerController
             {
                 SwitchState(_factory.GetDamage(damage));
             }
+
             if (_ctx.isMoving)
             {
                 SwitchState(_factory.Walk());
             }
-            else if(!_ctx.isSpellCasting)
+            else if (!_ctx.isSpellCasting)
                 SwitchState(_factory.Idle());
         }
 
-        public override void InitializeSubState() {}
+        public override void InitializeSubState()
+        {
+        }
+        private void DealSpellCastDamage()
+        {
+            if (_ctx.PlayerEntity.Stats.ManaPoints < _ctx.PlayerEntity.Stats.spellCastCost)
+                return;
+            foreach (var enemy in _ctx.ReturnAllEnemies())
+            {
+                enemy.gameObject.GetComponent<EnemyStateMachine>().EnemyStateController
+                    .TakeDamage(_ctx.PlayerEntity.Stats.spellDamage);
+            }
+            _ctx.PlayerEntity.Stats.ManaPoints -= _ctx.PlayerEntity.Stats.spellCastCost;
+        }
     }
 }

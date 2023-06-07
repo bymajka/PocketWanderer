@@ -10,7 +10,7 @@ namespace ItemSystem.Items
 
 		protected override void Use()
 		{
-			ModifyPlayerStats("SpeedPotion");
+			ModifyPlayerStats("MovementSpeed");
 		}
 	}
 }

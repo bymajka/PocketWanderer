@@ -4,6 +4,7 @@
     {
         Attack,
         Move,
-        Dead
+        Dead,
+        SpellCast
     }
 }

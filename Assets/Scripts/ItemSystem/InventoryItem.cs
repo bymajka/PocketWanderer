@@ -7,7 +7,7 @@ using UnityEngine;
 namespace ItemSystem
 {
 	public class InventoryItem
-	{ 
+	{
 		public int StackSize { get; set; }
 		public ItemData ItemData { get; set; }
 
@@ -29,14 +29,14 @@ namespace ItemSystem
 			StackSize--;
 		}
 
+		protected virtual void Use()
+		{
+			Debug.Log("Use from" + GetType());
+		}
+
 		public void AddAction(string actionName, Action action)
 		{
 			ItemData.ItemActions.Add(actionName, action);
-		}
-
-		public void Use()
-		{
-			Debug.Log("UsingItem");
 		}
 
 		public void Transfer(Inventory inventoryCurrent, Inventory inventoryOther)

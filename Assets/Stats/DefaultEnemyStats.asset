@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78c3aaf694214de8903d66961733ffb0, type: 3}
   m_Name: DefaultEnemyStats
   m_EditorClassIdentifier: 
-  HitPoints: -30
+  HitPoints: 50
   Armor: 0
   Damage: 5
   MovementSpeed: 2

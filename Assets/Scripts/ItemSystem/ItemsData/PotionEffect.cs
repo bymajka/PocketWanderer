@@ -5,6 +5,7 @@
         HealthBoost,
         SpeedBoost,
         PowerBoost,
-        Invisibility
+        Invisibility,
+        ManaRegeneration
     }
 }

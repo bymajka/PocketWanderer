@@ -8,7 +8,6 @@ namespace ItemSystem.Items
     public abstract class PotionItem : InventoryItem
     {
         protected readonly PotionData _potionData;
-        protected abstract void Use();
 
         protected PotionItem(PotionData itemData) : base(itemData)
         {

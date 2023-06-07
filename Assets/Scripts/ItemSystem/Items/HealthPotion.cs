@@ -1,4 +1,5 @@
 ﻿using ItemSystem.ItemsData;
+using UnityEngine;
 
 namespace ItemSystem.Items
 {
@@ -10,7 +11,8 @@ namespace ItemSystem.Items
 
         protected override void Use()
         {
-			ModifyPlayerStats("HealthPotion");
-		}
+	        Debug.Log("Use from" + GetType());
+			ModifyPlayerStats("HitPoints");
+        }
 	}
 }

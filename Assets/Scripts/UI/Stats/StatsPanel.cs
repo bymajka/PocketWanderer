@@ -46,13 +46,13 @@ namespace UI.Stats
         private void HandleManaPointsChanged(float mana)
         {
             float normalizedMana = CalculateNormalizedValue(mana, 
-                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.MaxManaPool);
+                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.maxManaPool);
             manaPoolSlider.value = normalizedMana;
         }
         private void HandleHealthPointsChanged(float health)
         {
             float normalizedHealth = CalculateNormalizedValue(health,
-                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.MaxHitPoints);
+                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.maxHitPoints);
             healthPoolSlider.value = normalizedHealth;
         }
         private void UpdateText(string value) => textMeshProUGUI.text = value;
