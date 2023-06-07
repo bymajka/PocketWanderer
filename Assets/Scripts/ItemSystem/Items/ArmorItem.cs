@@ -12,7 +12,7 @@ namespace ItemSystem.Items
 		{
 		}
 
-		public void Use()
+		public override void Use()
 		{
 			GameObject player = PlayerManager.Instance.PlayerObject;
 
@@ -29,6 +29,7 @@ namespace ItemSystem.Items
 			}
 
 			playerStats.Armor += _armorData.ArmorRating;
+			base.Use();
 		}
 	}
 }

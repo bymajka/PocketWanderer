@@ -36,7 +36,7 @@ namespace EnemyController
         public EnemyEntityBehaviour EnemyEntity { get; private set; }
         public PositionMover PositionMover { get; private set; }
         public SeekerController SeekerController { get; private set; }
-        public Inventory Inventory { get; private set; }
+        public EnemyInventory Inventory { get; private set; }
         public EnemyBaseState CurrentState { get; set; }
         public EnemyStateController EnemyStateController { get; private set; }
         public int LastPatronPointIndex { get; set; }

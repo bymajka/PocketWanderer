@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Core.Animation;
 using ItemSystem;
+using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace EnemyController
@@ -36,13 +37,14 @@ namespace EnemyController
         public override void CheckSwitchStates()
         {
         }
+
         public void DropItems()
         {
-            foreach (var item in Context.Inventory.Items)
+            foreach (ItemData item in Context.Inventory.Items)
             {
                 GameObject newItem = new GameObject();
-                newItem.AddComponent<Item>().ItemData = item.ItemData;
-                newItem.AddComponent<SpriteRenderer>().sprite = item.ItemData.Icon;
+                newItem.AddComponent<Item>().ItemData = item;
+                newItem.AddComponent<SpriteRenderer>().sprite = item.Icon;
                 newItem.GetComponent<SpriteRenderer>().sortingOrder = 1;
                 newItem.AddComponent<CircleCollider2D>().isTrigger = true;
                 newItem.transform.localScale *= 1.5f;

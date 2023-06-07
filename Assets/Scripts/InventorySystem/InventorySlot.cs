@@ -1,6 +1,6 @@
+using System;
 using ItemSystem;
 using TMPro;
-using UI.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +12,8 @@ namespace InventorySystem
         [SerializeField] private TextMeshProUGUI labelText;
         [SerializeField] private TextMeshProUGUI stackSizeText;
         [SerializeField] private Button deleteButton;
+        
+        public static Action<InventorySlot> RewriteSlotListener;
 
         public delegate void OnClickRemove();
 
@@ -29,17 +31,10 @@ namespace InventorySystem
             image.enabled = false;
             labelText.enabled = false;
             stackSizeText.enabled = false;
-            GetComponentInChildren<ItemActionPanel>().RemoveOldButtons();
         }
 
         public void FillSlot(InventoryItem inventoryItem)
         {
-            /*if (inventoryItem == null)
-            {
-                ClearSlot();
-                return;
-            }*/
-
             InventoryItem = inventoryItem;
 
             image.enabled = true;
@@ -49,6 +44,8 @@ namespace InventorySystem
             image.sprite = inventoryItem.ItemData.Icon;
             labelText.text = inventoryItem.ItemData.DisplayName;
             stackSizeText.text = inventoryItem.StackSize.ToString();
+            
+            RewriteSlotListener?.Invoke(this);
         }
     }
 }

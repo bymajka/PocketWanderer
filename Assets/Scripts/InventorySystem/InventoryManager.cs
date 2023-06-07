@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    public abstract class InventoryManager<T>: MonoBehaviour where T : Inventory
+    public abstract class InventoryManager<T>: MonoBehaviour where T : Inventory<InventoryItem>
     {
         [SerializeField] private GameObject slotPrefab;
         public List<InventorySlot> InventorySlots { get; protected set; }

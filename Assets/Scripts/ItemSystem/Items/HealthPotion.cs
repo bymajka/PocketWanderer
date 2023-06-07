@@ -9,10 +9,11 @@ namespace ItemSystem.Items
         {
         }
 
-        protected override void Use()
+        public override void Use()
         {
 	        Debug.Log("Use from" + GetType());
 			ModifyPlayerStats("HitPoints");
+			base.Use();
         }
 	}
 }

@@ -8,9 +8,10 @@ namespace ItemSystem.Items
 		{
 		}
 
-		protected override void Use()
+		public override void Use()
 		{
 			ModifyPlayerStats("MovementSpeed");
+			base.Use();
 		}
 	}
 }

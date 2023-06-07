@@ -8,11 +8,11 @@ namespace ItemSystem.Items
 	{
 		public readonly WeaponData _weaponData;
 
-		public WeaponItem(ArmorData itemData) : base(itemData)
+		public WeaponItem(WeaponData itemData) : base(itemData)
 		{
 		}
 
-		public void Use()
+		public override void Use()
 		{
 			GameObject player = PlayerManager.Instance.PlayerObject;
 
@@ -29,6 +29,7 @@ namespace ItemSystem.Items
 			}
 
 			playerStats.Damage += _weaponData.Damage;
+			base.Use();
 		}
 	}
 }

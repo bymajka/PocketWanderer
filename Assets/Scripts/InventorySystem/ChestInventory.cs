@@ -1,54 +1,18 @@
-using System;
-using System.Linq;
-using ItemSystem;
+using System.Collections.Generic;
 using ItemSystem.ItemsData;
 
 namespace InventorySystem
 {
-	public class ChestInventory : Inventory
+	public class ChestInventory : Inventory<ItemData>
 	{
-		public static event Action<InventoryItem> OnInventoryChangedChest;
+		public override List<ItemData> Items { get; set; } = new();
 		public override void Add(ItemData itemData)
 		{
-			var inventoryItem = Items
-				.FirstOrDefault(i => i.ItemData == itemData && i.StackSize < itemData.StackCapacity);
-
-			if (inventoryItem != null)
-			{
-				inventoryItem.AddToStack();
-				OnInventoryChangedChest?.Invoke(inventoryItem);
-			}
-			else
-			{
-				InventoryItem newItem = new(itemData);
-				Items.Add(newItem);
-				OnInventoryChangedChest?.Invoke(newItem);
-			}
+			Items.Add(itemData);
 		}
-		protected override void Remove(ItemData itemData)
+		public override void Remove(ItemData itemData)
 		{
-			var inventoryItem = Items
-				.LastOrDefault(i => i.ItemData == itemData && i.StackSize > 0);
-
-			if (inventoryItem != null)
-			{
-				inventoryItem.RemoveFromStack();
-				OnInventoryChangedChest?.Invoke(inventoryItem);
-
-				if (inventoryItem.StackSize != 0)
-					return;
-
-				Items.Remove(inventoryItem);
-			}
-		}
-		private void OnEnable()
-		{
-			InventoryManager<ChestInventory>.OnRemoveItem += Remove;
-		}
-
-		private void OnDisable()
-		{
-			InventoryManager<ChestInventory>.OnRemoveItem -= Remove;
+			Items.Remove(itemData);
 		}
 	}
 }

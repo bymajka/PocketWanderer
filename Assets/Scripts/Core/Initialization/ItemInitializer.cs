@@ -17,7 +17,7 @@ namespace Core.Initialization
             InitializeInventoryItems<EnemyInventory>();
         }
 
-        private void InitializeInventoryItems<T>() where T : Inventory
+        private void InitializeInventoryItems<T>() where T : Inventory<ItemData>
         {
             var inventories = FindObjectsOfType<T>();
             

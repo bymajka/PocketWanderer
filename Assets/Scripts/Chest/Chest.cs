@@ -1,5 +1,6 @@
 using InventorySystem;
 using ItemSystem;
+using ItemSystem.ItemsData;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,11 +49,11 @@ namespace Chest
 
         public void DropItems()
         {
-            foreach (var item in inventory.Items)
+            foreach (ItemData item in inventory.Items)
             {
                 GameObject newItem = new GameObject();
-                newItem.AddComponent<Item>().ItemData = item.ItemData;
-                newItem.AddComponent<SpriteRenderer>().sprite = item.ItemData.Icon;
+                newItem.AddComponent<Item>().ItemData = item;
+                newItem.AddComponent<SpriteRenderer>().sprite = item.Icon;
                 newItem.GetComponent<SpriteRenderer>().sortingOrder = 1;
                 newItem.AddComponent<CircleCollider2D>().isTrigger = true;
                 newItem.transform.localScale *= 1.5f;
