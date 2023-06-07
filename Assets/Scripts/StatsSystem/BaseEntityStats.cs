@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StatsSystem
 {
@@ -9,5 +10,6 @@ namespace StatsSystem
 		public float Damage;
 		public float MovementSpeed;
 		public float AttackPointDistance;
+		[FormerlySerializedAs("maxHitPoints")] public float MaxHitPoints;
 	}
 }

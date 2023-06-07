@@ -17,31 +17,12 @@ namespace UI.Stats
             PlayerStats.OnManaPointsChanged += HandleManaPointsChanged;
             PlayerStats.OnGoldAmountChanged += HandleGoldAmountChanged;
         }
-
         private void OnDestroy()
         {
             PlayerStats.OnHealthPointsChanged -= HandleHealthPointsChanged;
             PlayerStats.OnManaPointsChanged -= HandleManaPointsChanged;
             PlayerStats.OnGoldAmountChanged -= HandleGoldAmountChanged;
         }
-
-        /*private void HandleGoldAmountChanged(int goldValue)
-        {
-            textMeshProUGUI.text = goldValue.ToString(CultureInfo.CurrentCulture);
-        }
-
-        private void HandleManaPointsChanged(float mana)
-        {
-            float normalizedMana = mana / PlayerManager.Instance.PlayerObject.
-                GetComponent<PlayerEntityBehaviour>().Stats.MaxManaPool;
-            manaPoolSlider.value = normalizedMana;
-        }
-        private void HandleHealthPointsChanged(float health)
-        {
-            float normalizedHealth = health / PlayerManager.Instance.PlayerObject.
-                GetComponent<PlayerEntityBehaviour>().Stats.MaxHitPoints;
-            healthPoolSlider.value = normalizedHealth;
-        }*/
         private void HandleGoldAmountChanged(int goldValue) => UpdateText(goldValue.ToString(CultureInfo.CurrentCulture));
         private void HandleManaPointsChanged(float mana)
         {
@@ -52,7 +33,7 @@ namespace UI.Stats
         private void HandleHealthPointsChanged(float health)
         {
             float normalizedHealth = CalculateNormalizedValue(health,
-                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.maxHitPoints);
+                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.MaxHitPoints);
             healthPoolSlider.value = normalizedHealth;
         }
         private void UpdateText(string value) => textMeshProUGUI.text = value;

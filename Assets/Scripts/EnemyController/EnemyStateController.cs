@@ -1,5 +1,6 @@
 ﻿using System;
 using Entity.Behaviour;
+using StatsSystem;
 using UnityEngine;
 
 namespace EnemyController
@@ -16,6 +17,7 @@ namespace EnemyController
         private float _takenDamage;
         private float _attackCooldown;
         private DateTime _lastAttackTime;
+        private EnemyStats _enemyStats;
 
         public void Initialize(EnemyStateMachine context)
         {
@@ -28,6 +30,7 @@ namespace EnemyController
             _attackDistance = context.EnemyEntity.Stats.AttackDistance;
             _attackCooldown = context.EnemyEntity.Stats.AttackCooldown;
             _lastAttackTime = DateTime.MinValue;
+            _enemyStats = context.EnemyEntity.Stats;
         }
 
         public bool CheckIfFindTarget(Vector2 enemyDirection)
@@ -69,7 +72,7 @@ namespace EnemyController
         
         public void TakeDamage(float statsDamage)
         {
-            _takenDamage += statsDamage;
+            _takenDamage += statsDamage - _enemyStats.Armor;
         }
 
         public bool CheckIfTookDamage(out float damage)

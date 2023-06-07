@@ -7,6 +7,7 @@ namespace ItemSystem.Items
 {
     public abstract class PotionItem : InventoryItem
     {
+	    protected PotionData PotionData;
         protected PotionItem(PotionData itemData) : base(itemData)
         {
         }
@@ -25,16 +26,16 @@ namespace ItemSystem.Items
 			if (property != null && 
 				property.PropertyType == typeof(float))
 			{
-				var potionData = (PotionData) ItemData;
+				PotionData = (PotionData) ItemData;
 				
-				if (potionData.EffectValue <= 0 &&
+				if (PotionData.EffectValue <= 0 &&
 					(float)property.GetValue(playerStats) <= 0)
 				{
 					return;
 				}
 
 				float currentValue = (float)property.GetValue(playerStats);
-				property.SetValue(playerStats, currentValue + potionData.EffectValue);
+				property.SetValue(playerStats, currentValue + PotionData.EffectValue);
 			}
 		}
 	}

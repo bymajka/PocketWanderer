@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace ItemSystem.Items
 {
-	public class SpeedPotion : PotionItem
+	public class PowerPotion : PotionItem
 	{
-		public SpeedPotion(PotionData itemData) : base(itemData)
+		public PowerPotion(PotionData itemData) : base(itemData)
 		{
 		}
 
 		public override void Use()
 		{
 			Debug.Log("Use from" + GetType());
-			ModifyPlayerStats("MovementSpeed");
+			ModifyPlayerStats("Damage");
 			PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(PotionData);
 		}
 	}

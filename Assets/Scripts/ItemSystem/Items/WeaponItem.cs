@@ -1,4 +1,5 @@
 using Entity.Behaviour;
+using InventorySystem;
 using ItemSystem.ItemsData;
 using UnityEngine;
 
@@ -6,8 +7,6 @@ namespace ItemSystem.Items
 {
 	public class WeaponItem : InventoryItem
 	{
-		public readonly WeaponData _weaponData;
-
 		public WeaponItem(WeaponData itemData) : base(itemData)
 		{
 		}
@@ -22,14 +21,16 @@ namespace ItemSystem.Items
 			var playerBehaviour = player.GetComponent<PlayerEntityBehaviour>();
 			var playerStats = playerBehaviour.Stats;
 
+			WeaponData weaponData = (WeaponData) ItemData;
+			
 			if (playerStats.Armor <= 0 &&
-				_weaponData.Damage <= 0)
+				weaponData.Damage <= 0)
 			{
 				return;
 			}
 
-			playerStats.Damage += _weaponData.Damage;
-			base.Use();
+			playerStats.Damage += weaponData.Damage;
+			PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(weaponData);
 		}
 	}
 }

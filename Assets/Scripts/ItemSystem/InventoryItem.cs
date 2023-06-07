@@ -1,4 +1,3 @@
-using InventorySystem;
 using ItemSystem.ItemsData;
 
 namespace ItemSystem
@@ -26,7 +25,7 @@ namespace ItemSystem
 
 		public virtual void Use()
 		{
-			PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(ItemData);
+			
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using Entity.Behaviour;
+using InventorySystem;
 using ItemSystem.ItemsData;
 using UnityEngine;
 
@@ -6,8 +7,6 @@ namespace ItemSystem.Items
 {
 	public class ArmorItem : InventoryItem
 	{
-		public readonly ArmorData _armorData;
-
 		public ArmorItem(ArmorData itemData) : base(itemData)
 		{
 		}
@@ -22,14 +21,16 @@ namespace ItemSystem.Items
 			var playerBehaviour = player.GetComponent<PlayerEntityBehaviour>();
 			var playerStats = playerBehaviour.Stats;
 
+			ArmorData armorItem = (ArmorData) ItemData;
+			
 			if (playerStats.Armor <= 0 &&
-				_armorData.ArmorRating <= 0)
+				armorItem.ArmorRating <= 0)
 			{
 				return;
 			}
 
-			playerStats.Armor += _armorData.ArmorRating;
-			base.Use();
+			playerStats.Armor += armorItem.ArmorRating;
+			PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(armorItem);
 		}
 	}
 }

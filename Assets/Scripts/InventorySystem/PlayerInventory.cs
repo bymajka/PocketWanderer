@@ -36,14 +36,14 @@ namespace InventorySystem
 						case PotionEffect.ManaRegeneration:
 							newItem = new ManaPotion(potion);
 							break;
-						case PotionEffect.HealthBoost:
-							newItem = new HealthPotion(potion);
-							break;
 						case PotionEffect.SpeedBoost:
 							newItem = new SpeedPotion(potion);
 							break;
+						case PotionEffect.PowerBoost:
+							newItem = new PowerPotion(potion);
+							break;
 						default:
-							newItem = new ManaPotion(potion);
+							newItem = new HealthPotion(potion);
 							break;
 					}
 				}
@@ -61,7 +61,8 @@ namespace InventorySystem
 				{
 					var player = PlayerManager.Instance.GameObject()
 						.GetComponent<PlayerEntityBehaviour>();
-					player.Stats.gold += (int)itemData.Price;
+					player.Stats.Gold += (int)itemData.Price;
+					return;
 				}
 				Items.Add(newItem);
 				OnInventoryChangedPlayer?.Invoke(newItem);

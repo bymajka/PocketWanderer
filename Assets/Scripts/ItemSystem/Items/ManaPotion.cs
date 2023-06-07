@@ -1,4 +1,5 @@
-﻿using ItemSystem.ItemsData;
+﻿using InventorySystem;
+using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace ItemSystem.Items
@@ -13,7 +14,7 @@ namespace ItemSystem.Items
         {
             Debug.Log("Use from" + GetType());
             ModifyPlayerStats("ManaPoints");
-            base.Use();
+            PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(PotionData);
         }
     }
 }

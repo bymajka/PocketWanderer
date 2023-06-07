@@ -12,7 +12,7 @@ namespace StatsSystem
         public int Gold
         {
             get => gold;
-            private set
+            set
             {
                 gold = value;
                 OnGoldAmountChanged?.Invoke(gold);
@@ -37,18 +37,10 @@ namespace StatsSystem
             }
         }
 
-        [FormerlySerializedAs("MaxHitPoints")] public float maxHitPoints;
         [FormerlySerializedAs("MaxManaPool")] public float maxManaPool;
+        public float DefaultSpeed;
         public float spellCastCost;
         public float spellDamage;
-
-        /*public static event HealthPointsChangedDelegate OnHealthPointsChanged;
-        public delegate void HealthPointsChangedDelegate(float health);
-        public delegate void ManaPointsChangedDelegate(float health);
-        public static event ManaPointsChangedDelegate OnManaPointsChanged;
-        public delegate void GoldValueChangedDelegate(int goldValue);
-        public static event GoldValueChangedDelegate OnGoldAmountChanged;
-        */
         public static event Action<float> OnHealthPointsChanged;
         public static event Action<float> OnManaPointsChanged;
         public static event Action<int> OnGoldAmountChanged;

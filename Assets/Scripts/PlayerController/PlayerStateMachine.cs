@@ -40,7 +40,7 @@ namespace PlayerController
 
         public void TakeDamage(float damage)
         {
-           _takenDamage += damage;
+           _takenDamage += damage - PlayerEntity.Stats.Armor;
         }
 
         public bool CheckIfDamageTaken(out float damage)
