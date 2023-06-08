@@ -8,14 +8,14 @@ using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    public abstract class InventoryManager<T>: MonoBehaviour where T : Inventory<InventoryItem>
+    public abstract class InventoryManager<T> : MonoBehaviour where T : Inventory<InventoryItem>
     {
         [SerializeField] private GameObject slotPrefab;
-        public List<InventorySlot> InventorySlots { get; protected set; }
+        protected List<InventorySlot> InventorySlots { get; set; }
         [SerializeField] protected T inventory;
-        public static event Action<ItemData> OnRemoveItem; 
+        public static event Action<ItemData> OnRemoveItem;
 
-        public InventoryManager(T inventory)
+        protected InventoryManager(T inventory)
         {
             this.inventory = inventory;
         }
@@ -28,17 +28,17 @@ namespace InventorySystem
 
         private void CreateInventorySlot()
         {
-            GameObject newSlot = Instantiate(slotPrefab, transform, false);
-            InventorySlot newSlotComponent = newSlot.GetComponent<InventorySlot>();
+            var newSlot = Instantiate(slotPrefab, transform, false);
+            var newSlotComponent = newSlot.GetComponent<InventorySlot>();
             newSlotComponent.ClearSlot();
             InventorySlots.Add(newSlotComponent);
         }
 
         protected void CreateEmptyInventory()
         {
-            for (int i = 0; i < InventorySlots.Capacity; i++)
+            for (var i = 0; i < InventorySlots.Capacity; i++)
                 CreateInventorySlot();
-            for (int i = 0; i < inventory.Items.Count; i++)
+            for (var i = 0; i < inventory.Items.Count; i++)
                 InventorySlots[i].FillSlot(inventory.Items[i]);
             SignUpSlots();
         }
@@ -46,24 +46,25 @@ namespace InventorySystem
         public void EnableDisableInventory()
         {
             GameObject parent;
-            GameObject children = gameObject;
+            var children = gameObject;
             do
             {
                 parent = children.transform.parent.gameObject;
                 children = parent;
             } while (children.transform.parent != null && !children.GetComponent<ScrollRect>());
+
             parent.gameObject.SetActive(!parent.activeSelf);
         }
 
-        public static void RemoveDirectItem(InventorySlot inventorySlot)
+        private static void RemoveDirectItem(InventorySlot inventorySlot)
         {
             if (inventorySlot.InventoryItem == null)
                 return;
-                
+
             OnRemoveItem?.Invoke(inventorySlot.InventoryItem.ItemData);
         }
 
-        public void SignUpSlots()
+        private void SignUpSlots()
         {
             foreach (var slot in InventorySlots)
             {
@@ -71,7 +72,7 @@ namespace InventorySystem
             }
         }
 
-        public void UpdateSlot(InventoryItem item)
+        protected void UpdateSlot(InventoryItem item)
         {
             var occupiedSlot = InventorySlots.Find(i => i.InventoryItem == item);
             if (occupiedSlot != null)
@@ -81,9 +82,10 @@ namespace InventorySystem
                     occupiedSlot.ClearSlot();
                     return;
                 }
+
                 occupiedSlot.FillSlot(item);
             }
-            else 
+            else
                 InventorySlots.FirstOrDefault(i => i.InventoryItem == null)!.FillSlot(item);
         }
     }

@@ -16,8 +16,7 @@ namespace InventorySystem
 
 		public override void Add(ItemData itemData)
 		{
-			var inventoryItem = Items.Where(i => i.ItemData == itemData && i.StackSize < itemData.StackCapacity)
-				.FirstOrDefault();
+			var inventoryItem = Items.FirstOrDefault(i => i.ItemData == itemData && i.StackSize < itemData.StackCapacity);
 
 			if (inventoryItem != null)
 			{
@@ -30,31 +29,23 @@ namespace InventorySystem
 				var t = itemData.GetType();
 				if (t == typeof(PotionData))
 				{
-					PotionData potion = (PotionData) itemData;
-					switch (potion.PotionEffect)
+					var potion = (PotionData) itemData;
+					newItem = potion.PotionEffect switch
 					{
-						case PotionEffect.ManaRegeneration:
-							newItem = new ManaPotion(potion);
-							break;
-						case PotionEffect.SpeedBoost:
-							newItem = new SpeedPotion(potion);
-							break;
-						case PotionEffect.PowerBoost:
-							newItem = new PowerPotion(potion);
-							break;
-						default:
-							newItem = new HealthPotion(potion);
-							break;
-					}
+						PotionEffect.ManaRegeneration => new ManaPotion(potion),
+						PotionEffect.SpeedBoost => new SpeedPotion(potion),
+						PotionEffect.PowerBoost => new PowerPotion(potion),
+						_ => new HealthPotion(potion)
+					};
 				}
 				else if (t == typeof(ArmorData))
 				{
-					ArmorData armorData = (ArmorData) itemData;
+					var armorData = (ArmorData) itemData;
 					newItem = new ArmorItem(armorData);
 				}
 				else if (t == typeof(WeaponData))
 				{
-					WeaponData weaponData = (WeaponData) itemData;
+					var weaponData = (WeaponData) itemData;
 					newItem = new WeaponItem(weaponData);
 				}
 				else if (itemData.GetType() == typeof(JewelryData))
@@ -73,16 +64,16 @@ namespace InventorySystem
 			var inventoryItem = Items
 				.LastOrDefault(i => i.ItemData == itemData && i.StackSize > 0);
 
-			if (inventoryItem != null)
-			{
-				inventoryItem.RemoveFromStack();
-				OnInventoryChangedPlayer?.Invoke(inventoryItem);
+			if (inventoryItem == null)
+				return;
+			
+			inventoryItem.RemoveFromStack();
+			OnInventoryChangedPlayer?.Invoke(inventoryItem);
 
-				if (inventoryItem.StackSize != 0)
-					return;
+			if (inventoryItem.StackSize != 0)
+				return;
 
-				Items.Remove(inventoryItem);
-			}
+			Items.Remove(inventoryItem);
 		}
 
 		private void OnEnable()

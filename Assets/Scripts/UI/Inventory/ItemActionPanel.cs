@@ -6,27 +6,25 @@ namespace UI.Inventory
 {
     public class ItemActionPanel : MonoBehaviour
     {
+        private InventorySlot _inventorySlot;
+        private bool _isListenerSet;
         private void Awake()
         {
-            InventorySlot.RewriteSlotListener += RewriteListener;
+            _inventorySlot = GetComponentInParent<InventorySlot>();
         }
 
-        private void OnDestroy()
+        private void Update()
         {
-            InventorySlot.RewriteSlotListener -= RewriteListener;
-        }
-
-        private void Start()
-        {
-            var parent = GetComponentInParent<InventorySlot>();
-            if(parent.InventoryItem == null)
+            if (_inventorySlot.InventoryItem == null || _isListenerSet)
                 return;
-            RewriteListener(parent);
+            
+            GetComponent<Button>().onClick.AddListener(UseItem);
+            _isListenerSet = true;
         }
-
-        private void RewriteListener(InventorySlot slot)
+        
+        private void UseItem()
         {
-            GetComponent<Button>().onClick.AddListener(slot.InventoryItem.Use);
+            _inventorySlot.InventoryItem.Use();
         }
     }
 }

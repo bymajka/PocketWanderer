@@ -1,4 +1,3 @@
-using System;
 using ItemSystem;
 using TMPro;
 using UnityEngine;
@@ -12,8 +11,6 @@ namespace InventorySystem
         [SerializeField] private TextMeshProUGUI labelText;
         [SerializeField] private TextMeshProUGUI stackSizeText;
         [SerializeField] private Button deleteButton;
-        
-        public static Action<InventorySlot> RewriteSlotListener;
 
         public delegate void OnClickRemove();
 
@@ -44,8 +41,6 @@ namespace InventorySystem
             image.sprite = inventoryItem.ItemData.Icon;
             labelText.text = inventoryItem.ItemData.DisplayName;
             stackSizeText.text = inventoryItem.StackSize.ToString();
-            
-            RewriteSlotListener?.Invoke(this);
         }
     }
 }
