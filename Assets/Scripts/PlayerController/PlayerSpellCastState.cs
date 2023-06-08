@@ -12,8 +12,8 @@ namespace PlayerController
 
         public override void EnterState()
         {
-            _ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.SpellCast);
-            _ctx.PlayerEntity.Animator.PlayAnimation();
+            Ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.SpellCast);
+            Ctx.PlayerEntity.Animator.PlayAnimation();
             DealSpellCastDamage();
         }
 
@@ -24,22 +24,24 @@ namespace PlayerController
 
         public override void ExitState()
         {
-            _ctx.PlayerEntity.Animator.StopAnimation();
+            Ctx.PlayerEntity.Animator.StopAnimation();
         }
 
         public override void CheckSwitchStates()
         {
-            if (_ctx.CheckIfDamageTaken(out var damage))
+            if (Ctx.CheckIfDamageTaken(out var damage))
             {
-                SwitchState(_factory.GetDamage(damage));
+                SwitchState(Factory.GetDamage(damage));
             }
 
-            if (_ctx.isMoving)
+            if (Ctx.isMoving)
             {
-                SwitchState(_factory.Walk());
+                SwitchState(Factory.Walk());
             }
-            else if (!_ctx.isSpellCasting)
-                SwitchState(_factory.Idle());
+            else if (!Ctx.isSpellCasting)
+            {
+                SwitchState(Factory.Idle());
+            }
         }
 
         public override void InitializeSubState()
@@ -47,14 +49,14 @@ namespace PlayerController
         }
         private void DealSpellCastDamage()
         {
-            if (_ctx.PlayerEntity.Stats.ManaPoints < _ctx.PlayerEntity.Stats.spellCastCost)
+            if (Ctx.PlayerEntity.Stats.ManaPoints < Ctx.PlayerEntity.Stats.spellCastCost)
                 return;
-            foreach (var enemy in _ctx.ReturnAllEnemies())
+            foreach (var enemy in Ctx.ReturnAllEnemies())
             {
                 enemy.gameObject.GetComponent<EnemyStateMachine>().EnemyStateController
-                    .TakeDamage(_ctx.PlayerEntity.Stats.spellDamage);
+                    .TakeDamage(Ctx.PlayerEntity.Stats.spellDamage);
             }
-            _ctx.PlayerEntity.Stats.ManaPoints -= _ctx.PlayerEntity.Stats.spellCastCost;
+            Ctx.PlayerEntity.Stats.ManaPoints -= Ctx.PlayerEntity.Stats.spellCastCost;
         }
     }
 }

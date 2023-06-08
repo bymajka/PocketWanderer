@@ -1,5 +1,6 @@
 using Entity.Behaviour;
 using UnityEngine;
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager Instance { get; set; }
@@ -19,8 +20,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        var stats = PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats;
-        stats.manaPoints = stats.MaxManaPool;
+        var stats = PlayerManager
+            .Instance
+            .PlayerObject
+            .GetComponent<PlayerEntityBehaviour>()
+            .Stats;
+        
+        stats.ManaPoints = stats.MaxManaPool;
         stats.HitPoints = stats.MaxHitPoints;
         stats.MovementSpeed = stats.DefaultSpeed;
         stats.Damage = stats.MaxDamage;

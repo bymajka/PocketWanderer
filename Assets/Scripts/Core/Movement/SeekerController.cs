@@ -29,13 +29,15 @@ namespace Core.Movement
         public bool TryGetMoveVector(out Vector2 moveVector)
         {
             moveVector = _movable.transform.position;
-            
-            if (_currentPath == null || _currentWayPoint >= _currentPath.vectorPath.Count
-                                     || !TryGetMovementData(moveVector, out var waypointPosition, out var waypointDirection))
+
+            if (_currentPath == null ||
+                _currentWayPoint >= _currentPath.vectorPath.Count ||
+                !TryGetMovementData(moveVector, out var waypointPosition, out var waypointDirection))
+            {
                 return false;
+            }
             
             _currentDirection = waypointDirection;
-
             moveVector = waypointPosition;
 
             return true;
@@ -69,6 +71,7 @@ namespace Core.Movement
         {
             waypointDirection = Vector2.zero;
             waypointPosition = Vector2.zero;
+            
             while(_currentWayPoint < _currentPath.vectorPath.Count)
             {
                 waypointPosition = _currentPath.vectorPath[_currentWayPoint];

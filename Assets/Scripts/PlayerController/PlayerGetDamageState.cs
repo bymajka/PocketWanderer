@@ -16,13 +16,13 @@ namespace PlayerController
         {
             Debug.Log($"Player entered in Damage state. Damage: {_takenDamage}");
 
-            if (_ctx.PlayerEntity.Stats.Armor >= _takenDamage)
+            if (Ctx.PlayerEntity.Stats.Armor >= _takenDamage)
             {
-                _ctx.PlayerEntity.Stats.Armor -= _takenDamage;
+                Ctx.PlayerEntity.Stats.Armor -= _takenDamage;
             }
             else
             {
-                _ctx.PlayerEntity.Stats.HitPoints -= _takenDamage;
+                Ctx.PlayerEntity.Stats.HitPoints -= _takenDamage;
             }
         }
 
@@ -38,7 +38,11 @@ namespace PlayerController
 
         public override void CheckSwitchStates()
         {
-            SwitchState(_ctx.PlayerEntity.Stats.HitPoints <= 0 ? _factory.Death() : _factory.Idle());
+            var newState = Ctx.PlayerEntity.Stats.HitPoints <= 0 
+                ? Factory.Death() 
+                : Factory.Idle();
+            
+            SwitchState(newState);
         }
 
         public override void InitializeSubState()

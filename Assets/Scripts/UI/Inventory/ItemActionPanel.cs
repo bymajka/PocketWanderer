@@ -8,6 +8,7 @@ namespace UI.Inventory
     {
         private InventorySlot _inventorySlot;
         private bool _isListenerSet;
+        
         private void Awake()
         {
             _inventorySlot = GetComponentInParent<InventorySlot>();

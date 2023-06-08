@@ -11,8 +11,10 @@ namespace InventorySystem
     public abstract class InventoryManager<T> : MonoBehaviour where T : Inventory<InventoryItem>
     {
         [SerializeField] private GameObject slotPrefab;
-        protected List<InventorySlot> InventorySlots { get; set; }
         [SerializeField] protected T inventory;
+        
+        protected List<InventorySlot> InventorySlots { get; set; }
+
         public static event Action<ItemData> OnRemoveItem;
 
         protected InventoryManager(T inventory)
@@ -37,9 +39,15 @@ namespace InventorySystem
         protected void CreateEmptyInventory()
         {
             for (var i = 0; i < InventorySlots.Capacity; i++)
+            {
                 CreateInventorySlot();
+            }
+
             for (var i = 0; i < inventory.Items.Count; i++)
+            {
                 InventorySlots[i].FillSlot(inventory.Items[i]);
+            }
+            
             SignUpSlots();
         }
 
@@ -47,6 +55,7 @@ namespace InventorySystem
         {
             GameObject parent;
             var children = gameObject;
+            
             do
             {
                 parent = children.transform.parent.gameObject;
@@ -86,7 +95,9 @@ namespace InventorySystem
                 occupiedSlot.FillSlot(item);
             }
             else
+            {
                 InventorySlots.FirstOrDefault(i => i.InventoryItem == null)!.FillSlot(item);
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace ItemSystem.Items
         {
 	        Debug.Log("Use from" + GetType());
 			ModifyPlayerStats("HitPoints");
-			PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(PotionData);
+			RemoveItemFromInventory(PotionData);
         }
 	}
 }

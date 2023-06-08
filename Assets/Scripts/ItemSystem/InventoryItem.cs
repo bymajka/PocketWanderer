@@ -1,3 +1,4 @@
+using InventorySystem;
 using ItemSystem.ItemsData;
 
 namespace ItemSystem
@@ -18,14 +19,21 @@ namespace ItemSystem
 			StackSize++;
 		}
 
-		internal void RemoveFromStack()
+		public void RemoveFromStack()
 		{
 			StackSize--;
 		}
 
 		public virtual void Use()
 		{
-			
+		}
+
+		protected void RemoveItemFromInventory(ItemData itemData)
+		{
+			PlayerManager
+				.Instance
+				.PlayerObject.GetComponent<PlayerInventory>()
+				.Remove(itemData);
 		}
 	}
 }

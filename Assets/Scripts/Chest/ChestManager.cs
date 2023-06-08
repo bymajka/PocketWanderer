@@ -8,7 +8,7 @@ namespace Chest
     public class ChestManager : MonoBehaviour
     {
         [SerializeField] private PlayerInput playerInput;
-        private List<Chest> nearestChests = new List<Chest>();
+        private List<Chest> _nearestChests = new List<Chest>();
 
         private void Awake()
         {
@@ -18,18 +18,18 @@ namespace Chest
         public void AddChest(Chest chest)
         {
             if (chest != null)
-                nearestChests.Add(chest);
+                _nearestChests.Add(chest);
         }
         
         public void RemoveChest(Chest chest)
         {
             if (chest != null)
-                nearestChests.Remove(chest);
+                _nearestChests.Remove(chest);
         }
 
         public void OnInteraction(InputAction.CallbackContext callbackContext)
         {
-            var chestToOpen = nearestChests.FirstOrDefault();
+            var chestToOpen = _nearestChests.FirstOrDefault();
             if (chestToOpen != null)
             {
                 chestToOpen.OpenChest();

@@ -22,42 +22,42 @@ namespace InventorySystem
 			{
 				inventoryItem.AddToStack();
 				OnInventoryChangedPlayer?.Invoke(inventoryItem);
+				return;
 			}
-			else
+
+			InventoryItem newItem = null;
+			var type = itemData.GetType();
+			if (type == typeof(PotionData))
 			{
-				InventoryItem newItem = null;
-				var t = itemData.GetType();
-				if (t == typeof(PotionData))
+				var potion = (PotionData)itemData;
+				newItem = potion.PotionEffect switch
 				{
-					var potion = (PotionData) itemData;
-					newItem = potion.PotionEffect switch
-					{
-						PotionEffect.ManaRegeneration => new ManaPotion(potion),
-						PotionEffect.SpeedBoost => new SpeedPotion(potion),
-						PotionEffect.PowerBoost => new PowerPotion(potion),
-						_ => new HealthPotion(potion)
-					};
-				}
-				else if (t == typeof(ArmorData))
-				{
-					var armorData = (ArmorData) itemData;
-					newItem = new ArmorItem(armorData);
-				}
-				else if (t == typeof(WeaponData))
-				{
-					var weaponData = (WeaponData) itemData;
-					newItem = new WeaponItem(weaponData);
-				}
-				else if (itemData.GetType() == typeof(JewelryData))
-				{
-					var player = PlayerManager.Instance.GameObject()
-						.GetComponent<PlayerEntityBehaviour>();
-					player.Stats.Gold += (int)itemData.Price;
-					return;
-				}
-				Items.Add(newItem);
-				OnInventoryChangedPlayer?.Invoke(newItem);
+					PotionEffect.ManaRegeneration => new ManaPotion(potion),
+					PotionEffect.SpeedBoost => new SpeedPotion(potion),
+					PotionEffect.PowerBoost => new PowerPotion(potion),
+					PotionEffect.HealthBoost => new HealthPotion(potion)
+				};
 			}
+			else if (type == typeof(ArmorData))
+			{
+				var armorData = (ArmorData)itemData;
+				newItem = new ArmorItem(armorData);
+			}
+			else if (type == typeof(WeaponData))
+			{
+				var weaponData = (WeaponData)itemData;
+				newItem = new WeaponItem(weaponData);
+			}
+			else if (itemData.GetType() == typeof(JewelryData))
+			{
+				var player = PlayerManager.Instance.GameObject()
+					.GetComponent<PlayerEntityBehaviour>();
+				player.Stats.Gold += (int)itemData.Price;
+				return;
+			}
+
+			Items.Add(newItem);
+			OnInventoryChangedPlayer?.Invoke(newItem);
 		}
 		public override void Remove(ItemData itemData)
 		{

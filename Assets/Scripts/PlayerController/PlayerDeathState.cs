@@ -12,9 +12,9 @@ namespace PlayerController
 
         public override void EnterState()
         {
-            Debug.Log("Player entered in Damage state.");
-            _ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Dead);
-            _ctx.PlayerEntity.Animator.PlayAnimation();
+            Debug.Log("Player entered in DEATH state.");
+            Ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Dead);
+            Ctx.PlayerEntity.Animator.PlayAnimation();
         }
 
         public override void UpdateState()
@@ -24,7 +24,7 @@ namespace PlayerController
 
         public override void ExitState()
         {
-            Debug.Log("Player exited from DAMAGE state.");
+            Debug.Log("Player exited from DEATH state.");
         }
 
         public override void CheckSwitchStates()

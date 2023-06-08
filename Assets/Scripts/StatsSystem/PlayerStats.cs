@@ -6,8 +6,9 @@ namespace StatsSystem
     [CreateAssetMenu]
     public class PlayerStats : BaseEntityStats
     {
-        public int gold;
-        public float manaPoints;
+        private int gold;
+        private float manaPoints;
+        
         public int Gold
         {
             get => gold;

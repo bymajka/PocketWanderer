@@ -1,7 +1,5 @@
 using Entity.Behaviour;
-using InventorySystem;
 using ItemSystem.ItemsData;
-using UnityEngine;
 
 namespace ItemSystem.Items
 {
@@ -13,7 +11,7 @@ namespace ItemSystem.Items
 
 		public override void Use()
 		{
-			GameObject player = PlayerManager.Instance.PlayerObject;
+			var player = PlayerManager.Instance.PlayerObject;
 
 			if (player == null)
 				return;
@@ -21,7 +19,7 @@ namespace ItemSystem.Items
 			var playerBehaviour = player.GetComponent<PlayerEntityBehaviour>();
 			var playerStats = playerBehaviour.Stats;
 
-			ArmorData armorItem = (ArmorData) ItemData;
+			var armorItem = (ArmorData) ItemData;
 			
 			if (playerStats.Armor <= 0 &&
 				armorItem.ArmorRating <= 0)
@@ -30,7 +28,7 @@ namespace ItemSystem.Items
 			}
 
 			playerStats.Armor += armorItem.ArmorRating;
-			PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(armorItem);
+			RemoveItemFromInventory(armorItem);
 		}
 	}
 }

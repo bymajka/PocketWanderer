@@ -22,14 +22,14 @@ namespace ItemSystem.Items
 
 			var weaponData = (WeaponData) ItemData;
 			
-			if (playerStats.Armor <= 0 &&
+			if (playerStats.WeaponDamage <= 0 &&
 				weaponData.Damage <= 0)
 			{
 				return;
 			}
 
 			playerStats.WeaponDamage += weaponData.Damage;
-			PlayerManager.Instance.PlayerObject.GetComponent<PlayerInventory>().Remove(weaponData);
+			RemoveItemFromInventory(weaponData);
 		}
 	}
 }

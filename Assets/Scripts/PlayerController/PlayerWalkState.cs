@@ -5,43 +5,44 @@ namespace PlayerController
 {
     public class PlayerWalkState : PlayerBaseState
     {
-        public PlayerWalkState(PlayerStateMachine context, PlayerStateFactory playerStateFactory) : base(context, playerStateFactory)
+        public PlayerWalkState(PlayerStateMachine context, PlayerStateFactory playerStateFactory)
+            : base(context, playerStateFactory)
         {
         }
 
         public override void EnterState()
         {
-            _ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Move);
-            _ctx.PlayerEntity.Animator.PlayAnimation();
+            Ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Move);
+            Ctx.PlayerEntity.Animator.PlayAnimation();
         }
 
         public override void UpdateState()
         {
-            _ctx.DirectionalMover.Move(_ctx.Direction, _ctx.PlayerEntity.Stats.MovementSpeed * Time.deltaTime);
-            _ctx.PlayerEntity.Animator.SetDirection(_ctx.Direction);
+            Ctx.DirectionalMover.Move(Ctx.Direction, Ctx.PlayerEntity.Stats.MovementSpeed * Time.deltaTime);
+            Ctx.PlayerEntity.Animator.SetDirection(Ctx.Direction);
             CheckSwitchStates();
         }
 
         public override void ExitState()
         {
-            _ctx.isMoving = false;
-            _ctx.PlayerEntity.Animator.SetLastDirection(_ctx.DirectionalMover.LastMovementDirection);
-            _ctx.PlayerEntity.Animator.StopAnimation();
+            Ctx.isMoving = false;
+            Ctx.PlayerEntity.Animator.SetLastDirection(Ctx.DirectionalMover.LastMovementDirection);
+            Ctx.PlayerEntity.Animator.StopAnimation();
         }
 
         public override void CheckSwitchStates()
         {
-            if (_ctx.CheckIfDamageTaken(out var damage))
+            if (Ctx.CheckIfDamageTaken(out var damage))
             {
-                SwitchState(_factory.GetDamage(damage));
+                SwitchState(Factory.GetDamage(damage));
             }
-            if (_ctx.isAttacking)
+            if (Ctx.isAttacking)
             {
-                SwitchState(_factory.Attack());
+                SwitchState(Factory.Attack());
             }
-            else if (_ctx.Direction == Vector2.zero)
+            else if (Ctx.Direction == Vector2.zero)
             {
-                SwitchState(_factory.Idle());
+                SwitchState(Factory.Idle());
             }
         }
 

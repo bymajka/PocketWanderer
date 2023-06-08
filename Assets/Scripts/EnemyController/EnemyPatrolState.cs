@@ -43,6 +43,7 @@ namespace EnemyController
         {
             if (!Context.SeekerController.TryGetMoveVector(out var position))
                 return;
+            
             Context.PositionMover.Move(position, Context.EnemyEntity.Stats.MovementSpeed * Time.deltaTime);
         }
 

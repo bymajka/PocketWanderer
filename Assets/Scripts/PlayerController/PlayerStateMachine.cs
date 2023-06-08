@@ -33,7 +33,7 @@ namespace PlayerController
             PlayerCurrentState.EnterState();
         }
 
-        void Update()
+        private void Update()
         {
             PlayerCurrentState.UpdateState();
         }

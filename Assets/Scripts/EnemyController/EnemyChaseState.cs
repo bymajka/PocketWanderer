@@ -6,9 +6,9 @@ namespace EnemyController
 {
     public class EnemyChaseState : EnemyBaseState
     {
-        private Coroutine _coroutine;
-        private Transform _target;
-        private Vector2 _previousTargetPosition;
+        private Coroutine coroutine;
+        private Transform target;
+        private Vector2 previousTargetPosition;
 
         public EnemyChaseState(EnemyStateMachine context, EnemyStateFactory factory) : base(context, factory)
         {
@@ -19,8 +19,8 @@ namespace EnemyController
             Debug.Log("Enemy entered in CHASE state.");
             Context.EnemyEntity.Animator.SetAnimationType(AnimationType.Move);
             Context.EnemyEntity.Animator.PlayAnimation();
-            _target = Context.Target;
-            _coroutine = Context.StartCoroutine(SearchPathCoroutine());
+            target = Context.Target;
+            coroutine = Context.StartCoroutine(SearchPathCoroutine());
         }
 
         public override void OnUpdateState()
@@ -33,6 +33,7 @@ namespace EnemyController
         {
             if (!Context.SeekerController.TryGetMoveVector(out var position))
                 return;
+            
             Context.PositionMover.Move(position, Context.EnemyEntity.Stats.MovementSpeed * Time.deltaTime);
         }
 
@@ -42,7 +43,7 @@ namespace EnemyController
             Context.EnemyEntity.Animator.SetLastDirection(Context.PositionMover.LastMovementDirection);
             Context.EnemyEntity.Animator.StopAnimation();
 
-            Context.KillCoroutine(_coroutine);
+            Context.KillCoroutine(coroutine);
         }
 
         public override void CheckSwitchStates()
@@ -65,12 +66,12 @@ namespace EnemyController
 
         private IEnumerator SearchPathCoroutine()
         {
-            while (_target != null)
+            while (target != null)
             {
-                Vector2 destination = _target.transform.position;
-                if (destination != _previousTargetPosition)
+                Vector2 destination = target.transform.position;
+                if (destination != previousTargetPosition)
                 {
-                    _previousTargetPosition = destination;
+                    previousTargetPosition = destination;
                     Context.SeekerController.CalculatePath(destination);
                 }
 

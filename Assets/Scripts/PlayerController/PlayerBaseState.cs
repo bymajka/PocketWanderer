@@ -2,13 +2,13 @@ namespace PlayerController
 {
     public abstract class PlayerBaseState
     {
-        protected PlayerStateMachine _ctx;
-        protected PlayerStateFactory _factory;
+        protected PlayerStateMachine Ctx;
+        protected PlayerStateFactory Factory;
 
         protected PlayerBaseState(PlayerStateMachine ctx, PlayerStateFactory factory)
         {
-            _ctx = ctx;
-            _factory = factory;
+            Ctx = ctx;
+            Factory = factory;
         }
 
         public abstract void EnterState();
@@ -17,19 +17,23 @@ namespace PlayerController
         public abstract void CheckSwitchStates();
         public abstract void InitializeSubState();
 
-        void UpdateStates(){}
-
         protected void SwitchState(PlayerBaseState newState)
         {
             ExitState();
             newState.EnterState();
-            _ctx.PlayerCurrentState = newState;
+            Ctx.PlayerCurrentState = newState;
         }
 
-        protected void SetSuperState() {}
-    
-        protected void SetSubState(){}
-        
-        public virtual void ActivateAnimationEvent(){}
+        protected void SetSuperState()
+        {
+        }
+
+        protected void SetSubState()
+        {
+        }
+
+        public virtual void ActivateAnimationEvent()
+        {
+        }
     }
 }

@@ -13,8 +13,8 @@ namespace PlayerController
 
         public override void EnterState()
         {
-            _ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Attack);
-            _ctx.PlayerEntity.Animator.PlayAnimation();
+            Ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Attack);
+            Ctx.PlayerEntity.Animator.PlayAnimation();
         }
 
         public override void UpdateState()
@@ -24,22 +24,24 @@ namespace PlayerController
 
         public override void ExitState()
         {
-            _ctx.PlayerEntity.Animator.StopAnimation();
+            Ctx.PlayerEntity.Animator.StopAnimation();
         }
 
         public override void CheckSwitchStates()
         {
-            if (_ctx.CheckIfDamageTaken(out var damage))
+            if (Ctx.CheckIfDamageTaken(out var damage))
             {
-                SwitchState(_factory.GetDamage(damage));
+                SwitchState(Factory.GetDamage(damage));
             }
 
-            if (_ctx.isMoving)
+            if (Ctx.isMoving)
             {
-                SwitchState(_factory.Walk());
+                SwitchState(Factory.Walk());
             }
-            else if (!_ctx.isAttacking)
-                SwitchState(_factory.Idle());
+            else if (!Ctx.isAttacking)
+            {
+                SwitchState(Factory.Idle());
+            }
         }
 
         public override void InitializeSubState()
@@ -48,17 +50,20 @@ namespace PlayerController
 
         private void Attack()
         {
-            var hitEnemies = Physics2D.OverlapCircleAll(_ctx.transform.position, _ctx.PlayerEntity.Stats.AttackPointDistance, _ctx.EnemyLayer);
+            var hitEnemies = Physics2D.OverlapCircleAll(Ctx.transform.position, Ctx.PlayerEntity.Stats.AttackPointDistance, Ctx.EnemyLayer);
             foreach (var enemyCollider in hitEnemies)
             {
                 var enemyStateMachine = enemyCollider.GetComponent<EnemyStateMachine>();
                 if (enemyStateMachine != null)
                 {
-                    enemyStateMachine.EnemyStateController.TakeDamage(_ctx.PlayerEntity.Stats.Damage + _ctx.PlayerEntity.Stats.WeaponDamage);
+                    enemyStateMachine.EnemyStateController.TakeDamage(Ctx.PlayerEntity.Stats.Damage + Ctx.PlayerEntity.Stats.WeaponDamage);
                 }
             }
         }
 
-        public override void ActivateAnimationEvent() => Attack();
+        public override void ActivateAnimationEvent()
+        {
+            Attack();
+        }
     }
 }
