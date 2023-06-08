@@ -2,7 +2,7 @@
 
 namespace Core.Movement
 {
-    public class DirectionalMover
+    public abstract class DirectionalMover
     {
         protected readonly Rigidbody2D Rigidbody;
         
@@ -10,16 +10,12 @@ namespace Core.Movement
         
         public Vector2 LastMovementDirection { get; set; }
 
-        public DirectionalMover(Rigidbody2D rigidbody)
+        protected DirectionalMover(Rigidbody2D rigidbody)
         {
             Rigidbody = rigidbody;
         }
 
-        public virtual void Move(Vector2 direction, float distanceDelta)
-        {
-            SetDirection(direction);
-            Rigidbody.position += _direction * distanceDelta;
-        }
+        public abstract void Move(Vector2 direction, float distanceDelta);
 
         protected void SetDirection(Vector2 newDirection)
         {

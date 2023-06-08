@@ -28,7 +28,7 @@ namespace PlayerController
             _states = new PlayerStateFactory(this);
             PlayerEntity = GetComponent<PlayerEntityBehaviour>();
             PlayerEntity.Initialize();
-            DirectionalMover = new DirectionalMover(PlayerEntity.Rigidbody);
+            DirectionalMover = new PlayerMover(PlayerEntity.Rigidbody);
             PlayerCurrentState = _states.Idle();
             PlayerCurrentState.EnterState();
         }
