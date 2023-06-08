@@ -72,7 +72,7 @@ namespace EnemyController
         
         public void TakeDamage(float statsDamage)
         {
-            _takenDamage += statsDamage - _enemyStats.Armor;
+            _takenDamage += statsDamage;
         }
 
         public bool CheckIfTookDamage(out float damage)

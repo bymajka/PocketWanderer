@@ -19,4 +19,4 @@ MonoBehaviour:
   Amount: 1
   Price: 120
   WeaponType: 3
-  Damage: 32
+  Damage: 10

@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace StatsSystem
 {
@@ -37,7 +36,7 @@ namespace StatsSystem
             }
         }
 
-        [FormerlySerializedAs("MaxManaPool")] public float maxManaPool;
+        public float MaxManaPool;
         public float DefaultSpeed;
         public float spellCastCost;
         public float spellDamage;

@@ -27,7 +27,7 @@ namespace UI.Stats
         private void HandleManaPointsChanged(float mana)
         {
             float normalizedMana = CalculateNormalizedValue(mana, 
-                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.maxManaPool);
+                PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats.MaxManaPool);
             manaPoolSlider.value = normalizedMana;
         }
         private void HandleHealthPointsChanged(float health)

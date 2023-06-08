@@ -16,7 +16,7 @@ namespace PlayerController
         {
             Debug.Log($"Player entered in Damage state. Damage: {_takenDamage}");
 
-            if (_ctx.PlayerEntity.Stats.Armor > 0)
+            if (_ctx.PlayerEntity.Stats.Armor >= _takenDamage)
             {
                 _ctx.PlayerEntity.Stats.Armor -= _takenDamage;
             }

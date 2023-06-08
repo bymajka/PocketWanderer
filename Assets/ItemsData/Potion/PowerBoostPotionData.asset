@@ -19,4 +19,4 @@ MonoBehaviour:
   Amount: 1
   Price: 100
   PotionEffect: 2
-  EffectValue: 30
+  EffectValue: 5

@@ -46,14 +46,16 @@ namespace PlayerController
         {
         }
 
-        public void Attack()
+        private void Attack()
         {
-            var hitEnemies = Physics2D.RaycastAll(_ctx.transform.position, _ctx.DirectionalMover.LastMovementDirection,
-                _ctx.PlayerEntity.Stats.AttackPointDistance, _ctx.EnemyLayer);
-            Debug.Log(hitEnemies.Length);
-            foreach (var enemy in hitEnemies)
+            var hitEnemies = Physics2D.OverlapCircleAll(_ctx.transform.position, _ctx.PlayerEntity.Stats.AttackPointDistance, _ctx.EnemyLayer);
+            foreach (var enemyCollider in hitEnemies)
             {
-                enemy.transform.GetComponent<EnemyStateMachine>().EnemyStateController.TakeDamage(_ctx.PlayerEntity.Stats.Damage);
+                var enemyStateMachine = enemyCollider.GetComponent<EnemyStateMachine>();
+                if (enemyStateMachine != null)
+                {
+                    enemyStateMachine.EnemyStateController.TakeDamage(_ctx.PlayerEntity.Stats.Damage + _ctx.PlayerEntity.Stats.WeaponDamage);
+                }
             }
         }
 

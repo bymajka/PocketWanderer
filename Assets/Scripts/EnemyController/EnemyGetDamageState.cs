@@ -5,7 +5,7 @@ namespace EnemyController
     public class EnemyGetDamageState : EnemyBaseState
     {
         private float _takenDamage;
-        
+
         public EnemyGetDamageState(EnemyStateMachine context, EnemyStateFactory factory, float takenDamage)
             : base(context, factory)
         {
@@ -14,15 +14,11 @@ namespace EnemyController
 
         public override void OnEnterState()
         {
-            Debug.Log($"Enemy entered in Damage state. Damage: {_takenDamage}");
-            if (Context.EnemyEntity.Stats.Armor > 0)
-            {
-                Context.EnemyEntity.Stats.Armor -= _takenDamage;
-            }
-            else
-            {
-                Context.EnemyEntity.Stats.HitPoints -= _takenDamage;
-            }
+            Debug.LogFormat("Enemy entered in Damage state. Damage: {0}", _takenDamage);
+
+            var remainingDamage = Mathf.Max(_takenDamage - Context.EnemyEntity.Stats.Armor, 0);
+            Context.EnemyEntity.Stats.Armor = Mathf.Max(Context.EnemyEntity.Stats.Armor - _takenDamage, 0);
+            Context.EnemyEntity.Stats.HitPoints = Mathf.Max(Context.EnemyEntity.Stats.HitPoints - remainingDamage, 0);
         }
 
         public override void OnUpdateState()
@@ -47,7 +43,9 @@ namespace EnemyController
                 return;
             }
 
-            SwitchState(Context.EnemyStateController.CheckIfPlayerInAttackRange() ? Factory.Attack() : Factory.Chaise());
+            SwitchState(Context.EnemyStateController.CheckIfPlayerInAttackRange()
+                ? Factory.Attack()
+                : Factory.Chaise());
         }
     }
 }

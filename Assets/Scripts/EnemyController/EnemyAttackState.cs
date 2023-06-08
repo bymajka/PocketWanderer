@@ -25,6 +25,7 @@ namespace EnemyController
             _directionToTarget = (Context.Target.position - Context.transform.position).normalized;
             Context.PositionMover.LastMovementDirection = _directionToTarget;
             Context.EnemyEntity.Animator.SetLastDirection(_directionToTarget);
+            
             CheckSwitchStates();
             Attack();
         }
@@ -52,7 +53,7 @@ namespace EnemyController
             }
         }
 
-        public void Attack()
+        private void Attack()
         {
             if (!Context.EnemyStateController.CheckIfCanAttack())
                 return;
@@ -65,7 +66,7 @@ namespace EnemyController
             Debug.Log(hitEnemies.Length);
             foreach (var player in hitEnemies)
             {
-                player.transform.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage);
+                player.transform.GetComponent<PlayerStateMachine>().TakeDamage(Context.EnemyEntity.Stats.Damage + Context.EnemyEntity.Stats.WeaponDamage);
             }
 
             Context.EnemyStateController.ResetLastAttackTime();

@@ -2,7 +2,7 @@ using Entity.Behaviour;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    private static GameManager Instance { get; set; }
 
     private void Awake()
     {
@@ -20,13 +20,15 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         var stats = PlayerManager.Instance.PlayerObject.GetComponent<PlayerEntityBehaviour>().Stats;
-        stats.manaPoints = stats.maxManaPool;
+        stats.manaPoints = stats.MaxManaPool;
         stats.HitPoints = stats.MaxHitPoints;
         stats.MovementSpeed = stats.DefaultSpeed;
+        stats.Damage = stats.MaxDamage;
 
         foreach (var enemy in FindObjectsOfType<EnemyEntityBehaviour>())
         {
             enemy.Stats.HitPoints = enemy.Stats.MaxHitPoints;
+            enemy.Stats.Damage = enemy.Stats.MaxDamage;
         }
     }
 }

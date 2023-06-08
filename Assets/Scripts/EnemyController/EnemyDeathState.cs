@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Core.Animation;
 using ItemSystem;
-using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace EnemyController
@@ -40,9 +39,9 @@ namespace EnemyController
 
         public void DropItems()
         {
-            foreach (ItemData item in Context.Inventory.Items)
+            foreach (var item in Context.Inventory.Items)
             {
-                GameObject newItem = new GameObject();
+                var newItem = new GameObject();
                 newItem.AddComponent<Item>().ItemData = item;
                 newItem.AddComponent<SpriteRenderer>().sprite = item.Icon;
                 newItem.GetComponent<SpriteRenderer>().sortingOrder = 1;
