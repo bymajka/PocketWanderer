@@ -1,45 +1,56 @@
-﻿using System.Reflection;
-using Entity.Behaviour;
+﻿using Entity.Behaviour;
 using ItemSystem.ItemsData;
-using UnityEngine;
 
 namespace ItemSystem.Items
 {
     public abstract class PotionItem : InventoryItem
     {
-	    protected PotionData PotionData;
-	    
+        protected PotionData PotionData;
+
         protected PotionItem(PotionData itemData) : base(itemData)
         {
         }
 
-		protected void ModifyPlayerStats(string propertyName)
-		{
-			var player = PlayerManager.Instance.PlayerObject;
+        protected void ModifyPlayerStats(string propertyName)
+        {
+            var player = PlayerManager.Instance.PlayerObject;
 
-			if (player == null)
-				return;
+            if (player == null)
+                return;
 
-			var playerBehaviour = player.GetComponent<PlayerEntityBehaviour>();
-			var playerStats = playerBehaviour.Stats;
+            var playerBehaviour = player.GetComponent<PlayerEntityBehaviour>();
+            var playerStats = playerBehaviour.Stats;
 
-			var property = playerStats.GetType().GetProperty(propertyName);
-			if (property == null ||
-			    property.PropertyType != typeof(float))
-			{
-				return;
-			}
-			
-			PotionData = (PotionData) ItemData;
+            var property = playerStats.GetType().GetProperty(propertyName);
+            if (property == null ||
+                property.PropertyType != typeof(float))
+            {
+                return;
+            }
 
-			if (PotionData.EffectValue <= 0 &&
-			    (float)property.GetValue(playerStats) <= 0)
-			{
-				return;
-			}
+            PotionData = (PotionData) ItemData;
 
-			var currentValue = (float)property.GetValue(playerStats);
-			property.SetValue(playerStats, currentValue + PotionData.EffectValue);
-		}
-	}
+            if (PotionData.EffectValue <= 0 &&
+                (float) property.GetValue(playerStats) <= 0)
+            {
+                return;
+            }
+
+            var currentValue = (float) property.GetValue(playerStats);
+            switch (PotionData.PotionEffect)
+            {
+                case PotionEffect.HealthBoost:
+                    if (currentValue + PotionData.EffectValue > playerStats.MaxHitPoints)
+                        property.SetValue(playerStats, playerStats.MaxHitPoints);
+                    break;
+                case PotionEffect.ManaRegeneration:
+                    if (currentValue + PotionData.EffectValue > playerStats.MaxManaPool)
+                        property.SetValue(playerStats, playerStats.MaxManaPool);
+                    break;
+                default:
+                    property.SetValue(playerStats, currentValue + PotionData.EffectValue);
+                    break;
+            }
+        }
+    }
 }

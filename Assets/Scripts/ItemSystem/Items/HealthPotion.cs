@@ -1,5 +1,4 @@
-﻿using InventorySystem;
-using ItemSystem.ItemsData;
+﻿using ItemSystem.ItemsData;
 using UnityEngine;
 
 namespace ItemSystem.Items
@@ -16,5 +15,5 @@ namespace ItemSystem.Items
 			ModifyPlayerStats("HitPoints");
 			RemoveItemFromInventory(PotionData);
         }
-	}
+    }
 }

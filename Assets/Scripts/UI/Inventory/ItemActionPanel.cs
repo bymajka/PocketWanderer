@@ -25,7 +25,7 @@ namespace UI.Inventory
         
         private void UseItem()
         {
-            _inventorySlot.InventoryItem.Use();
+            _inventorySlot.InventoryItem?.Use();
         }
     }
 }
