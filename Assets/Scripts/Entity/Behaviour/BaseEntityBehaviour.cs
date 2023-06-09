@@ -10,7 +10,7 @@ namespace Entity.Behaviour
         public Rigidbody2D Rigidbody { get; private set; }
         public AnimatorController Animator { get; private set; }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             Animator = GetComponent<AnimatorController>();

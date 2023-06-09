@@ -39,6 +39,7 @@ namespace StatsSystem
 
         public float MaxManaPool;
         public float DefaultSpeed;
+        public float SpellCastRadius;
         public float spellCastCost;
         public float spellDamage;
         public static event Action<float> OnHealthPointsChanged;

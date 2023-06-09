@@ -9,8 +9,9 @@ namespace PlayerController
     public class PlayerStateMachine : MonoBehaviour
     {
         [field: Header("Attack")]
-        [field: SerializeField] public LayerMask EnemyLayer { get; set; }
-        
+        [field: SerializeField]
+        public LayerMask EnemyLayer { get; set; }
+
         public PlayerEntityBehaviour PlayerEntity { get; private set; }
         public DirectionalMover DirectionalMover { get; private set; }
         public PlayerBaseState PlayerCurrentState { get; set; }
@@ -40,7 +41,7 @@ namespace PlayerController
 
         public void TakeDamage(float damage)
         {
-           _takenDamage += damage;
+            _takenDamage += damage;
         }
 
         public bool CheckIfDamageTaken(out float damage)
@@ -74,13 +75,8 @@ namespace PlayerController
 
         public void ActivateAnimationEvent()
         {
-            if(PlayerCurrentState is PlayerAttackState)
+            if (PlayerCurrentState is PlayerAttackState)
                 PlayerCurrentState.ActivateAnimationEvent();
-        }
-
-        public EnemyEntityBehaviour[] ReturnAllEnemies()
-        {
-            return FindObjectsOfType<EnemyEntityBehaviour>();
         }
     }
 }

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         stats.HitPoints = stats.MaxHitPoints;
         stats.MovementSpeed = stats.DefaultSpeed;
         stats.Damage = stats.MaxDamage;
+        stats.Gold = stats.Gold;
 
         foreach (var enemy in FindObjectsOfType<EnemyEntityBehaviour>())
         {

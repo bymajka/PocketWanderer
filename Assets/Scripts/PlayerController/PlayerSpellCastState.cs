@@ -1,5 +1,6 @@
 using Core.Animation;
 using EnemyController;
+using UnityEngine;
 
 namespace PlayerController
 {
@@ -47,15 +48,20 @@ namespace PlayerController
         public override void InitializeSubState()
         {
         }
+
         private void DealSpellCastDamage()
         {
             if (Ctx.PlayerEntity.Stats.ManaPoints < Ctx.PlayerEntity.Stats.spellCastCost)
                 return;
-            foreach (var enemy in Ctx.ReturnAllEnemies())
+            
+            var hitEnemies = Physics2D.OverlapCircleAll(Ctx.transform.position, Ctx.PlayerEntity.Stats.SpellCastRadius, Ctx.EnemyLayer);
+            
+            foreach (var enemy in hitEnemies)
             {
                 enemy.gameObject.GetComponent<EnemyStateMachine>().EnemyStateController
                     .TakeDamage(Ctx.PlayerEntity.Stats.spellDamage);
             }
+
             Ctx.PlayerEntity.Stats.ManaPoints -= Ctx.PlayerEntity.Stats.spellCastCost;
         }
     }

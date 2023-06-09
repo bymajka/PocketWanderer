@@ -5,6 +5,13 @@ namespace Entity.Behaviour
 {
     public class EnemyEntityBehaviour : BaseEntityBehaviour
     {
-        [field: SerializeField] public EnemyStats Stats { get; set; }
+        [SerializeField] private EnemyStats statsData;
+        public EnemyStats Stats { get; private set; }
+
+        public override void Initialize()
+        {
+            Stats = Instantiate(statsData);
+            base.Initialize();
+        }
     }
 }
