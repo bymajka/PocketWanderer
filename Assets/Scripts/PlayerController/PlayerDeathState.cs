@@ -1,5 +1,7 @@
-﻿using Core.Animation;
+﻿using System.Collections;
+using Core.Animation;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PlayerController
 {
@@ -25,6 +27,7 @@ namespace PlayerController
         public override void ExitState()
         {
             Debug.Log("Player exited from DEATH state.");
+            Ctx.StartCoroutine(StartDeath());
         }
 
         public override void CheckSwitchStates()
@@ -33,6 +36,12 @@ namespace PlayerController
 
         public override void InitializeSubState()
         {
+        }
+
+        private IEnumerator StartDeath()
+        {
+            yield return new WaitForSecondsRealtime(3f);
+            SceneManager.LoadScene(0);
         }
     }
 }

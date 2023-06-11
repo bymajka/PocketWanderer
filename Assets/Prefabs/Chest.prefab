@@ -199,6 +199,7 @@ MonoBehaviour:
   chestOpenedSprite: {fileID: 21300000, guid: fb3245e87fc18a043812284c49cb65de, type: 3}
   chestClosedSprite: {fileID: 21300000, guid: 07faf369c4e17364494c49ce2bef40ad, type: 3}
   chestButton: {fileID: 5200976588269534684}
+  dropItemsRange: 0
 --- !u!60 &5200976588022643860
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections;
 using Core.Movement;
 using Entity.Behaviour;
 using UnityEngine;
@@ -77,6 +78,11 @@ namespace PlayerController
         {
             if (PlayerCurrentState is PlayerAttackState)
                 PlayerCurrentState.ActivateAnimationEvent();
+        }
+        
+        public Coroutine RunCoroutine(IEnumerator coroutine)
+        {
+            return StartCoroutine(coroutine);
         }
     }
 }

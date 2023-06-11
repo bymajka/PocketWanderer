@@ -1,5 +1,7 @@
+using EnemyController;
 using Entity.Behaviour;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,12 +22,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InitializeLevel();
+    }
+
+    private void InitializeLevel()
+    {
         var stats = PlayerManager
             .Instance
             .PlayerObject
             .GetComponent<PlayerEntityBehaviour>()
             .Stats;
-        
+
         stats.ManaPoints = stats.MaxManaPool;
         stats.HitPoints = stats.MaxHitPoints;
         stats.MovementSpeed = stats.DefaultSpeed;
@@ -36,6 +43,7 @@ public class GameManager : MonoBehaviour
         {
             enemy.Stats.HitPoints = enemy.Stats.MaxHitPoints;
             enemy.Stats.Damage = enemy.Stats.MaxDamage;
+            enemy.GetComponent<EnemyStateMachine>().Target = PlayerManager.Instance.PlayerObject.transform;
         }
     }
 }
