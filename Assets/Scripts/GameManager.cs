@@ -1,7 +1,6 @@
 using EnemyController;
 using Entity.Behaviour;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
         {
             enemy.Stats.HitPoints = enemy.Stats.MaxHitPoints;
             enemy.Stats.Damage = enemy.Stats.MaxDamage;
-            enemy.GetComponent<EnemyStateMachine>().Target = PlayerManager.Instance.PlayerObject.transform;
+            enemy.GetComponent<EnemyStateMachine>().Target = PlayerManager.Instance.transform;
         }
     }
 }

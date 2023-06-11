@@ -17,6 +17,7 @@ namespace PlayerController
             Debug.Log("Player entered in DEATH state.");
             Ctx.PlayerEntity.Animator.SetAnimationType(AnimationType.Dead);
             Ctx.PlayerEntity.Animator.PlayAnimation();
+            Ctx.StartCoroutine(StartDeath());
         }
 
         public override void UpdateState()
@@ -27,7 +28,6 @@ namespace PlayerController
         public override void ExitState()
         {
             Debug.Log("Player exited from DEATH state.");
-            Ctx.StartCoroutine(StartDeath());
         }
 
         public override void CheckSwitchStates()
@@ -42,6 +42,7 @@ namespace PlayerController
         {
             yield return new WaitForSecondsRealtime(3f);
             SceneManager.LoadScene(0);
+            Debug.Log("Entry scene loaded");
         }
     }
 }
